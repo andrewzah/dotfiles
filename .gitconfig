@@ -1,0 +1,98 @@
+[user]
+	email = zah@andrewzah.com
+	name = Andrew Zah
+  signingkey = 5EB70FAA
+[core]
+	editor = nvim
+        excludesfile = ~/.global_gitignore
+[alias]
+        aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+
+        # pretty log 
+        lg = log --color --graph --pretty=format:'%Cred%h%Creset %C(yellow) %G? %Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+        
+        # delete branch
+        brdel = branch -D
+        
+        # most modified files
+        churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
+         
+        # save repo as tarball
+        export = archive -o latest.tar.gz -9 --prefix=latest/
+        
+        # list of commit sha-1s
+        l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"       
+        
+        # list all tags
+        tags = tag -l
+        
+        # checks that local refs are up to date before overwriting
+        please = push --force-with-lease
+
+        # see recent branches worked on
+        recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+
+        # see overview of commits
+        overview = log --all --oneline --no-merges
+
+        # recap your own commits on a project
+        recap = log --all --pretty=format:'%h %ad %s' --no-merges --author=<zah@andrewzah.com> --date=short
+        
+        # amend commit
+        commend = commit --amend --no-edit
+         
+        # merge no fast forward
+        merc = merge --no-ff
+         
+        # brief status
+        st = status --short --branch
+         
+        # stash only unstaged changes to tracked files
+        stsh = stash --keep-index
+        
+        # stash any changes to tracked files
+        staash = stash --include-untracked
+         
+        # stash ignored, untracked, and tracked files 
+        staaash = stash --all
+        
+        # initialize empty repo and commit
+        it = !git init && git commit -m \"root\" --allow-empty }
+[diff]
+    indentHeuristic = on
+[log]
+  date = relative
+[color]
+        ui = true
+[color "branch"]
+        current = yellow reverse
+        local = yellow
+        remote = green
+[color "diff"]
+        meta = yellow
+        frag = magenta
+        old = red 
+        new = green
+[color "status"]
+        added = yellow
+        changed = green
+        untracked = red
+[commit]
+        gpgsign = true
+
+# shorthand URLs
+[url "https://github.com/"]
+        insteadOf = gh:
+[url "git@github.com:"]
+        insteadOf = ghs:
+[url "https://gist.github.com/"]
+        insteadOf = gist:
+[url "https://gitlab.com/"]
+        insteadOf = gl:
+[url "git@gitlab.com:"]
+        insteadOf = gls:
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[init]
+        templatedir = ~/.config/git/templates/init
