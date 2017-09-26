@@ -19,15 +19,16 @@ export GREP_COLOR='3;33'
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
 export ARCHFLAGS='-arch x86_64'
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# Avoid issues with `gpg` as installed via Homebrew.
+# https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty)
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
- export EDITOR='nvim'
-else
- export EDITOR='nvim'
-fi
+export EDITOR='nvim'
+
+# Lang and Locale
+export LANG='en_US.UTF-8';
+export LC_ALL='en_US.UTF-8';

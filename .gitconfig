@@ -8,6 +8,9 @@
 [alias]
         aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
 
+        # git add --all
+        aa = add --all
+
         # pretty log 
         lg = log --color --graph --pretty=format:'%Cred%h%Creset %C(yellow) %G? %Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
         

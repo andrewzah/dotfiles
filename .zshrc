@@ -6,7 +6,6 @@ source ~/.zsh/aliases.zsh
 source ~/.zsh/functions.zsh
 source ~/.zsh/history.zsh
 source ~/.zsh/secret-exports.zsh
-
 ZSH_THEME="theunraveler"
 
 plugins=(git lein brew ruby wd)
