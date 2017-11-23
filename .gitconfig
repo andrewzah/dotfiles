@@ -10,9 +10,6 @@
 
         # git add --all
         aa = add --all
-
-        # pretty log 
-        lg = log --color --graph --pretty=format:'%Cred%h%Creset %C(yellow) %G? %Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
         
         # delete branch
         brdel = branch -D
@@ -94,8 +91,6 @@
         insteadOf = gl:
 [url "git@gitlab.com:"]
         insteadOf = gls:
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 
 [init]
         templatedir = ~/.config/git/templates/init

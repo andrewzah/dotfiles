@@ -1,5 +1,4 @@
-# PATH
-export PATH=/usr/local/bin:$PATH~/bin:/usr/local/sbin:~/bin
+#!/usr/bin/env bash
 
 # ZSH 
 export ZSH=/Users/andrew/.oh-my-zsh
@@ -32,3 +31,13 @@ export EDITOR='nvim'
 # Lang and Locale
 export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
+
+export LDFLAGS=-L/usr/local/opt/libxml2/lib
+export CPPFLAGS=-I/usr/local/opt/libxml2/include
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+
+#########
+# Apps
+#########
+
+export MAIN_SITE_DB_URL="postgres://kemalyst:kemalyst@localhost:5432/main_site_dev"

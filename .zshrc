@@ -6,9 +6,11 @@ source ~/.zsh/aliases.zsh
 source ~/.zsh/functions.zsh
 source ~/.zsh/history.zsh
 source ~/.zsh/secret-exports.zsh
+~/.zsh/macosx.sh
+
 ZSH_THEME="theunraveler"
 
-plugins=(git lein brew ruby wd)
+plugins=(git lein brew ruby wd last-working-dir)
 
 source $ZSH/oh-my-zsh.sh
 source $ZSH/plugins/zsh-up/up.plugin.zsh
