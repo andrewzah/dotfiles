@@ -12,4 +12,11 @@ alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 alias dcb="docker-compose build"
 
+# ctags
 alias ctags="`brew --prefix`/bin/ctags -f ./.git/tags"
+
+# alacritty
+alias a="open -n /Applications/Alacritty.app"
+
+#kitty
+alias kitty="python3 /Users/andrew/Desktop/Sync/_programming/C/kitty &"

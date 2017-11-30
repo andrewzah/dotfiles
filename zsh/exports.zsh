@@ -4,8 +4,7 @@
 export ZSH=/Users/andrew/.oh-my-zsh
 export UPDATE_ZSH_DAYS=1
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 
 # Custom
 ########
@@ -40,4 +39,8 @@ export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 # Apps
 #########
 
+# local db testing
 export MAIN_SITE_DB_URL="postgres://kemalyst:kemalyst@localhost:5432/main_site_dev"
+
+# Vim FZF
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'

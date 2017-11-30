@@ -1,65 +1,90 @@
-set nocompatible
-filetype off
-
-" Leader key
-let mapleader = ","
+" Load vim-plug if it's not found
+if empty(glob("~/.vim/autoload/plug.vim"))
+	execute 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
 
 set rtp+=/usr/local/opt/fzf
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-fireplace'
-Plugin 'venantius/vim-eastwood'
-Plugin 'morhetz/gruvbox'
-Plugin 'yuttie/comfortable-motion.vim'
-Plugin 'fisadev/FixedTaskList.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'luochen1990/rainbow'
-Plugin 'tpope/vim-surround'
-Plugin 'godlygeek/tabular'
-Plugin 'bhurlow/vim-parinfer'
-Plugin 'rosenfeld/conque-term'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'junegunn/fzf.vim'
-Plugin 'majutsushi/tagbar'
+call plug#begin('~/.vim/plugged')
 
-call vundle#end()
-filetype plugin on
+Plug 'AndrewRadev/sideways.vim'
+Plug 'bhurlow/vim-parinfer'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'chrisbra/NrrwRgn'
+Plug 'fisadev/FixedTaskList.vim'
+Plug 'gcmt/wildfire.vim'
+Plug 'godlygeek/tabular'
+Plug 'haya14busa/vim-signjk-motion'
+Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+Plug 'junegunn/fzf.vim'
+Plug 'luochen1990/rainbow'
+Plug 'machakann/vim-sandwich'
+Plug 'majutsushi/tagbar'
+Plug 'morhetz/gruvbox'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'rosenfeld/conque-term'
+Plug 'scrooloose/nerdcommenter'
+Plug 'soramugi/auto-ctags.vim'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-fugitive'
+Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'yuttie/comfortable-motion.vim'
 
-set hidden
-
-nnoremap ' `
-nnoremap ` '
-
-set title
-
-set history=1000
-" Gruvbox
-set background=dark
-" let g:gruvbox_italic = 1
-colorscheme gruvbox
-
+call plug#end()
 filetype plugin indent on
 runtime macros/matchit.vim
 
-" Get out of insert mode with jj 
-inoremap jj <Esc>
-
 syntax enable 
-syntax on
-" set t_co=256
+set hidden
+set title
+set history=1000
+
+" theme / colors
+set background=dark
+colorscheme gruvbox
 set termguicolors
-
-" Fast Saving
-nmap <leader>w :w!<cr>
-
-" Fast Save+Quit
-nmap <leader>x :wq<cr>
 
 set scrolloff=3
 
+" Cursor position
+set ruler
+
+" Line Numbers
+set number
+
+" make backspace behave
+set backspace=eol,start,indent
+set whichwrap+=<,>
+
+set magic
+
+set showmatch
+set mat=2
+
+" tab behavior
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab "paste correctly
+
+" searching
+set hls "highlight search
+set is "incsearch
+set ignorecase " Ignore case when searching...
+set smartcase  " Except when starting with a capital
+
+" Quick timeouts on key combinations.
+set timeoutlen=300
+
+set shortmess=atIwmfl
+
+"""
+""" Variables for plugins
+"""
+
+" Rainbow brackets/parens
+let g:rainbow_active = 1
 
 let g:fzf_tags_command = 'ctags --extra=+f -R'
 let g:fzf_colors =
@@ -76,62 +101,69 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" Disable arrow movement, resize splits instead.
+let g:elite_mode = 1
+if get(g:, 'elite_mode')
+	nnoremap <Up>    :resize +2<CR>
+	nnoremap <Down>  :resize -2<CR>
+	nnoremap <Left>  :vertical resize +2<CR>
+	nnoremap <Right> :vertical resize -2<CR>
+endif
+
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"  
+
+" auto-ctags options
+let g:auto_ctags = 1
+let g:auto_ctags_directory_list = ['.git']
+
+let g:wildfire_objects = {
+  \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
+  \ "html,xml" : ["at", "it"],
+\ }
+"for appending types to * rather than excluding: https://github.com/gcmt/wildfire.vim
+
+"stellar var name
+let g:mkdp_path_to_chrome = "open -F -n -a Google\\ Chrome"
+
+"""
+""" Key remapping
+"""
+
+" Leader key
+let mapleader = ","
+
+" signjk 
+nmap <Leader>j <Plug>(signjk-j)
+nmap <Leader>k <Plug>(signjk-k)
+
+" ease of access
+nnoremap ' `
+nnoremap ` '
+
+" Get out of insert mode with jj 
+inoremap jj <Esc>
+
+" Fast Saving
+nmap <leader>w :w!<cr>
+
+" Fast Save+Quit
+nmap <leader>x :wq<cr>
+
+" fast fuzzy searching
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <c-p> :Files<cr>
-" Ctrl-P
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
-"let g:ctrlp_working_path_mode = 'ra'
 
+" push window up/down
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-set ruler
-
-" Line Numbers
-set number
-
-" Rainbow brackets/parens
-let g:rainbow_active = 1
-
-" 7 lines to the cursor when moving vertically using j/k
-" set so=7
-
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-set magic
-
-set showmatch
-set mat=2
+" clear search highlight
+nnoremap <silent> <C-l><C-l> :nohl<CR><C-l>
 
 vmap <Tab> >gv
 vmap <S-Tab> <gv
-
-set tabstop=2
-set softtabstop=0
-set expandtab
-set shiftwidth=2
-set smarttab
-" set cursorline
-set hls is
-
-" clear search highlight
-" nnoremap <silent> <C-l><C-l> :nohl<CR><C-l>
-nnoremap <silent> <Leader>l :nohl<CR>
-
-" Quick timeouts on key combinations.
-set timeoutlen=300
-
-set shortmess=atI
-
-set incsearch
-set ignorecase " Ignore case when searching...
-set smartcase  " Except when starting with a capital
-
-" NerdTree
-map <F2> :NERDTreeToggle<CR>
 
 " Tabularize
 nmap <Leader>a= :Tabularize /=<CR>
@@ -154,29 +186,11 @@ nmap <silent> <Leader><Leader> V
 vmap <Leader><Leader> <Esc>
 
 " When pressing <leader>cd switch to the directory of the open buffer
-map <Leader>cd :lcd %:p:h<CR>:pwd<CR>
+nmap <Leader>cd :lcd %:p:h<CR>:pwd<CR>
 
 " Use backspace key for matchit.vim
 nmap <BS> %
 xmap <BS> %
-
-" Disable arrow movement, resize splits instead.
-
-let g:elite_mode = 1
-if get(g:, 'elite_mode')
-	nnoremap <Up>    :resize +2<CR>
-	nnoremap <Down>  :resize -2<CR>
-	nnoremap <Left>  :vertical resize +2<CR>
-	nnoremap <Right> :vertical resize -2<CR>
-endif
-
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"  
-" Autoset slang -> slim syntax highlighting
-au BufRead,BufNewFile *.slang set filetype=slim
-
-" Autoset ecr -> erb syntax highlighting
-au BufRead,BufNewFile *.ecr set filetype=erb
 
 " Session stuff
 nnoremap <leader>ss :call MakeSession()<cr>
@@ -184,6 +198,22 @@ nnoremap <leader>sl :call LoadSession()<cr>
 
 " tagbar
 nnoremap <silent> <c-b> :TagbarToggle<CR>
+
+" sideways plugin
+nnoremap <c-h> :SidewaysLeft<cr>
+nnoremap <c-l> :SidewaysRight<cr>
+
+" This selects the next closest text object.
+nmap <SPACE> <Plug>(wildfire-fuel)
+" This selects the previous closest text object.
+vmap <C-SPACE> <Plug>(wildfire-water)
+
+" Autoset slang -> slim syntax highlighting
+au BufRead,BufNewFile *.slang set filetype=slim
+
+" Autoset ecr -> erb syntax highlighting
+au BufRead,BufNewFile *.ecr set filetype=erb
+
 
 " Clojure
 " au Filetype clojure nmap <c-c><c-k> :Require<cr>  
@@ -226,3 +256,6 @@ augroup autosourcing
         au VimLeave * :call MakeSession()
     endif
 augroup END
+
+" FZF :Find
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)

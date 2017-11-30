@@ -20,6 +20,7 @@ function extract {
   fi
 }
 
+# move files to trash instead of rm
 function trash () {
   local path
   for path in "$@"; do
@@ -64,6 +65,9 @@ function v() {
 	fi;
 }
 
+# SOURCES
+# https://github.com/mathiasbynens/dotfiles/blob/master/.functions
+
 
 # transfer.sh alias
 transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
@@ -77,5 +81,3 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@"
 }
 
-# SOURCES
-# https://github.com/mathiasbynens/dotfiles/blob/master/.functions
