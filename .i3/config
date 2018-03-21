@@ -84,3 +84,8 @@ bar {
   workspace_buttons yes
   font pango: Source Code Pro 10
 }
+
+client.focused          #5F875F #285577 #ffffff #97b597   #5F875F
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
