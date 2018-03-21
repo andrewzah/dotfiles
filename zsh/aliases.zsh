@@ -1,3 +1,4 @@
+alias ls="ls -la"
 alias exa="exa -l"
 
 # Clojure
