@@ -6,7 +6,7 @@ export UPDATE_ZSH_DAYS=1
 # Custom
 ########
 
-export TERM=xterm-256color
+export TERM=xterm-kitty
 
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='3;33'
