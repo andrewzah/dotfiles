@@ -32,7 +32,7 @@ chunkc set global_desktop_offset_gap     15
 
 # chunkc set 3_desktop_offset_top          190
 
-chunkc set desktop_padding_step_size     10.0
+chunkc set desktop_padding_step_size     5.0
 chunkc set desktop_gap_step_size         5.0
 
 chunkc set bsp_spawn_left                1
@@ -91,6 +91,7 @@ chunkc core::load ffm.so
 #       to pass value containing a whitespace.
 #
 
+chunkc tiling::rule --owner alacritty  --state tile
 chunkc tiling::rule --owner Spotify --role AXWindow --subrole AXDialog --state tile
 chunkc tiling::rule --owner Firefox --role AXWindow --subrole AXDialog --state tile
 chunkc tiling::rule --owner Finder --name Copy --state float

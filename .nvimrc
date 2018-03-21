@@ -8,43 +8,58 @@ set rtp+=/usr/local/opt/fzf
 call plug#begin('~/.vim/plugged')
 
 Plug 'AndrewRadev/sideways.vim'
+Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'bhurlow/vim-parinfer'
+Plug 'c-brenn/phoenix.vim'
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
+Plug 'etdev/vim-hexcolor', { 'for': ['vim', 'css', 'html', 'scss']}
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'gcmt/wildfire.vim'
+Plug 'gerw/vim-HiLinkTrace', { 'on': 'HLT!'}
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/vim-signjk-motion'
+Plug 'https://github.com/rust-lang/rust.vim'
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
 Plug 'junegunn/fzf.vim'
-Plug 'luochen1990/rainbow'
+Plug 'ledger/vim-ledger'
 Plug 'machakann/vim-sandwich'
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['h', 'cpp'] }
 Plug 'rosenfeld/conque-term'
+Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'sheerun/vim-polyglot'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist', { 'for': ['eex', 'ex'] }
 Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'vimlab/split-term.vim'
 Plug 'yuttie/comfortable-motion.vim'
+Plug '~/Desktop/Sync/_programming/Vim/alpine'
 
 call plug#end()
 filetype plugin indent on
 runtime macros/matchit.vim
 
-syntax enable 
+syntax enable
+colorscheme gruvbox
+"colorscheme alpine
+
 set hidden
 set title
 set history=1000
+set fillchars=vert:\│
 
 " theme / colors
-set background=dark
-colorscheme gruvbox
 set termguicolors
-
+set background=dark
 set scrolloff=3
 
 " Cursor position
@@ -73,15 +88,25 @@ set hls "highlight search
 set is "incsearch
 set ignorecase " Ignore case when searching...
 set smartcase  " Except when starting with a capital
+set incsearch
 
 " Quick timeouts on key combinations.
 set timeoutlen=300
 
 set shortmess=atIwmfl
 
+set lazyredraw
+
+"shows info or documentation below code, so code doesn't move
+set splitbelow 
+
+
 """
 """ Variables for plugins
 """
+
+" after/syntax concealing
+let g:clojure_conceal_extras = 1
 
 " Rainbow brackets/parens
 let g:rainbow_active = 1
@@ -126,6 +151,17 @@ let g:wildfire_objects = {
 "stellar var name
 let g:mkdp_path_to_chrome = "open -F -n -a Google\\ Chrome"
 
+"" ALE linters
+"let g:ale_fixers = {
+"\   'clojure' :  ['joker'],
+"\   'crystal' :  ['crystal'],
+"\   'go'      :  ['gofmt'],
+"\   'rust'    :  [],
+"\}
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_enter = 0
+"let g:ale_fix_on_save = 1
+
 """
 """ Key remapping
 """
@@ -162,8 +198,10 @@ nnoremap <C-y> 3<C-y>
 " clear search highlight
 nnoremap <silent> <C-l><C-l> :nohl<CR><C-l>
 
-vmap <Tab> >gv
-vmap <S-Tab> <gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+vnoremap < <gv
+vnoremap > >gv
 
 " Tabularize
 nmap <Leader>a= :Tabularize /=<CR>
@@ -192,6 +230,10 @@ nmap <Leader>cd :lcd %:p:h<CR>:pwd<CR>
 nmap <BS> %
 xmap <BS> %
 
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 " Session stuff
 nnoremap <leader>ss :call MakeSession()<cr>
 nnoremap <leader>sl :call LoadSession()<cr>
@@ -200,8 +242,8 @@ nnoremap <leader>sl :call LoadSession()<cr>
 nnoremap <silent> <c-b> :TagbarToggle<CR>
 
 " sideways plugin
-nnoremap <c-h> :SidewaysLeft<cr>
-nnoremap <c-l> :SidewaysRight<cr>
+nnoremap <leader>l :SidewaysLeft<cr>
+nnoremap <leader>h :SidewaysRight<cr>
 
 " This selects the next closest text object.
 nmap <SPACE> <Plug>(wildfire-fuel)
@@ -214,6 +256,20 @@ au BufRead,BufNewFile *.slang set filetype=slim
 " Autoset ecr -> erb syntax highlighting
 au BufRead,BufNewFile *.ecr set filetype=erb
 
+" Highlight syntax for word under cursor
+nnoremap <leader>pr :HLT!<cr>
+
+nnoremap <BS> {
+onoremap <BS> {
+vnoremap <BS> {
+
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+vnoremap <CR> }
+
+xmap S <Plug>(operator-sandwich-add)
+
+tnoremap <Esc> <C-\><C-n>
 
 " Clojure
 " au Filetype clojure nmap <c-c><c-k> :Require<cr>  
@@ -257,5 +313,14 @@ augroup autosourcing
     endif
 augroup END
 
+"auto source nvimfile on write
+augroup mynvimrc
+    au!
+    au BufWritePost .nvimrc so $MYVIMRC
+augroup END
+
 " FZF :Find
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --no-ignore --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+" Edit new file with a new directory
+command! -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e <args>
