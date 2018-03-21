@@ -8,7 +8,7 @@ source ~/.zsh/history.zsh
 source ~/.zsh/secret-exports.zsh
 #~/.zsh/macosx.sh
 
-ZSH_THEME="theunraveler"
+ZSH_THEME="zah"
 
 plugins=(git lein brew ruby wd last-working-dir)
 
