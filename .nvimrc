@@ -7,12 +7,12 @@ end
 call plug#begin('~/.vim/plugged')
 
 Plug 'AndrewRadev/sideways.vim'
-Plug 'ElmCast/elm-vim'
+Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
-Plug 'c-brenn/phoenix.vim', { 'for': ['ex', 'eex', 'exs'] }
+Plug 'c-brenn/phoenix.vim', { 'for': ['elixir'] }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
-Plug 'elixir-editors/vim-elixir'
+Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'gcmt/wildfire.vim'
 Plug 'gerw/vim-HiLinkTrace'
@@ -26,8 +26,8 @@ Plug 'luochen1990/rainbow'
 Plug 'machakann/vim-sandwich'
 Plug 'morhetz/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'rhysd/vim-crystal', { 'for': 'cr' }
-Plug 'rust-lang/rust.vim', { 'for': 'rs' }
+Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
