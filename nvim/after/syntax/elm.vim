@@ -27,24 +27,24 @@
 "   - 1.0.1  Update pipe operator symbol and add few extra operator overrides
 "   - 1.0.0  Initial release - just override pipe operator
 "
-if exists('g:no_elm_conceal') || !has('conceal') || &enc != 'utf-8'
-  finish
-endif
+"if exists('g:no_elm_conceal') || !has('conceal') || &enc != 'utf-8'
+  "finish
+"endif
 "
 " if !has('conceal')
 "     finish
 " endif
 
-syntax match exNiceOperator "|>" conceal cchar=▷
+"syntax match exNiceOperator "|>" conceal cchar=▷
 " syntax match exNiceOperator "<-" conceal cchar=←
-syntax match exNiceOperator "->" conceal cchar=→
+"syntax match exNiceOperator "->" conceal cchar=→
 " syntax match exNiceOperator "==" conceal cchar=≡
 " syntax match exNiceOperator "!=" conceal cchar=≢
-syntax match exNiceOperator "<=" conceal cchar=≤
-syntax match exNiceOperator ">=" conceal cchar=≥
+"syntax match exNiceOperator "<=" conceal cchar=≤
+"syntax match exNiceOperator ">=" conceal cchar=≥
 
-hi link exNiceOperator Operator
-hi! link Conceal Operator
-setlocal conceallevel=2
+"hi link exNiceOperator Operator
+"hi! link Conceal Operator
+"setlocal conceallevel=2
 
 

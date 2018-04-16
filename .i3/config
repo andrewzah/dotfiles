@@ -18,7 +18,7 @@ workspace $work1 output DVI-I-1
 workspace $work2 output HDMI-0
 
 # startup applications
-exec_always feh --bg-scale ~/Pictures/Wallpapers/flower-right.jpg ~/Pictures/Wallpapers/flower-left.jpg
+exec_always feh --bg-scale ~/Pictures/Wallpapers/deoksugung2_right.jpg ~/Pictures/Wallpapers/deoksugung2_left.jpg
 
 ## i3 Opts
 hide_edge_borders both
@@ -62,7 +62,12 @@ assign [class="Thunderbird"] $work3
 # splits
 bindsym $mod+h split h
 bindsym $mod+v split v
+
+# toggling view types
+bindsym $mod+s layout stacking
+bindsym $mod+l layout toggle split
 bindsym $mod+f fullscreen toggle
+bindsym $mod+g floating toggle
 
 
 ## i3 Session keys
@@ -72,8 +77,12 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # General
 bindsym $mod+Return exec termite
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show run -config /home/andrei/.config/rofi/config
+bindsym $mod+w exec rofi -show window -config /home/andrei/.config/rofi/config
 bindsym $mod+Shift+w kill
+
+# Floating windows
+for_window [class="Peek"] floating enable
 
 bar {
   output DVI-I-1

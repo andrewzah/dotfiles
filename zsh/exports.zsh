@@ -3,6 +3,10 @@
 # ZSH 
 export UPDATE_ZSH_DAYS=1
 
+# MPW
+MPW_FULLNAME="Andrew Zah"
+MPW_FORMAT='none'
+
 # Custom
 ########
 

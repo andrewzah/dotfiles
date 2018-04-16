@@ -12,7 +12,9 @@ Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
 Plug 'c-brenn/phoenix.vim', { 'for': ['elixir'] }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
+Plug 'chrisbra/csv.vim'
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
+Plug 'elorest/vim-slang', { 'for': 'slang' }
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'gcmt/wildfire.vim'
 Plug 'gerw/vim-HiLinkTrace'
@@ -185,7 +187,7 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " clear search highlight
-nnoremap <Leader>cl :nohl<CR><C-l>
+nnoremap <Leader>co :nohl<CR><C-l>
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -226,11 +228,12 @@ nnoremap <leader>pr :HLT!<cr>
 
 """ Syntaxes """
 
-" Autoset slang -> slim syntax highlighting
-au BufRead,BufNewFile *.slang set filetype=slim
+" Autoset slang syntax highlighting
+au BufRead,BufNewFile *.slang set filetype=slang
 
 " Autoset ecr -> erb syntax highlighting
 au BufRead,BufNewFile *.ecr set filetype=erb
+
 
 
 " Automatically make the dir if it doesn't exist on the machine.
@@ -242,6 +245,9 @@ autocmd! FocusGained,BufEnter * checktime
 
 " Clojure
 " au Filetype clojure nmap <c-c><c-k> :Require<cr>  
+
+" Formats a ledger entry. Untabs a visual selection, runs :Tab /<space><space>, and re-tabs
+let @l = '€kB:tab€kb€kb€kbTab  /€kb€kb€kb /  gv	:w'
 
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
