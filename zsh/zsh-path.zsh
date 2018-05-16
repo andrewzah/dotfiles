@@ -1,8 +1,5 @@
-# Mac OS X uses path_helper and /etc/paths.d to preload PATH, clear it out first
-if [ -x /usr/libexec/path_helper ]; then
-    PATH=''
-    eval `/usr/libexec/path_helper -s`
-fi
+# Cargo / Rust
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # nvm
 #export NVM_DIR=~/.nvm
@@ -15,7 +12,8 @@ export PATH=/usr/local/share/python:$PATH
 if which rbenv &> /dev/null; then
     # Put the rbenv entry at the front of the line
     export PATH="$HOME/.rbenv/bin:$PATH"
+# rbenv
+eval "$(rbenv init -)"
 
-    # enable shims and auto-completion
-    eval "$(rbenv init -)"
-fi
+# nvm
+source /usr/share/nvm/init-nvm.sh

@@ -104,12 +104,78 @@
     fi
   }
 
+<<<<<<< HEAD
 
+=======
+  function prompt_ruby() {
+    if [[ ! -f Gemfile || ! -f Rakefile || ! -n *.rb(#qN^/) ]]; then
+      return
+    fi
+
+    local ruby_version
+
+    if _exists rbenv; then
+      ruby_version=$(rbenv version-name)
+    else
+      return
+    fi
+
+    [[ "${ruby_version}" == "system" ]] && return
+
+    # Add 'v' before ruby version that starts with a number
+    [[ "${ruby_version}" =~ ^[0-9].+$ ]] && ruby_version="v${ruby_version}"
+
+    _prompt_section \
+      "" \
+      "" \
+      "Ruby ${ruby_version}" \
+      ""
+  }
+
+  function prompt_crystal() {
+    if [[ ! -f shard.yml || ! -n *.cr(#qN^/) ]]; then
+      return
+    fi
+
+    local crystal_version
+
+    if _exists crystal; then
+      crystal_version=$(crystal -v | awk '{print $2;exit}')
+    else
+      return
+    fi
+
+    # Add 'v' before crystal version that starts with a number
+    [[ "${crystal_version}" =~ ^[0-9].+$ ]] && crystal_version="v${crystal_version}"
+
+    _prompt_section \
+      "" \
+      "" \
+      "Crystal ${crystal_version}" \
+      ""
+  }
+
+  set_prompt_plugins() {
+    local PROMPT_PLUGINS_ORDER=(
+      ruby
+      crystal
+    )
+
+    # Execute all parts
+    for i in $PROMPT_PLUGINS_ORDER; do
+      prompt_$i
+    done
+  }
+>>>>>>> b97f1e72a7c866ed8e41423a137c3ea08cffdc47
 
   # Wrap up in set_prompt so it can be 
   # refreshed by time functions, etc
   set_prompt() {
     PROMPT='%{$(exit_code_status)%}λ $(_convertsecs $(get_time)) %{${PR_BOLD_GREEN}%}[%c] ⇒ %{$reset_color%} '
+<<<<<<< HEAD
     RPROMPT='$PR_BOLD_GREEN% {$(git_prompt_info)}%{$reset_color%} $(git_prompt_status)%{$reset_color%}'
+=======
+    RPROMPT='$(set_prompt_plugins)%{$PR_BOLD_GREEN%} {$(git_prompt_info)}%{$reset_color%} $(git_prompt_status)%{$reset_color%}'
+>>>>>>> b97f1e72a7c866ed8e41423a137c3ea08cffdc47
   }
   set_prompt # init

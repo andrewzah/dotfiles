@@ -1,36 +1,36 @@
-" Load vim-plug if it's not found
-if empty(glob("~/.vim/autoload/plug.vim"))
-	execute 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-endif
-
-set rtp+=/usr/local/opt/fzf
+if has('unix')
+  set rtp+=/usr/bin/fzf
+elseif has('macunix')
+  set rtp+=/usr/local/opt/fzf
+end
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'AndrewRadev/sideways.vim'
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
-Plug 'bhurlow/vim-parinfer'
-Plug 'c-brenn/phoenix.vim'
+Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
+Plug 'c-brenn/phoenix.vim', { 'for': ['elixir'] }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
-Plug 'etdev/vim-hexcolor', { 'for': ['vim', 'css', 'html', 'scss']}
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'chrisbra/csv.vim'
+Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
+Plug 'elorest/vim-slang', { 'for': 'slang' }
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'gcmt/wildfire.vim'
-Plug 'gerw/vim-HiLinkTrace', { 'on': 'HLT!'}
+Plug 'gerw/vim-HiLinkTrace'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/vim-signjk-motion'
 Plug 'https://github.com/rust-lang/rust.vim'
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'ledger/vim-ledger'
+Plug 'luochen1990/rainbow'
 Plug 'machakann/vim-sandwich'
-Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['h', 'cpp'] }
-Plug 'rosenfeld/conque-term'
-Plug 'rust-lang/rust.vim'
+Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim'
@@ -64,6 +64,9 @@ set scrolloff=3
 
 " Cursor position
 set ruler
+set rulerformat=%27(%{strftime('%a\ %e,\ %H:%M')}\ %5l,%-1(%c%V%)\ %P%)
+
+set clipboard+=unnamedplus
 
 " Line Numbers
 set number
@@ -83,6 +86,8 @@ set shiftwidth=2
 set expandtab
 set smarttab "paste correctly
 
+set cursorline
+
 " searching
 set hls "highlight search
 set is "incsearch
@@ -100,6 +105,15 @@ set lazyredraw
 "shows info or documentation below code, so code doesn't move
 set splitbelow 
 
+" Backup, Swap, and Undo
+set directory^=~/.nvim/tmp,/tmp
+set backupdir=~/.nvim/backup,/tmp
+set undodir=~/.nvim/undo,/tmp
+
+" Remove swapfiles, autoread changes instead
+set noswapfile
+set autoread
+
 
 """
 """ Variables for plugins
@@ -112,6 +126,8 @@ let g:clojure_conceal_extras = 1
 let g:rainbow_active = 1
 
 let g:fzf_tags_command = 'ctags --extra=+f -R'
+
+" gruvbox coloring for fzf
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -148,8 +164,6 @@ let g:wildfire_objects = {
 \ }
 "for appending types to * rather than excluding: https://github.com/gcmt/wildfire.vim
 
-"stellar var name
-let g:mkdp_path_to_chrome = "open -F -n -a Google\\ Chrome"
 
 "" ALE linters
 "let g:ale_fixers = {
@@ -186,6 +200,9 @@ nmap <leader>w :w!<cr>
 " Fast Save+Quit
 nmap <leader>x :wq<cr>
 
+" Fast quitting
+nmap <leader>q :q!<cr>
+
 " fast fuzzy searching
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :Buffers<CR>
@@ -196,7 +213,7 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " clear search highlight
-nnoremap <silent> <C-l><C-l> :nohl<CR><C-l>
+nnoremap <Leader>co :nohl<CR><C-l>
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -204,10 +221,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Tabularize
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+nnoremap <Leader>a= :Tabularize /=<CR>
+vnoremap <Leader>a= :Tabularize /=<CR>
+nnoremap <Leader>a: :Tabularize /:\zs<CR>
+vnoremap <Leader>a: :Tabularize /:\zs<CR>
 
 " Save 1 keystroke on vim splits
 nnoremap <C-J> <C-W><C-J>
@@ -215,20 +232,20 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Allow mac copy/paste
-vmap <C-x> :!pbcopy<CR>  
-vmap <C-c> :w !pbcopy<CR><CR>
+" Allow copy/paste
+nnoremap <C-x> "+p
+vnoremap <C-c> "+y
 
 " Double leader key for toggling visual-line mode
-nmap <silent> <Leader><Leader> V
-vmap <Leader><Leader> <Esc>
+nnoremap <silent> <Leader><Leader> V
+vnoremap <Leader><Leader> <Esc>
 
 " When pressing <leader>cd switch to the directory of the open buffer
-nmap <Leader>cd :lcd %:p:h<CR>:pwd<CR>
+nnoremap <Leader>cd :lcd %:p:h<CR>:pwd<CR>
 
 " Use backspace key for matchit.vim
-nmap <BS> %
-xmap <BS> %
+nnoremap <BS> %
+xnoremap <BS> %
 
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
@@ -238,20 +255,13 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 nnoremap <leader>ss :call MakeSession()<cr>
 nnoremap <leader>sl :call LoadSession()<cr>
 
-" tagbar
-nnoremap <silent> <c-b> :TagbarToggle<CR>
+" Highlight syntax for word under cursor
+nnoremap <leader>pr :HLT!<cr>
 
-" sideways plugin
-nnoremap <leader>l :SidewaysLeft<cr>
-nnoremap <leader>h :SidewaysRight<cr>
+""" Syntaxes """
 
-" This selects the next closest text object.
-nmap <SPACE> <Plug>(wildfire-fuel)
-" This selects the previous closest text object.
-vmap <C-SPACE> <Plug>(wildfire-water)
-
-" Autoset slang -> slim syntax highlighting
-au BufRead,BufNewFile *.slang set filetype=slim
+" Autoset slang syntax highlighting
+au BufRead,BufNewFile *.slang set filetype=slang
 
 " Autoset ecr -> erb syntax highlighting
 au BufRead,BufNewFile *.ecr set filetype=erb
@@ -271,8 +281,19 @@ xmap S <Plug>(operator-sandwich-add)
 
 tnoremap <Esc> <C-\><C-n>
 
+
+" Automatically make the dir if it doesn't exist on the machine.
+silent !mkdir -p ~/.nvim/tmp >/dev/null 2>&1
+
+" Autoread on common events
+autocmd! FocusGained,BufEnter * checktime
+
+
 " Clojure
 " au Filetype clojure nmap <c-c><c-k> :Require<cr>  
+
+" Formats a ledger entry. Untabs a visual selection, runs :Tab /<space><space>, and re-tabs
+let @l = '€kB:tab€kb€kb€kbTab  /€kb€kb€kb /  gv	:w'
 
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.

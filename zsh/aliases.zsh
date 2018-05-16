@@ -8,16 +8,16 @@ alias git=hub
 # Clojure
 alias lr="lein repl"
 
+
+# https://github.com/holman/dotfiles/blob/b943fe169f372c6ee0057c8ff698e1709719a6ba/git/aliases.zsh
+# Git. Remove `+` and `-` from start of diff lines; just rely upon color.
+alias gd='git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r'
+
+# https://github.com/holman/dotfiles/blob/b943fe169f372c6ee0057c8ff698e1709719a6ba/docker/aliases.zsh
 # Docker
+alias d='docker $*'
+alias d-c='docker-compose $*'
+
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 alias dcb="docker-compose build"
-
-# ctags
-alias ctags="`brew --prefix`/bin/ctags -f ./.git/tags"
-
-# alacritty
-alias a="open -n /Applications/Alacritty.app"
-
-#kitty
-alias kitty="python3 /Users/andrew/Desktop/Sync/_programming/C/kitty &"
