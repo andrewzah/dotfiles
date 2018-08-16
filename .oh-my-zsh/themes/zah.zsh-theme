@@ -153,21 +153,12 @@
   }
 
   set_prompt_plugins() {
-    local PROMPT_PLUGINS_ORDER=(
-      ruby
-      crystal
-    )
-
-    # Execute all parts
-    for i in $PROMPT_PLUGINS_ORDER; do
-      prompt_$i
-    done
   }
 
   # Wrap up in set_prompt so it can be 
   # refreshed by time functions, etc
   set_prompt() {
     PROMPT='%{$(exit_code_status)%}λ $(_convertsecs $(get_time)) %{${PR_BOLD_GREEN}%}[%c] ⇒ %{$reset_color%} '
-    RPROMPT='$(set_prompt_plugins)%{$PR_BOLD_GREEN%} {$(git_prompt_info)}%{$reset_color%} $(git_prompt_status)%{$reset_color%}'
+    RPROMPT='{$(git_prompt_info)}%{$reset_color%} $(git_prompt_status)%{$reset_color%}'
   }
   set_prompt # init

@@ -8,12 +8,12 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'AndrewRadev/sideways.vim'
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
+Plug 'Yggdroot/indentLine', { 'for': ['yaml', 'python'] }
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
-Plug 'c-brenn/phoenix.vim', { 'for': ['elixir'] }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
 Plug 'chrisbra/csv.vim'
-Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
+Plug 'elixir-editors/vim-elixir'
 Plug 'elorest/vim-slang', { 'for': 'slang' }
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'gcmt/wildfire.vim'
@@ -21,21 +21,30 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/vim-signjk-motion'
 Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
+Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'ledger/vim-ledger'
-Plug 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow', { 'for': ['clojure'] }
 Plug 'machakann/vim-sandwich'
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-grepper'
 Plug 'morhetz/gruvbox'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'soramugi/auto-ctags.vim'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
 Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'w0rp/ale'
 Plug 'yuttie/comfortable-motion.vim'
 
 call plug#end()
@@ -150,6 +159,21 @@ let g:wildfire_objects = {
 \ }
 "for appending types to * rather than excluding: https://github.com/gcmt/wildfire.vim
 
+let g:indentLine_char = '|'
+
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_save = 1
+let g:ale_linters = {
+  \ 'javascript': ['eslint'],
+\ }
+
+let g:grepper = {}
+let g:grepper.tools = ['rg', 'git', 'grep']
+
+let test#strategy = "dispatch"
+
 """
 """ Key remapping
 """
@@ -225,6 +249,15 @@ nnoremap <leader>sl :call LoadSession()<cr>
 
 " Highlight syntax for word under cursor
 nnoremap <leader>pr :HLT!<cr>
+
+" In order to traverse ALE warnings
+nnoremap <silent> [w <Plug>(ale_previous_wrap)
+nnoremap <silent> ]w <Plug>(ale_next_wrap)
+
+" Grepper
+nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+nnoremap gs <Plug>(GrepperOperator)
+xnoremap gs <Plug>(GrepperOperator)
 
 """ Syntaxes """
 

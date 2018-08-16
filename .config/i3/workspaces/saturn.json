@@ -1,0 +1,48 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 835,
+       "width": 1416,
+       "x": 12,
+       "y": 12
+    },
+    "name": "#get_schwifty - Discord",
+    "percent": 0.5,
+    "swallows": [
+       {
+       // "class": "^discord$",
+       // "instance": "^discord$",
+       // "title": "^\\#get_schwifty\\ \\-\\ Discord$",
+       // "transient_for": "^$",
+       // "window_role": "^browser\\-window$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 600,
+       "width": 800,
+       "x": 0,
+       "y": 0
+    },
+    "name": "Spotify",
+    "percent": 0.5,
+    "swallows": [
+       {
+       // "class": "^Spotify$",
+       // "instance": "^spotify$",
+       // "title": "^Spotify$",
+       // "transient_for": "^$"
+       }
+    ],
+    "type": "con"
+}
+

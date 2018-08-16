@@ -1,0 +1,5 @@
+syntax keyword crystalClassAttribute class_getter class_setter class_property
+syntax keyword crystalHTMLMethodBlock get put post patch delete
+
+hi link crystalClassAttribute crystalAttribute
+hi link crystalHTMLMethodBlock crystalBlock
