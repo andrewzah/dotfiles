@@ -5,4 +5,4 @@ export PATH="$HOME/.cargo/bin:$PATH"
 eval "$(rbenv init -)"
 
 # nvm
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh

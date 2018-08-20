@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
-# ZSH 
+###
+### ZSH 
+###
+
 export UPDATE_ZSH_DAYS=1
 
-# MPW
-MPW_FULLNAME="Andrew Zah"
-MPW_FORMAT='none'
+# Set vi mode timeout to 0.1
+export KEYTIMEOUT=1
 
-# Custom
-########
+###
+### Custom
+###
 
 export TERM=xterm-kitty
 
@@ -22,9 +25,9 @@ export EDITOR='nvim'
 export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
 
-#########
-# Apps
-#########
+###
+### Apps
+###
 
 # Vim FZF
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
