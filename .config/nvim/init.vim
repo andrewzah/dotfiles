@@ -87,8 +87,6 @@ set shiftwidth=2
 set expandtab
 set smarttab "paste correctly
 
-set cursorline
-
 " searching
 set hls "highlight search
 set is "incsearch
