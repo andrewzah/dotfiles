@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/andrew/Desktop/Sync/_programming/Caddy/andrewzah.com/services/http'
+let g:netrw_dirhist_2='/Users/andrew/.config/nvim'
+let g:netrw_dirhist_3='/'
+let g:netrw_dirhist_4='/Users/andrew/Desktop/Sync/_programming/Rust/amaranth-rust'
+let g:netrw_dirhist_5='/Users/andrew/Desktop/Sync/_programming/Rust/amaranth-rust/src'
+let g:netrw_dirhist_6='/Users/andrew/.zsh'

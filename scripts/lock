@@ -1,4 +1,0 @@
-#!/bin/bash
-scrot /tmp/screenshot.png
-convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png
-/home/andrei/.config/i3/i3lock-fancy-multimonitor/lock -n -p -b=0x5
