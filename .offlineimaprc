@@ -24,7 +24,7 @@ localfolders = ~/Mail/Zoho
 [Repository Gmail-Remote]
 type = Gmail
 remoteuser = zah.andrew@gmail.com
-remotepass = qvoslasijhfbwufd
+remotepass = CHANGEME
 realdelete = no
 maxconnections = 3
 ssl = yes
@@ -35,7 +35,7 @@ type = IMAP
 remotehost = imappro.zoho.com
 remoteport = 993 
 remoteuser = zah@andrewzah.com
-remotepass = MtpmvAT3AqRE
+remotepass = CHANGEME
 realdelete = no
 maxconnections = 3
 ssl = yes
