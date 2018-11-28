@@ -1,1 +1,2 @@
-gem: --no-rdoc --no-ri
+install: --no-ri --no-rdoc --platform ruby
+update:  --no-ri --no-rdoc --platform ruby

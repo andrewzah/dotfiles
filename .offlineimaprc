@@ -1,0 +1,42 @@
+# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
+# get started fast.
+
+[general]
+ui = ttyui
+accounts = Gmail,Zoho
+
+[Account Gmail]
+localrepository = Gmail-Local
+remoterepository = Gmail-Remote
+
+[Account Zoho]
+localrepository = Zoho-Local
+remoterepository = Zoho-Remote
+
+[Repository Gmail-Local]
+type = Maildir
+localfolders = ~/Mail/Gmail
+
+[Repository Zoho-Local]
+type = Maildir
+localfolders = ~/Mail/Zoho
+
+[Repository Gmail-Remote]
+type = Gmail
+remoteuser = zah.andrew@gmail.com
+remotepass = qvoslasijhfbwufd
+realdelete = no
+maxconnections = 3
+ssl = yes
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+
+[Repository Zoho-Remote]
+type = IMAP
+remotehost = imappro.zoho.com
+remoteport = 993 
+remoteuser = zah@andrewzah.com
+remotepass = MtpmvAT3AqRE
+realdelete = no
+maxconnections = 3
+ssl = yes
+sslcacertfile = /usr/local/etc/openssl/cert.pem

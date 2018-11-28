@@ -1,0 +1,27 @@
+set spoolfile = "+Zoho/INBOX"
+set sort=threads
+set sort_browser=reverse-date
+set sort_aux=reverse-last-date-received
+#last-date-received
+
+set new_mail_command="terminal-notifier -title '%v' -subtitle 'New Mail' -message '%n new messages, %u unread.' -activate 'com.apple.Terminal'"
+set timeout=10
+set index_format= "%4C %Z %{%b %d %H:%M} %-15.15L (%?l?%4l&%4c?) %s"
+
+alternative_order text/plain text/html
+auto_view text/html
+
+source ~/.neomutt/accounts/zoho
+
+folder-hook Gmail/* source ~/.neomutt/accounts/gmail
+folder-hook Zoho/*  source ~/.neomutt/accounts/zoho
+
+macro index ,cga  "<change-folder>=[Gmail]/All Mail<enter>" "go to gmail all mail"
+macro index ,cgi  "<change-folder> =Gmail/INBOX<enter>"     "go to Gmail Inbox"
+macro index ,cza  "<change-folder> =Zoho/Archives<enter>"   "go to Zoho Archives"
+macro index ,czi  "<change-folder> =Zoho/INBOX<enter>"      "go to Zoho Inbox"
+macro index,pager ,ag "<save-message>=Gmail/[Gmail].All<quote-char><space>Mail<enter><enter>" "Archive Message to Gmail/[Gmail].All Mail"
+macro index,pager ,az "<save-message>=Zoho/Archives<enter><enter>" "Archive Message to Zoho/Archives"
+
+# Fetch mail shortcut
+bind index G imap-fetch-mail

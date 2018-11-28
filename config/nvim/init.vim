@@ -6,41 +6,40 @@ end
 
 call plug#begin('~/.vim/plugged')
 
-""" Langs
+""" Language/Syntax
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
+Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 Plug 'elorest/vim-slang', { 'for': 'slang' }
-Plug 'https://github.com/rust-lang/rust.vim'
 Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
 Plug 'ledger/vim-ledger'
-Plug 'luochen1990/rainbow'
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
-Plug 'sheerun/vim-polyglot'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-""" Vim behavior/functionality
-Plug 'Yggdroot/indentLine', { 'for': ['yaml', 'python'] }
-Plug 'bhurlow/vim-parinfer', {'for': ['clojure', 'lisp'] }
+""" Vim Behavior/Functionality
+Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
+Plug 'chrisbra/NrrwRgn'
+Plug 'gerw/vim-HiLinkTrace'
 Plug 'godlygeek/tabular'
+Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'luochen1990/rainbow'
 Plug 'machakann/vim-sandwich'
-Plug 'mattn/emmet-vim', { 'for': ['html'] }
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'morhetz/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'soramugi/auto-ctags.vim'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
 
-""" Nice in theory, not sure if I'll actually use
-Plug 'chrisbra/NrrwRgn', { 'on': 'NR' }
-Plug 'gcmt/wildfire.vim', { 'for': ['clojure', 'lisp'] }
-Plug 'gerw/vim-HiLinkTrace', { 'on': 'HLT!'}
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'skywind3000/asyncrun.vim', { 'on': ['AsyncRun'] }
-Plug 'tpope/vim-dispatch'
+""" Want to use in theory, need to look into
+" Plug 'gcmt/wildfire.vim'
 
 call plug#end()
 filetype plugin indent on
@@ -52,16 +51,29 @@ set title
 set history=1000
 
 " theme / colors
-set termguicolors
 set background=dark
 colorscheme gruvbox
+set termguicolors
+
 set scrolloff=3
 
 " Cursor position
 set ruler
 set rulerformat=%27(%{strftime('%a\ %e,\ %H:%M')}\ %5l,%-1(%c%V%)\ %P%)
 
-set clipboard+=unnamedplus
+" Remember things between sessions
+"
+" '20  - remember marks for 20 previous files
+" \"50 - save 50 lines for each register
+" :20  - remember 20 items in command-line history
+" /20  - remember 20 items in search history
+" %    - remember the buffer list (if vim started without a file arg)
+" n    - set name of viminfo file
+set viminfo='20,\"50,:20,/20,%
+
+if exists('+clipboard')
+  set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
+endif
 
 " Line Numbers
 set number
@@ -76,17 +88,26 @@ set showmatch
 set mat=2
 
 " tab behavior
-set tabstop=2
-set shiftwidth=2
+set autoindent
 set expandtab
-set smarttab "paste correctly
+set shiftround
+set shiftwidth=2
+set smartindent
+set smarttab 
+set softtabstop=2
+set tabstop=8
 
 " searching
-set hlsearch "highlight search
-set incsearch
+set hls "highlight search
+set is "incsearch
 set ignorecase " Ignore case when searching...
 set smartcase  " Except when starting with a capital
 
+set showmatch  " When a bracket is inserted, jump to the matching bracket.
+set mat=5      " How long to jump to the matching bracket in tenths of a second.
+set list       " Enable 'list mode', which visually displays certain characters
+               " upon listchars rules.
+               
 " Quick timeouts on key combinations.
 set timeoutlen=300
 
@@ -101,10 +122,22 @@ set undodir=~/.nvim/undo,/tmp
 set noswapfile
 set autoread
 
+set showcmd " display incomplete commands in laststatus.
+            " For example, typing the start of a multi-key binding will
+            " show each successive key typed in the lower right. Useful
+            " for identifying when you're starting a command.
+
+set hidden  " When you 'abandon' a buffer (i.e., when you no longer have a
+            " buffer displayed), simply hide it rather than unloading it.
+            " Without this, hiding a modified buffer would error due to that
+            " buffer not being saved.
 
 """
 """ Variables for plugins
 """
+
+" Conceal
+let g:clojure_conceal_extras = 1
 
 " Rainbow brackets/parens
 let g:rainbow_active = 1
@@ -147,31 +180,18 @@ let g:wildfire_objects = {
 
 let g:indentLine_char = '|'
 
-""" ALE
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_save = 1
 let g:ale_linters = {
   \ 'javascript': ['eslint'],
-  \ 'rust': ['cargo'],
 \ }
 
 let g:grepper = {}
 let g:grepper.tools = ['rg', 'git', 'grep']
 
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-"" ALE linters
-let g:ale_fixers = {
-\   'go'      :  ['gofmt'],
-\   'rust'    :  ['rustfmt'],
-\}
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_fix_on_save = 1
+let test#strategy = "dispatch"
 
 """
 """ Key remapping
@@ -210,8 +230,6 @@ nnoremap <Leader>co :nohl<CR><C-l>
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
-vnoremap < <gv
-vnoremap > >gv
 
 " Tabularize
 nnoremap <Leader>a= :Tabularize /=<CR>
@@ -225,9 +243,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Allow mac copy/paste
-vnoremap <C-x> :!pbcopy<CR>  
-vnoremap <C-c> :w !pbcopy<CR><CR>
+
+" Allow copy/paste
+nnoremap <C-x> "+p
+vnoremap <C-c> "+y
 
 " Double leader key for toggling visual-line mode
 nnoremap <silent> <Leader><Leader> V
@@ -248,8 +267,8 @@ nnoremap <leader>sl :call LoadSession()<cr>
 nnoremap <leader>pr :HLT!<cr>
 
 " In order to traverse ALE warnings
-nnoremap [w <Plug>(ale_previous_wrap)
-nnoremap ]w <Plug>(ale_next_wrap)
+nnoremap <silent> [w <Plug>(ale_previous_wrap)
+nnoremap <silent> ]w <Plug>(ale_next_wrap)
 
 " Grepper
 nnoremap <Leader>* :Grepper -cword -noprompt<CR>
@@ -264,23 +283,12 @@ au BufRead,BufNewFile *.slang set filetype=slang
 " Autoset ecr -> erb syntax highlighting
 au BufRead,BufNewFile *.ecr set filetype=erb
 
-" Highlight syntax for word under cursor
-nnoremap <leader>pr :HLT!<cr>
-
-nnoremap <BS> {
-onoremap <BS> {
-vnoremap <BS> {
 
 " Automatically make the dir if it doesn't exist on the machine.
 silent !mkdir -p ~/.nvim/tmp >/dev/null 2>&1
 
 " Autoread on common events
 autocmd! FocusGained,BufEnter * checktime
-
-tnoremap <Esc> <C-\><C-n>
-
-" Clojure
-" au Filetype clojure nmap <c-c><c-k> :Require<cr>  
 
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
@@ -321,11 +329,20 @@ augroup autosourcing
     endif
 augroup END
 
-"auto source nvimfile on write
-augroup mynvimrc
-    au!
-    au BufWritePost ~/.config/nvim/init.vim so $MYVIMRC
-augroup END
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") && &ft != 'gitcommit' |
+     \   exe "normal! g`\"" |
+     \ endif
+
+autocmd filetype crontab setlocal nobackup nowritebackup
 
 " FZF :Find
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+  \ | wincmd p | diffthis
+endif
