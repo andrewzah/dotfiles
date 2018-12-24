@@ -16,6 +16,7 @@ Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
 Plug 'ledger/vim-ledger'
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
 """ Vim Behavior/Functionality
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }

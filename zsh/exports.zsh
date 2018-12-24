@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # ZSH 
 export ZSH=/Users/andrew/.oh-my-zsh
 export UPDATE_ZSH_DAYS=1
@@ -36,6 +34,8 @@ export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
 
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/Cellar/openssl/1.0.2e_1/lib
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
 
 #export LDFLAGS=-L/usr/local/opt/libxml2/lib
 #export CPPFLAGS=-I/usr/local/opt/libxml2/include
