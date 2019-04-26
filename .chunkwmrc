@@ -19,7 +19,7 @@ chunkc core::hotload 1
 #
 
 chunkc set global_desktop_mode           bsp
-chunkc set 7_desktop_mode                float
+chunkc set 8_desktop_mode                float
 
 chunkc set 1_desktop_tree                ~/.chunkwm_layouts/dev_1
 
@@ -82,7 +82,7 @@ chunkc set focused_border_skip_floating  0
 #
 
 chunkc core::load tiling.so
-chunkc core::load ffm.so
+# chunkc core::load ffm.so
 
 # ways to switch
 alt - f : chunkc tiling::window --toggle fullscreen
@@ -101,5 +101,6 @@ chunkc tiling::rule --owner alacritty  --state tile
 chunkc tiling::rule --owner Spotify --role AXWindow --subrole AXDialog --state tile
 chunkc tiling::rule --owner Firefox --role AXWindow --subrole AXDialog --state tile
 chunkc tiling::rule --owner Finder --name Copy --state float
+chunkc tiling::rule --owner \"Azure Data Studio\"  --state tile
 chunkc tiling::rule --owner \"App Store\" --state float
 chunkc tiling::rule --owner \"FightCade\" --state float

@@ -10,5 +10,6 @@ alias dcb="docker-compose build"
 # ctags
 alias ctags="`brew --prefix`/bin/ctags -f ./.git/tags"
 
-# alacritty
-alias a="open -n /Applications/Alacritty.app"
+# directories
+alias cdr="cd ~/Documents/repos"
+alias cdp="cd ~/Desktop/Sync/programming"

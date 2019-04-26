@@ -7,16 +7,22 @@ end
 call plug#begin('~/.vim/plugged')
 
 """ Language/Syntax
+"Plug 'l04m33/vlime', {'rtp': 'vim/'}
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 Plug 'elorest/vim-slang', { 'for': 'slang' }
+Plug 'fatih/vim-go'
 Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ledger/vim-ledger'
+Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'slim-template/vim-slim', { 'for': 'slim' }
 
 """ Vim Behavior/Functionality
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
@@ -30,7 +36,6 @@ Plug 'luochen1990/rainbow'
 Plug 'machakann/vim-sandwich'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plug 'morhetz/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'scrooloose/nerdcommenter'
@@ -39,20 +44,23 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
 
-""" Want to use in theory, need to look into
-" Plug 'gcmt/wildfire.vim'
+"" og theme
+Plug 'morhetz/gruvbox'
+"" new themes to try
+Plug 'KKPMW/moonshine-vim'
 
 call plug#end()
 filetype plugin indent on
 runtime macros/matchit.vim
 
-syntax enable 
+syntax enable
 set hidden
 set title
 set history=1000
 
 " theme / colors
 set background=dark
+"colorscheme hybrid
 colorscheme gruvbox
 set termguicolors
 
@@ -143,7 +151,7 @@ let g:clojure_conceal_extras = 1
 " Rainbow brackets/parens
 let g:rainbow_active = 1
 
-let g:fzf_tags_command = 'ctags --extra=+f -R'
+let g:fzf_tags_command = 'ctags --extra=+f -R .git/tags'
 
 " gruvbox coloring for fzf
 let g:fzf_colors =
@@ -186,7 +194,9 @@ let g:ale_lint_on_enter = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_save = 1
 let g:ale_linters = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'javascript': ['eslint'],
+  \ 'go': ['go fmt'],
 \ }
 
 let g:grepper = {}
@@ -226,24 +236,22 @@ nmap <c-p> :Files<cr>
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
+" cut without yanking
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
 " clear search highlight
 nnoremap <Leader>co :nohl<CR><C-l>
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
-" Tabularize
-nnoremap <Leader>a= :Tabularize /=<CR>
-vnoremap <Leader>a= :Tabularize /=<CR>
-nnoremap <Leader>a: :Tabularize /:\zs<CR>
-vnoremap <Leader>a: :Tabularize /:\zs<CR>
-
 " Save 1 keystroke on vim splits
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
 
 " Allow copy/paste
 nnoremap <C-x> "+p
@@ -338,7 +346,7 @@ autocmd BufReadPost *
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 " FZF :Find
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!node_modules/" --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.

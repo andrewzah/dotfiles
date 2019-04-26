@@ -1,42 +1,3 @@
-function extract {
-  echo Extracting $1 ...
-  if [ -f $1 ] ; then
-      case $1 in
-          *.tar.bz2)   tar xjf $1  ;;
-          *.tar.gz)    tar xzf $1  ;;
-          *.bz2)       bunzip2 $1  ;;
-          *.rar)       unrar x $1    ;;
-          *.gz)        gunzip $1   ;;
-          *.tar)       tar xf $1   ;;
-          *.tbz2)      tar xjf $1  ;;
-          *.tgz)       tar xzf $1  ;;
-          *.zip)       unzip $1   ;;
-          *.Z)         uncompress $1  ;;
-          *.7z)        7z x $1  ;;
-          *)        echo "'$1' cannot be extracted via extract()" ;;
-      esac
-  else
-      echo "'$1' is not a valid file"
-  fi
-}
-
-# move files to trash instead of rm
-function trash () {
-  local path
-  for path in "$@"; do
-    # ignore any arguments
-    if [[ "$path" = -* ]]; then :
-    else
-      local dst=${path##*/}
-      # append the time if necessary
-      while [ -e ~/.Trash/"$dst" ]; do
-        dst="$dst "$(date +%H-%M-%S)
-      done
-      /bin/mv "$path" ~/.Trash/"$dst"
-    fi
-  done
-}
-
 function mkd() {
 	mkdir -p "$@";
 }
@@ -63,6 +24,28 @@ function v() {
 	else
 		nvim "$@";
 	fi;
+}
+
+function m() {
+	if [ $# -eq 0 ]; then
+		make;
+	else
+		make "$@";
+	fi;
+}
+
+function t() {
+	if [ $# -eq 0 ]; then
+		task;
+	else
+		task "$@";
+	fi;
+}
+
+function run_msql() {
+  docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=DereApittyI99I' \
+    -p 1433:1433 --name sql1 \
+    -d mcr.microsoft.com/mssql/server:2017-latest
 }
 
 # SOURCES
