@@ -9,6 +9,7 @@ dos2unix
 exa
 ffmpeg
 findutils
+gnu-sed
 gnupg
 heroku/brew/heroku
 irssi
