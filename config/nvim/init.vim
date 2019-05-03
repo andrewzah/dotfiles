@@ -13,7 +13,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 Plug 'elorest/vim-slang', { 'for': 'slang' }
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
@@ -25,11 +25,10 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
 
 """ Vim Behavior/Functionality
+Plug 'bkad/CamelCaseMotion'
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
-Plug 'chrisbra/NrrwRgn'
-Plug 'gerw/vim-HiLinkTrace'
+Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
 Plug 'godlygeek/tabular'
-Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'luochen1990/rainbow'
@@ -49,6 +48,9 @@ Plug 'morhetz/gruvbox'
 "" new themes to try
 Plug 'KKPMW/moonshine-vim'
 
+" used for testing/debug
+"Plug 'gerw/vim-HiLinkTrace'
+
 call plug#end()
 filetype plugin indent on
 runtime macros/matchit.vim
@@ -64,7 +66,7 @@ set background=dark
 colorscheme gruvbox
 set termguicolors
 
-set scrolloff=3
+set scrolloff=0
 
 " Cursor position
 set ruler
@@ -242,7 +244,7 @@ xnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
 " clear search highlight
-nnoremap <Leader>co :nohl<CR><C-l>
+nnoremap <Leader>nh :nohl<CR><C-l>
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -274,10 +276,6 @@ nnoremap <leader>sl :call LoadSession()<cr>
 
 " Highlight syntax for word under cursor
 nnoremap <leader>pr :HLT!<cr>
-
-" In order to traverse ALE warnings
-nnoremap <silent> [w <Plug>(ale_previous_wrap)
-nnoremap <silent> ]w <Plug>(ale_next_wrap)
 
 " Grepper
 nnoremap <Leader>* :Grepper -cword -noprompt<CR>
