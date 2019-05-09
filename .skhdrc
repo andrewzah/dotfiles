@@ -107,6 +107,8 @@ alt - a : chunkc tiling::desktop --toggle offset
 # toggle window fullscreen
 alt - f : chunkc tiling::window --toggle fullscreen
 
+alt - p : chunkc tiling::desktop --toggle offset; chunkc tiling::window --toggle fullscreen
+
 # toggle window native fullscreen
 shift + alt - f : chunkc tiling::window --toggle native-fullscreen
 

@@ -21,13 +21,11 @@ chunkc core::hotload 1
 chunkc set global_desktop_mode           bsp
 chunkc set 8_desktop_mode                float
 
-chunkc set 1_desktop_tree                ~/.chunkwm_layouts/dev_1
-
-chunkc set global_desktop_offset_top     0
-chunkc set global_desktop_offset_bottom  0
-chunkc set global_desktop_offset_left    0
-chunkc set global_desktop_offset_right   0
-chunkc set global_desktop_offset_gap     0
+chunkc set global_desktop_offset_top     7
+chunkc set global_desktop_offset_bottom  7
+chunkc set global_desktop_offset_left    7
+chunkc set global_desktop_offset_right   7
+chunkc set global_desktop_offset_gap     7
 
 # chunkc set 3_desktop_offset_top          190
 
@@ -40,7 +38,7 @@ chunkc set bsp_split_mode                optimal
 chunkc set bsp_split_ratio               0.5
 
 chunkc set window_focus_cycle            monitor
-chunkc set mouse_follows_focus           0
+chunkc set mouse_follows_focus           intrinsic
 chunkc set window_float_next             0
 chunkc set window_float_center           1
 chunkc set window_region_locked          1
@@ -71,22 +69,25 @@ chunkc set window_use_cgs_move           0
 # NOTE: the following are config variables for the chunkwm-border plugin.
 #
 
-chunkc set focused_border_color          0xff775759
-chunkc set focused_border_width          0
+chunkc set focused_border_color          0xffb8bb26
+chunkc set focused_border_width          1
 chunkc set focused_border_radius         0
-chunkc set focused_border_skip_floating  0
+chunkc set focused_border_skip_floating  1
 
 #
 # NOTE: specify plugins to load when chunkwm starts.
 #       if chunkc plugin_dir is not set, the absolutepath is necessary.
 #
 
+chunkc core::load border.so
 chunkc core::load tiling.so
 # chunkc core::load ffm.so
 
 # ways to switch
 alt - f : chunkc tiling::window --toggle fullscreen
 shift + alt - space : chunkc tiling::window --toggle float
+
+chunkc set focused_border_skip_monocle 1
 
 # change layout of desktop
 alt - e : chunkc tiling::desktop --layout bsp
