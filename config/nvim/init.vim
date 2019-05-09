@@ -66,7 +66,7 @@ set background=dark
 colorscheme gruvbox
 set termguicolors
 
-set scrolloff=0
+set scrolloff=3
 
 " Cursor position
 set ruler
