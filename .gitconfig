@@ -1,31 +1,36 @@
 [user]
-	email = zah@andrewzah.com
-	name = Andrew Zah
-  signingkey = 5EB70FAA
+  email = zah@andrewzah.com
+  name = Andrew Zah
+  signingkey = 6DA8AD68401EFD0D3F86F52477E0757829DDB540
+
 [core]
-	editor = nvim
-        excludesfile = ~/.global_gitignore
+  editor = nvim
+  excludesfile = ~/.global_gitignore
+
 [alias]
         aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
 
         # git add --all
         aa = add --all
-        
+
+        # find all of em
+        finda = "!grepalias() { git config --global --get-regexp alias | grep -i \"$1\" | awk -v nr=2 '{sub(/^alias\\./,\"\")};{printf \"\\033[31m%_10s\\033[1;37m\", $1};{sep=FS};{for (x=nr; x<=NF; x++) {printf \"%s%s\", sep, $x; }; print \"\\033[0;39m\"}'; }; grepalias"
+
         # delete branch
         brdel = branch -D
-        
+
         # most modified files
         churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
-         
+
         # save repo as tarball
         export = archive -o latest.tar.gz -9 --prefix=latest/
-        
+
         # list of commit sha-1s
-        l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"       
-        
+        l = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
+
         # list all tags
         tags = tag -l
-        
+
         # checks that local refs are up to date before overwriting
         please = push --force-with-lease
 
@@ -37,25 +42,25 @@
 
         # recap your own commits on a project
         recap = log --all --pretty=format:'%h %ad %s' --no-merges --author=<zah@andrewzah.com> --date=short
-        
+
         # amend commit
         commend = commit --amend --no-edit
-         
+
         # merge no fast forward
         merc = merge --no-ff
-         
+
         # brief status
         st = status --short --branch
-         
+
         # stash only unstaged changes to tracked files
         stsh = stash --keep-index
-        
+
         # stash any changes to tracked files
         staash = stash --include-untracked
-         
-        # stash ignored, untracked, and tracked files 
+
+        # stash ignored, untracked, and tracked files
         staaash = stash --all
-        
+
         # initialize empty repo and commit
         it = !git init && git commit -m \"root\" --allow-empty }
 [diff]
@@ -71,7 +76,7 @@
 [color "diff"]
         meta = yellow
         frag = magenta
-        old = red 
+        old = red
         new = green
 [color "status"]
         added = yellow
@@ -79,18 +84,3 @@
         untracked = red
 [commit]
         gpgsign = true
-
-# shorthand URLs
-[url "https://github.com/"]
-        insteadOf = gh:
-[url "git@github.com:"]
-        insteadOf = ghs:
-[url "https://gist.github.com/"]
-        insteadOf = gist:
-[url "https://gitlab.com/"]
-        insteadOf = gl:
-[url "git@gitlab.com:"]
-        insteadOf = gls:
-
-[init]
-        templatedir = ~/.config/git/templates/init

@@ -1,6 +1,3 @@
-# reload config
-cmd + alt + ctrl - r : khd -e "reload"
-
 # focus window
 alt - h : chunkc tiling::window --focus west
 alt - j : chunkc tiling::window --focus south
@@ -34,6 +31,15 @@ shift + cmd - right  : chunkc tiling::window --warp-floating top-right
 shift + ctrl - left  : chunkc tiling::window --warp-floating bottom-left
 shift + ctrl - right : chunkc tiling::window --warp-floating bottom-right
 
+# make floating window fill screen
+shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
+
+# make floating window fill left-half of screen
+shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
+
+# make floating window fill right-half of screen
+shift + alt - right : chunkc tiling::window --grid-layout 1:2:1:0:1:1
+
 # send window to desktop
 shift + alt - x : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop)
 shift + alt - z : chunkc tiling::window --send-to-desktop prev
@@ -43,7 +49,11 @@ shift + alt - 2 : chunkc tiling::window --send-to-desktop 2
 shift + alt - 3 : chunkc tiling::window --send-to-desktop 3
 shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
 shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
-shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
+shift + alt - q : chunkc tiling::window --send-to-desktop 6
+shift + alt - w : chunkc tiling::window --send-to-desktop 7
+shift + alt - e : chunkc tiling::window --send-to-desktop 8
+shift + alt - r : chunkc tiling::window --send-to-desktop 9
+shift + alt - t : chunkc tiling::window --send-to-desktop 10
 
 # send window to desktop and switch desktop
 shift + cmd - x : `id=$(chunkc get _last_active_desktop); chunkc tiling::window -d $id; khd -p "cmd + alt - $id" &> /dev/null`
@@ -107,7 +117,7 @@ alt - a : chunkc tiling::desktop --toggle offset
 # toggle window fullscreen
 alt - f : chunkc tiling::window --toggle fullscreen
 
-alt - p : chunkc tiling::desktop --toggle offset; chunkc tiling::window --toggle fullscreen
+# alt - p : chunkc tiling::desktop --toggle offset; chunkc tiling::window --toggle fullscreen
 
 # toggle window native fullscreen
 shift + alt - f : chunkc tiling::window --toggle native-fullscreen
@@ -122,8 +132,8 @@ alt - e : chunkc tiling::window --toggle split
 alt - t : chunkc tiling::window --toggle float
 
 # toggle sticky, float and resize to picture-in-picture size
-alt - s : chunkc tiling::window --toggle sticky;\
-          chunkc tiling::window --warp-floating pip-right
+#alt - s : chunkc tiling::window --toggle sticky;\
+          #chunkc tiling::window --warp-floating pip-right
 
 # float next window to be tiled
 shift + alt - t : chunkc set window_float_next 1

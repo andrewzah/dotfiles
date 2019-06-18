@@ -18,17 +18,20 @@ Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ledger/vim-ledger'
+Plug 'lervag/vimtex'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 """ Vim Behavior/Functionality
-Plug 'bkad/CamelCaseMotion'
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
+Plug 'bkad/CamelCaseMotion'
 Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
 Plug 'godlygeek/tabular'
+Plug 'Alok/notational-fzf-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'luochen1990/rainbow'
@@ -38,7 +41,7 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
 Plug 'radenling/vim-dispatch-neovim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'soramugi/auto-ctags.vim'
+Plug 'soramugi/auto-ctags.vim', { 'for': ['rust', 'ruby'] }
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
@@ -147,13 +150,35 @@ set hidden  " When you 'abandon' a buffer (i.e., when you no longer have a
 """ Variables for plugins
 """
 
+"latex live stuff
+let g:vimtex_compiler_progname = 'nvr'
+let g:tex_flavor  = 'latex'
+let g:vimtex_view_method = 'skim'
+"let g:vimtex_latexmk_options='-pdf -pdflatex="xelatex -synctex=1 %S %O" -verbose -file-line-error -interaction=nonstopmode'
+
 " Conceal
 let g:clojure_conceal_extras = 1
 
 " Rainbow brackets/parens
 let g:rainbow_active = 1
 
+" vim markdown disable idiotic defaults
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_emphasis_multiline = 0
+let g:vim_markdown_fenced_languages = ['csharp=cs', 'rust=rs']
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
+
+" fzf
 let g:fzf_tags_command = 'ctags --extra=+f -R .git/tags'
+
+" notational fzf vim
+let g:nv_search_paths =
+  \ ['~/Desktop/Sync/thoughts',
+    \ '~/Desktop/Sync/thoughts/korean',
+  \]
 
 " gruvbox coloring for fzf
 let g:fzf_colors =
@@ -233,6 +258,9 @@ nmap <leader>q :q!<cr>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <c-p> :Files<cr>
+
+" notational velocity
+nnoremap <Leader>e :NV<CR>
 
 " push window up/down
 nnoremap <C-e> 3<C-e>

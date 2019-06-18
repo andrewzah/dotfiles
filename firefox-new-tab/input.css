@@ -1,0 +1,41 @@
+body {
+  font-family: 'Courier New', 'Libre Baskerville' !important;
+  color: #333;
+  line-height: 1.1;
+}
+
+a {
+  font-family: 'Courier New', 'Libre Baskerville' !important;
+  text-decoration: none;
+  color: #333;
+  border-bottom: #333 1px dotted;
+}
+
+a:hover {
+  color: green;
+  border-bottom: green 1px dotted;
+}
+
+p {
+  margin: 7px 1px;
+}
+
+.flex-container {
+  max-width: 950px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.flex-container div {
+  margin: 5px;
+  min-width: 100px;
+}
+
+.flex-container div h2 {
+  padding-bottom: 0px;
+  text-decoration: underline;
+  font-weight: bold;
+}
