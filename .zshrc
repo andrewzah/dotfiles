@@ -1,14 +1,16 @@
-source ~/.zsh/aliases.zsh
-source ~/.zsh/colors.zsh
-source ~/.zsh/exports.zsh
-source ~/.zsh/secret-exports.zsh
-source ~/.zsh/functions.zsh
-source ~/.zsh/history.zsh
-source ~/.zsh/setopt.zsh
-source ~/.zsh/zsh-path.zsh
+export ZSH=/Users/andrewzah/.oh-my-zsh
 
-source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-source ~/.iterm2_shell_integration.zsh
+source ~/.dotfiles/zsh/aliases.zsh
+source ~/.dotfiles/zsh/colors.zsh
+source ~/.dotfiles/zsh/path-exports.zsh
+source ~/.dotfiles/zsh/secret-exports.zsh
+source ~/.dotfiles/zsh/functions.zsh
+source ~/.dotfiles/zsh/history.zsh
+source ~/.dotfiles/zsh/setopt.zsh
+
+ZSH_THEME="arrow"
+source $ZSH/oh-my-zsh.sh
+
 #plugins=(gitfast ruby wd colored-man-pages last-working-dir)
 #source ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 

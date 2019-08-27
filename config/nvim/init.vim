@@ -44,7 +44,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'soramugi/auto-ctags.vim', { 'for': ['rust', 'ruby'] }
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 
 "" og theme
 Plug 'morhetz/gruvbox'
@@ -176,8 +176,8 @@ let g:fzf_tags_command = 'ctags --extra=+f -R .git/tags'
 
 " notational fzf vim
 let g:nv_search_paths =
-  \ ['~/Desktop/Sync/thoughts',
-    \ '~/Desktop/Sync/thoughts/korean',
+  \ ['~/Thoughts',
+    \ '~/Thoughts/korean',
   \]
 
 " gruvbox coloring for fzf
@@ -372,7 +372,9 @@ autocmd BufReadPost *
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 " FZF :Find
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!node_modules/" --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+if executable('rg')
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!node_modules/" --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+end
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
