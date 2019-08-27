@@ -1,21 +1,17 @@
-export ZSH=/home/andrei/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
-source ~/.zsh/path.zsh
-source ~/.zsh/colors.zsh
-source ~/.zsh/setopt.zsh
-source ~/.zsh/exports.zsh
-#source ~/.zsh/aliases.zsh
-source ~/.zsh/functions.zsh
-source ~/.zsh/history.zsh
-source ~/.zsh/secret-exports.zsh
-#~/.zsh/macosx.sh
+source ~/.dotfiles/zsh/aliases.zsh
+source ~/.dotfiles/zsh/config.zsh
+source ~/.dotfiles/zsh/functions.zsh
+source ~/.dotfiles/zsh/path-exports-options.zsh
+source ~/.dotfiles/zsh/secret-exports.zsh
+source ~/.dotfiles/zsh/zsh-configuration.zsh
 
-ZSH_THEME="theunraveler"
-
-plugins=(git lein ruby wd colored-man-pages last-working-dir)
+ZSH_THEME="zah"
 source $ZSH/oh-my-zsh.sh
 
-source $ZSH_CUSTOM/plugins/up/up.plugin.zsh
-source $ZSH_CUSTOM/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+plugins=(gitfast)
+
+PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

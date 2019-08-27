@@ -7,23 +7,12 @@
   ZSH_THEME_GIT_PROMPT_SUFFIX=""
   ZSH_THEME_GIT_PROMPT_DIRTY=""
   ZSH_THEME_GIT_PROMPT_CLEAN=""
-  #https://www.utf8icons.com/character/67587/cypriot-syllable-o
-  ZSH_THEME_GIT_PROMPT_ADDED="%{$PR_BOLD_GREEN%} 𐠃"
-
-  #https://www.utf8icons.com/character/5819/runic-letter-haegl-h
-  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$PR_BOLD_YELLOW%} ᚻ"
-
-  # https://www.utf8icons.com/character/5815/runic-letter-gebo-gyfu-g
-  ZSH_THEME_GIT_PROMPT_DELETED="%{$PR_BOLD_RED%} ᚷ"
-
-  # https://www.utf8icons.com/character/10499/rightwards-double-arrow-with-vertical-stroke
-  ZSH_THEME_GIT_PROMPT_RENAMED="%{$PR_BOLD_BLUE%} ⤃"
-
-  # https://www.utf8icons.com/character/1986/nko-digit-two
-  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$PR_BOLD_MAGENTA%} ߂"
-
-  # https://www.utf8icons.com/character/67620/cypriot-syllable-re
-  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$PR_BOLD_CYAN%} 𐠤"
+  ZSH_THEME_GIT_PROMPT_ADDED="%{$fg_bold[green]%} a"
+  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%} m"
+  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg_bold[red]%} x"
+  ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg_bold[blue]%} r"
+  ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg_bold[magenta]%} u"
+  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[cyan]%} n"
 
 # Helper Functions
 # ================
@@ -110,7 +99,7 @@
   }
 
   function dir_status() {
-    echo "%{$fg_bold[cyan]%}%0~%{$reset_color%}"
+    echo "%{$fg_bold[cyan]%}%2~%{$reset_color%}"
   }
 
   # Wrap up in set_prompt so it can be 
@@ -122,12 +111,12 @@
       (*)           VI_MODE="$(insert-mode)" ;;
     esac
 
-    PROMPT='$(exit_code_status)λ ($(_convertsecs $(get_time))) $(user_host_status)$(dir_status) $(exit_code_status)\$ %{$reset_color%} '
+    PROMPT=' $(exit_code_status)λ ($(_convertsecs $(get_time))) $(dir_status) $(exit_code_status)\$ %{$reset_color%}'
 
     if [[ -n $(git_prompt_info) ]]; then
-      RPROMPT='${VI_MODE} {$(git_prompt_info)}%{$reset_color%} $(git_prompt_status)%{$reset_color%}'
+      RPROMPT='%{$fg[green]%}{$(git_prompt_info)}%{$reset_color%}$(git_prompt_status)%{$reset_color%}'
     else
-      RPROMPT='${VI_MODE}'
+      RPROMPT=''
     fi
   }
 

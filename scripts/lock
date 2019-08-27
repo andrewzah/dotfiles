@@ -29,7 +29,7 @@ do
     ;;
   -b=*|--blur=*)
     VAL="${i#*=}"
-    BLURTYPE=(${VAL//=/ }) 
+    BLURTYPE=(${VAL//=/ })
     shift
     ;;
   -p|--pixelate)

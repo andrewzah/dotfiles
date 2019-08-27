@@ -1,38 +1,39 @@
 ## font
-font pango:DejaVu Sans Mono 10
+font pango:Inconsolata 10
 
 ## i3 ModKeys
 set $mod Mod4
 set $cmod Mod1
 
-gaps inner 10
-set $work1 "Neptune"
-set $work2 "Saturn"
-set $work3 "Titan"
-set $work4 "Venus"
-set $work5 "Jupiter"
-set $work6 "Mars"
+gaps inner 5
+set $work1 "미륵"
+set $work2 "조왕신"
+set $work3 "업신"
+set $work4 "산신"
+set $work5 "터주신"
+set $work6 "자청비"
 
 # default workspaces to each monitor
 workspace $work1 output DVI-I-1
 workspace $work2 output HDMI-0
 
 # startup applications
-exec_always --no-startup-id ~/.config/i3/polybar.sh &
-exec_always feh --bg-scale ~/Pictures/Wallpapers/deoksugung2_right.jpg ~/Pictures/Wallpapers/deoksugung2_left.jpg
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always feh --bg-scale ~/Wallpapers/1.jpg ~/Wallpapers/2.jpg
 
 ## i3 Opts
-hide_edge_borders both
+default_border pixel 2
+default_floating_border pixel 2
 new_window pixel 2
 
 # Floating mode
 #floating_modifer $mod
 
 # Focus keys
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # Move keys
 bindsym $mod+Shift+Left move left
@@ -63,19 +64,18 @@ bindsym $mod+Shift+5 move container to workspace $work5
 bindsym $mod+Shift+6 move container to workspace $work6
 
 # assign programs to workspaces
-assign [class="Discord"] $work2
 assign [class="Thunderbird"] $work3
+assign [class="Discord"] $work4
 
 # splits
-bindsym $mod+h split h
+bindsym $mod+o split h
 bindsym $mod+v split v
 
 # toggling view types
 bindsym $mod+s layout stacking
-bindsym $mod+l layout toggle split
+bindsym $mod+p layout toggle split
 bindsym $mod+f fullscreen toggle
 bindsym $mod+g floating toggle
-
 
 ## i3 Session keys
 bindsym $mod+Shift+c reload
@@ -83,15 +83,20 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # General
-bindsym $mod+Return exec kitty
-bindsym $mod+d exec rofi -show run -config /home/andrei/.config/rofi/config
-bindsym $mod+w exec rofi -show window -config /home/andrei/.config/rofi/config
+bindsym $mod+d exec rofi -show run -config /home/andrew/.config/rofi/config
+bindsym $mod+w exec rofi -show window -config /home/andrew/.config/rofi/config
 bindsym $mod+Shift+w kill
 
-# Floating windows
-for_window [class="Peek"] floating enable
+set $green #98971a
+set $purple #B16286
+set $darkgray #1d2021
 
-client.focused          #5F875F #285577 #ffffff #97b597   #5F875F
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.focused          #98971A #98971A #FFFFFF #B16286
+client.focused_inactive #1D2021 #1D2021 #FFFFFF #B16286
+client.unfocused        #1D2021 #1D2021 #888888 #B16286
+client.urgent           #CC241D #CC241D #FFFFFF #CC241D
+client.placeholder      #000000 #0C0C0C #FFFFFF #B16286
+
+client.background       #FFFFFF
+
+#for_window [class=".*"] border pixel 2

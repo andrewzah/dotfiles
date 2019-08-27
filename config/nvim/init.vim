@@ -6,58 +6,63 @@ end
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'AndrewRadev/sideways.vim'
+""" Language/Syntax
+"Plug 'l04m33/vlime', {'rtp': 'vim/'}
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
-Plug 'Yggdroot/indentLine', { 'for': ['yaml', 'python'] }
-Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'chrisbra/NrrwRgn'
-Plug 'chrisbra/csv.vim'
-Plug 'elixir-editors/vim-elixir'
+Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 Plug 'elorest/vim-slang', { 'for': 'slang' }
-Plug 'fisadev/FixedTaskList.vim'
-Plug 'gcmt/wildfire.vim'
-Plug 'gerw/vim-HiLinkTrace'
-Plug 'godlygeek/tabular'
-Plug 'haya14busa/vim-signjk-motion'
-Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
-Plug 'janko-m/vim-test'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ledger/vim-ledger'
-Plug 'luochen1990/rainbow', { 'for': ['clojure'] }
-Plug 'machakann/vim-sandwich'
-Plug 'mattn/emmet-vim'
-Plug 'mhinz/vim-grepper'
-Plug 'morhetz/gruvbox'
-Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
-Plug 'radenling/vim-dispatch-neovim'
+Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'slim-template/vim-slim', { 'for': 'slim' }
+Plug 'LnL7/vim-nix', { 'for': 'nix' }
+
+""" Vim Behavior/Functionality
+Plug 'bkad/CamelCaseMotion'
+Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
+Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
+Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'luochen1990/rainbow'
+Plug 'machakann/vim-sandwich'
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
+Plug 'radenling/vim-dispatch-neovim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'soramugi/auto-ctags.vim'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-projectionist'
-Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
-Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'w0rp/ale'
-Plug 'yuttie/comfortable-motion.vim'
+"Plug 'w0rp/ale'
+
+"" og theme
+Plug 'morhetz/gruvbox'
+"" new themes to try
+Plug 'KKPMW/moonshine-vim'
+
+" used for testing/debug
+"Plug 'gerw/vim-HiLinkTrace'
 
 call plug#end()
 filetype plugin indent on
 runtime macros/matchit.vim
 
-syntax enable 
+syntax enable
 set hidden
 set title
 set history=1000
 
 " theme / colors
 set background=dark
+"colorscheme hybrid
 colorscheme gruvbox
 set termguicolors
 
@@ -67,7 +72,19 @@ set scrolloff=3
 set ruler
 set rulerformat=%27(%{strftime('%a\ %e,\ %H:%M')}\ %5l,%-1(%c%V%)\ %P%)
 
-set clipboard+=unnamedplus
+" Remember things between sessions
+"
+" '20  - remember marks for 20 previous files
+" \"50 - save 50 lines for each register
+" :20  - remember 20 items in command-line history
+" /20  - remember 20 items in search history
+" %    - remember the buffer list (if vim started without a file arg)
+" n    - set name of viminfo file
+set viminfo='20,\"50,:20,/20,%
+
+if exists('+clipboard')
+  set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
+endif
 
 " Line Numbers
 set number
@@ -82,10 +99,14 @@ set showmatch
 set mat=2
 
 " tab behavior
-set tabstop=2
-set shiftwidth=2
+set autoindent
 set expandtab
-set smarttab "paste correctly
+set shiftround
+set shiftwidth=2
+set smartindent
+set smarttab 
+set softtabstop=2
+set tabstop=8
 
 " searching
 set hls "highlight search
@@ -93,6 +114,11 @@ set is "incsearch
 set ignorecase " Ignore case when searching...
 set smartcase  " Except when starting with a capital
 
+set showmatch  " When a bracket is inserted, jump to the matching bracket.
+set mat=5      " How long to jump to the matching bracket in tenths of a second.
+set list       " Enable 'list mode', which visually displays certain characters
+               " upon listchars rules.
+               
 " Quick timeouts on key combinations.
 set timeoutlen=300
 
@@ -107,6 +133,15 @@ set undodir=~/.nvim/undo,/tmp
 set noswapfile
 set autoread
 
+set showcmd " display incomplete commands in laststatus.
+            " For example, typing the start of a multi-key binding will
+            " show each successive key typed in the lower right. Useful
+            " for identifying when you're starting a command.
+
+set hidden  " When you 'abandon' a buffer (i.e., when you no longer have a
+            " buffer displayed), simply hide it rather than unloading it.
+            " Without this, hiding a modified buffer would error due to that
+            " buffer not being saved.
 
 """
 """ Variables for plugins
@@ -118,7 +153,7 @@ let g:clojure_conceal_extras = 1
 " Rainbow brackets/parens
 let g:rainbow_active = 1
 
-let g:fzf_tags_command = 'ctags --extra=+f -R'
+let g:fzf_tags_command = 'ctags --extra=+f -R .git/tags'
 
 " gruvbox coloring for fzf
 let g:fzf_colors =
@@ -144,9 +179,6 @@ if get(g:, 'elite_mode')
 	nnoremap <Right> :vertical resize -2<CR>
 endif
 
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"  
-
 " auto-ctags options
 let g:auto_ctags = 1
 let g:auto_ctags_directory_list = ['.git']
@@ -164,7 +196,9 @@ let g:ale_lint_on_enter = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_save = 1
 let g:ale_linters = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'javascript': ['eslint'],
+  \ 'go': ['go fmt'],
 \ }
 
 let g:grepper = {}
@@ -178,10 +212,6 @@ let test#strategy = "dispatch"
 
 " Leader key
 let mapleader = ","
-
-" signjk 
-nmap <Leader>j <Plug>(signjk-j)
-nmap <Leader>k <Plug>(signjk-k)
 
 " ease of access
 nnoremap ' `
@@ -208,17 +238,16 @@ nmap <c-p> :Files<cr>
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
+" cut without yanking
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
 " clear search highlight
-nnoremap <Leader>co :nohl<CR><C-l>
+nnoremap <Leader>nh :nohl<CR><C-l>
 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
-
-" Tabularize
-nnoremap <Leader>a= :Tabularize /=<CR>
-vnoremap <Leader>a= :Tabularize /=<CR>
-nnoremap <Leader>a: :Tabularize /:\zs<CR>
-vnoremap <Leader>a: :Tabularize /:\zs<CR>
 
 " Save 1 keystroke on vim splits
 nnoremap <C-J> <C-W><C-J>
@@ -248,10 +277,6 @@ nnoremap <leader>sl :call LoadSession()<cr>
 " Highlight syntax for word under cursor
 nnoremap <leader>pr :HLT!<cr>
 
-" In order to traverse ALE warnings
-nnoremap <silent> [w <Plug>(ale_previous_wrap)
-nnoremap <silent> ]w <Plug>(ale_next_wrap)
-
 " Grepper
 nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 nnoremap gs <Plug>(GrepperOperator)
@@ -266,19 +291,11 @@ au BufRead,BufNewFile *.slang set filetype=slang
 au BufRead,BufNewFile *.ecr set filetype=erb
 
 
-
 " Automatically make the dir if it doesn't exist on the machine.
 silent !mkdir -p ~/.nvim/tmp >/dev/null 2>&1
 
 " Autoread on common events
 autocmd! FocusGained,BufEnter * checktime
-
-
-" Clojure
-" au Filetype clojure nmap <c-c><c-k> :Require<cr>  
-
-" Formats a ledger entry. Untabs a visual selection, runs :Tab /<space><space>, and re-tabs
-let @l = '€kB:tab€kb€kb€kbTab  /€kb€kb€kb /  gv	:w'
 
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
@@ -319,5 +336,20 @@ augroup autosourcing
     endif
 augroup END
 
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") && &ft != 'gitcommit' |
+     \   exe "normal! g`\"" |
+     \ endif
+
+autocmd filetype crontab setlocal nobackup nowritebackup
+
 " FZF :Find
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!node_modules/" --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+  \ | wincmd p | diffthis
+endif

@@ -1,19 +1,27 @@
-alias ls="ls -la"
-alias exa="exa -l"
+alias rm="rm -i"
 
-# Clojure
-alias lr="lein repl"
+alias copy='xclip -selection c'
+alias paste='xclip -selection p'
 
+alias ll='ls -al'
 
-# https://github.com/holman/dotfiles/blob/b943fe169f372c6ee0057c8ff698e1709719a6ba/git/aliases.zsh
-# Git. Remove `+` and `-` from start of diff lines; just rely upon color.
-alias gd='git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r'
+# gron
+alias norg="gron --ungron"
+alias ungron="gron --ungron"
 
-# https://github.com/holman/dotfiles/blob/b943fe169f372c6ee0057c8ff698e1709719a6ba/docker/aliases.zsh
+# ruby
+alias rbi='eval "$(rbenv init -)"'
+alias bi='bundle install'
+alias bu='bundle update'
+alias gi='gem install'
+
 # Docker
-alias d='docker $*'
-alias d-c='docker-compose $*'
+alias dcu='docker-compose up'
+alias dcd='docker-compose down'
+alias dcb='docker-compose build'
 
-alias dcu="docker-compose up"
-alias dcd="docker-compose down"
-alias dcb="docker-compose build"
+# local system
+alias cdr='~/Work/repos'
+alias cda='~/Work/repos/cyber/cyber-server/api-server'
+
+alias cdp='~/Programming'
