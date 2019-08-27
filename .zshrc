@@ -8,7 +8,7 @@ source ~/.dotfiles/zsh/functions.zsh
 source ~/.dotfiles/zsh/history.zsh
 source ~/.dotfiles/zsh/setopt.zsh
 
-ZSH_THEME="arrow"
+ZSH_THEME="zah"
 source $ZSH/oh-my-zsh.sh
 
 #plugins=(gitfast ruby wd colored-man-pages last-working-dir)
