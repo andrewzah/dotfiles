@@ -41,6 +41,7 @@ Plug 'radenling/vim-dispatch-neovim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/VisIncr'
 "Plug 'w0rp/ale'
 
 "" og theme

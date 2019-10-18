@@ -25,3 +25,4 @@ alias cdr='~/Work/repos'
 alias cda='~/Work/repos/cyber/cyber-server/api-server'
 
 alias cdp='~/Programming'
+alias cdw='~/Website'

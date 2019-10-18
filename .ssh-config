@@ -1,0 +1,14 @@
+Host freenas.local
+  HostName 192.168.1.13
+
+Host andrewzah.com
+  User deploy
+  Port 2223
+
+Host *
+  Cipher aes128-ctr
+
+Host *
+  ControlPath ~/.ssh/%C.sock
+  ControlMaster auto
+  ControlPersist 10m

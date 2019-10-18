@@ -18,6 +18,9 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
+# anaconda
+export PATH=/home/andrew/anaconda3/bin:$PATH
+
 # nix
 source ~/.nix-profile/etc/profile.d/nix.sh
 
