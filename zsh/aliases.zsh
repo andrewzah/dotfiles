@@ -11,5 +11,5 @@ alias dcb="docker-compose build"
 alias ctags="`brew --prefix`/bin/ctags -f ./.git/tags"
 
 # directories
-alias cdw="cd ~/Work/repos"
+alias cdw="cd ~/Website"
 alias cdp="cd ~/Programming"

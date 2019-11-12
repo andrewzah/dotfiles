@@ -44,12 +44,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'soramugi/auto-ctags.vim', { 'for': ['rust', 'ruby'] }
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
-"Plug 'w0rp/ale'
 
 "" og theme
 Plug 'morhetz/gruvbox'
-"" new themes to try
-Plug 'KKPMW/moonshine-vim'
 
 " used for testing/debug
 "Plug 'gerw/vim-HiLinkTrace'
@@ -113,7 +110,7 @@ set tabstop=8
 
 " searching
 set hls "highlight search
-set is "incsearch
+"set is "incsearch
 set ignorecase " Ignore case when searching...
 set smartcase  " Except when starting with a capital
 
@@ -176,9 +173,15 @@ let g:fzf_tags_command = 'ctags --extra=+f -R .git/tags'
 
 " notational fzf vim
 let g:nv_search_paths =
-  \ ['~/Thoughts',
-    \ '~/Thoughts/korean',
+  \ ['~/Sync/thoughts',
+    \ '~/Sync/thoughts/korean',
   \]
+
+let g:nv_keymap = {
+                    \ 'alt-s': 'split ',
+                    \ 'alt-v': 'vertical split ',
+                    \ 'alt-t': 'tabedit ',
+                    \ }
 
 " gruvbox coloring for fzf
 let g:fzf_colors =

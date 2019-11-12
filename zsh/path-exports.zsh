@@ -35,6 +35,9 @@ eval "$(rbenv init -)"
 # python
 export PATH=/usr/local/share/python:$PATH
 
+# anaconda
+export PATH=/usr/local/anaconda3/bin:$PATH
+
 # Vim FZF
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
