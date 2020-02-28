@@ -6,6 +6,8 @@
 [core]
   editor = nvim
   excludesfile = ~/.global_gitignore
+	quotepath = false
+	commitGraph = true
 
 [alias]
         aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
@@ -84,3 +86,10 @@
         untracked = red
 ;[commit]
         ;gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gc]
+	writeCommitGraph = true

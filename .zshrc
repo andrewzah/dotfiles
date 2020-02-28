@@ -7,11 +7,16 @@ source ~/.dotfiles/zsh/secret-exports.zsh
 source ~/.dotfiles/zsh/functions.zsh
 source ~/.dotfiles/zsh/history.zsh
 source ~/.dotfiles/zsh/setopt.zsh
+source ~/.dotfiles/zsh/theme.zsh
 
-ZSH_THEME="zah"
-source $ZSH/oh-my-zsh.sh
+autoload -U colors && colors
+#export PS1="%{$fg_bold[magenta]%} λ %{$reset_color%}"
 
-#plugins=(gitfast ruby wd colored-man-pages last-working-dir)
-#source ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+export HISTSIZE=10000000
+export SAVEHIST=10000000
+export HISTFILE=~/Sync/personal/.shell_history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

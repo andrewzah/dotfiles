@@ -7,7 +7,6 @@ end
 call plug#begin('~/.vim/plugged')
 
 """ Language/Syntax
-"Plug 'l04m33/vlime', {'rtp': 'vim/'}
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
@@ -17,8 +16,9 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'ledger/vim-ledger'
-Plug 'lervag/vimtex'
+Plug 'leafoftree/vim-svelte-plugin', { 'for': 'svelte'}
+"Plug 'ledger/vim-ledger'
+"Plug 'lervag/vimtex'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
@@ -27,22 +27,21 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 """ Vim Behavior/Functionality
+"Plug 'mattn/emmet-vim'
+"Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+"Plug 'radenling/vim-dispatch-neovim'
+"Plug 'tpope/vim-dispatch'
+Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
 Plug 'bkad/CamelCaseMotion'
-Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
 Plug 'godlygeek/tabular'
 Plug 'Alok/notational-fzf-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'luochen1990/rainbow'
 Plug 'machakann/vim-sandwich'
-Plug 'mattn/emmet-vim'
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
-Plug 'radenling/vim-dispatch-neovim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'soramugi/auto-ctags.vim', { 'for': ['rust', 'ruby'] }
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 
 "" og theme
@@ -62,7 +61,6 @@ set history=1000
 
 " theme / colors
 set background=dark
-"colorscheme hybrid
 colorscheme gruvbox
 set termguicolors
 
@@ -122,7 +120,7 @@ set list       " Enable 'list mode', which visually displays certain characters
 " Quick timeouts on key combinations.
 set timeoutlen=300
 
-set shortmess=atIwmfl
+"set shortmess=atIwmfl
 
 " Backup, Swap, and Undo
 set directory^=~/.nvim/tmp,/tmp
@@ -158,6 +156,8 @@ let g:clojure_conceal_extras = 1
 
 " Rainbow brackets/parens
 let g:rainbow_active = 1
+
+let g:netrw_silent = 1
 
 " vim markdown disable idiotic defaults
 let g:vim_markdown_folding_disabled = 1
@@ -208,8 +208,8 @@ if get(g:, 'elite_mode')
 endif
 
 " auto-ctags options
-let g:auto_ctags = 1
-let g:auto_ctags_directory_list = ['.git']
+"let g:auto_ctags = 1
+"let g:auto_ctags_directory_list = ['.git']
 
 let g:wildfire_objects = {
   \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
@@ -228,11 +228,6 @@ let g:ale_linters = {
   \ 'javascript': ['eslint'],
   \ 'go': ['go fmt'],
 \ }
-
-let g:grepper = {}
-let g:grepper.tools = ['rg', 'git', 'grep']
-
-let test#strategy = "dispatch"
 
 """
 """ Key remapping
@@ -308,11 +303,6 @@ nnoremap <leader>sl :call LoadSession()<cr>
 " Highlight syntax for word under cursor
 nnoremap <leader>pr :HLT!<cr>
 
-" Grepper
-nnoremap <Leader>* :Grepper -cword -noprompt<CR>
-nnoremap gs <Plug>(GrepperOperator)
-xnoremap gs <Plug>(GrepperOperator)
-
 """ Syntaxes """
 
 " Autoset slang syntax highlighting
@@ -331,14 +321,14 @@ autocmd! FocusGained,BufEnter * checktime
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo') && isdirectory(expand('~').'/.vim/backups')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
+if has('persistent_undo') && isdirectory(expand('~').'/.nvim/backups')
+  silent !mkdir ~/.nvim/backups > /dev/null 2>&1
+  set undodir=~/.nvim/backups
   set undofile
 endif
 
 set ssop-=options       " do not store options (vimrc) in a session
-"" Make and load method to save session per dir
+" Make and load method to save session per dir
 function! MakeSession()
     let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
     if (filewritable(b:sessiondir) != 2)
@@ -362,7 +352,7 @@ endfunction
 " Auto-commands 
 augroup autosourcing
     if(argc() == 0)
-        "au VimEnter * nested :call LoadSession() " Uncomment to automatically load session
+        au VimEnter * nested :call LoadSession() " Uncomment to automatically load session
         au VimLeave * :call MakeSession()
     endif
 augroup END

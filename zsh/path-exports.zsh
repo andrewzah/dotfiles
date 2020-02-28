@@ -28,12 +28,22 @@ export UPDATE_ZSH_DAYS=1
 # Rust: Cargo
 export PATH=$HOME/.cargo/bin:$PATH
 
-# ruby
+
+# rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+
+# openssl compatibility issues
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+# RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl" rbenv install 2.3.8
+
+# go
+export GOPATH="$HOME/.go"
 
 # python
-export PATH=/usr/local/share/python:$PATH
+#export PATH=/usr/local/share/python:$PATH
 
 # anaconda
 export PATH=/usr/local/anaconda3/bin:$PATH

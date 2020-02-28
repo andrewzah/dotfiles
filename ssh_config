@@ -3,3 +3,7 @@ Host *
 
 Host cyber.ossys.com
  IdentityFile ~/.ssh/cyber
+
+Host git.andrewzah.com
+  Port 2929 
+  IdentityFile ~/.ssh/id_rsa
