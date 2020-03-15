@@ -59,3 +59,11 @@ function t() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@"
 }
+
+function push {
+    curl -s -F "token=ahhx2yd48aomnybcx7oh2ftdtgqvra" \
+    -F "user=u4y22rmhanqrcgetmiufkei4xegcdt" \
+    -F "title=TEST" \
+    -F "message=$1" https://api.pushover.net/1/messages.json
+}
+

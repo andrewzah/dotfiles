@@ -3,9 +3,9 @@
 export UPDATE_ZSH_DAYS=1
 
 # HISTORY
-HISTSIZE=200000
-SAVEHIST=200000
-HISTFILE=~/.zsh_history
+export HISTSIZE=10000000
+export SAVEHIST=10000000
+export HISTFILE=~/Sync/personal/.shell_history
 
 # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
 setopt AUTO_CD
@@ -29,7 +29,7 @@ setopt HIST_REDUCE_BLANKS
 setopt EXTENDED_HISTORY
 
 # remove command line from history list when first character on the line is a space
-setopt hist_ignore_space 
+setopt hist_ignore_space
 
 # ===== Completion 
 

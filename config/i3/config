@@ -6,12 +6,12 @@ set $mod Mod4
 set $cmod Mod1
 
 gaps inner 5
-set $work1 "미륵"
-set $work2 "조왕신"
-set $work3 "업신"
-set $work4 "산신"
-set $work5 "터주신"
-set $work6 "자청비"
+set $work1 "ㅁ"
+set $work2 "ㅇ"
+set $work3 "ㅈ"
+set $work4 "ㄱ"
+set $work5 "ㄷ"
+set $work6 "ㅎ"
 
 # default workspaces to each monitor
 workspace $work1 output DVI-I-1
@@ -19,7 +19,7 @@ workspace $work2 output HDMI-0
 
 # startup applications
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always feh --bg-scale ~/Wallpapers/nasa-japanese.png ~/Wallpapers/nasa-japanese.png
+exec_always feh --bg-scale ~/Sync/wallpapers/nasa-japanese.png ~/Sync/wallpapers/nasa-japanese.png
 
 ## i3 Opts
 default_border pixel 2

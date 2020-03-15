@@ -18,8 +18,15 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
+# java 12
+#export PATH=/usr/lib/jdk/12/bin:$PATH
+#export JAVA_HOME=/usr/lib/jdk/12/bin
+# java 8
+export PATH=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH
+
 # anaconda
-export PATH=/home/andrew/anaconda3/bin:$PATH
+#export PATH=/home/andrew/anaconda3/bin:$PATH
 
 # nix
 source ~/.nix-profile/etc/profile.d/nix.sh

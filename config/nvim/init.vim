@@ -26,8 +26,9 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
 
 """ Vim Behavior/Functionality
-Plug 'bkad/CamelCaseMotion'
+Plug 'alok/notational-fzf-vim'
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
+Plug 'bkad/CamelCaseMotion'
 Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf'
@@ -119,7 +120,7 @@ set showmatch  " When a bracket is inserted, jump to the matching bracket.
 set mat=5      " How long to jump to the matching bracket in tenths of a second.
 set list       " Enable 'list mode', which visually displays certain characters
                " upon listchars rules.
-               
+
 " Quick timeouts on key combinations.
 set timeoutlen=300
 
@@ -170,6 +171,18 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" notational fzf vim
+let g:nv_search_paths =
+  \ ['~/Sync/thoughts',
+    \ '~/Sync/thoughts/korean',
+  \]
+
+let g:nv_keymap = {
+                    \ 'alt-s': 'split ',
+                    \ 'alt-v': 'vertical split ',
+                    \ 'alt-t': 'tabedit ',
+                    \ }
 
 " Disable arrow movement, resize splits instead.
 let g:elite_mode = 1
@@ -234,6 +247,9 @@ nmap <leader>q :q!<cr>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <c-p> :Files<cr>
+
+" notational velocity
+nnoremap <Leader>e :NV<CR>
 
 " push window up/down
 nnoremap <C-e> 3<C-e>

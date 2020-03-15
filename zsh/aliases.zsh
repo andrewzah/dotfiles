@@ -1,9 +1,11 @@
-alias rm="rm -i"
-
 alias copy='xclip -selection c'
 alias paste='xclip -selection p'
 
-alias ll='ls -al'
+alias ll='exa -al'
+alias ls="exa"
+
+# k8s
+alias k="kubectl"
 
 # gron
 alias norg="gron --ungron"
@@ -15,14 +17,10 @@ alias bi='bundle install'
 alias bu='bundle update'
 alias gi='gem install'
 
-# Docker
-alias dcu='docker-compose up'
-alias dcd='docker-compose down'
-alias dcb='docker-compose build'
-
 # local system
 alias cdr='~/Work/repos'
-alias cda='~/Work/repos/cyber/cyber-server/api-server'
+alias cda='~/Work/repos/afml'
+alias cdg='~/Programming/C#/Test2'
 
 alias cdp='~/Programming'
 alias cdw='~/Website'
