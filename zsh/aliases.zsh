@@ -4,7 +4,11 @@ alias paste='xclip -selection p'
 alias ll='exa -al'
 alias ls="exa"
 
-# k8s
+# pubkey
+alias pubkey="cat ~/.ssh/id_rsa.pub|copy"
+
+# common
+alias g="go build"
 alias k="kubectl"
 
 # gron
@@ -18,9 +22,7 @@ alias bu='bundle update'
 alias gi='gem install'
 
 # local system
-alias cdr='~/Work/repos'
-alias cda='~/Work/repos/afml'
-alias cdg='~/Programming/C#/Test2'
-
-alias cdp='~/Programming'
-alias cdw='~/Website'
+alias cda='cd ~/work/afml'
+alias cdp='cd ~/programming'
+alias cds='cd ~/Website'
+alias cdw='cd ~/work'

@@ -24,6 +24,8 @@ Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
+Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
+Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 
 """ Vim Behavior/Functionality
 Plug 'alok/notational-fzf-vim'
@@ -174,8 +176,14 @@ let g:fzf_colors =
 
 " notational fzf vim
 let g:nv_search_paths =
-  \ ['~/Sync/thoughts',
-    \ '~/Sync/thoughts/korean',
+  \ ['~/sync/general/thoughts',
+    \ '~/sync/general/thoughts/backup',
+    \ '~/sync/general/thoughts/data',
+    \ '~/sync/general/thoughts/dnd',
+    \ '~/sync/general/thoughts/korean',
+    \ '~/sync/general/thoughts/programming',
+    \ '~/sync/general/thoughts/tools',
+    \ '~/sync/general/thoughts/work',
   \]
 
 let g:nv_keymap = {

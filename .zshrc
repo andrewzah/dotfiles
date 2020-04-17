@@ -8,6 +8,7 @@ source ~/.dotfiles/zsh/theme.zsh
 
 autoload -U colors && colors
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export HISTFILE=~/sync/general/personal/.shell_history.debian-holmes
 
 bindkey -v
 bindkey -e
