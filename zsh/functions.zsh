@@ -1,10 +1,3 @@
-# shorthands
-function run_msql() {
-  docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=DereApittyI99I' \
-    -p 1433:1433 --name sql1 \
-    -d mcr.microsoft.com/mssql/server:2017-latest
-}
-
 # SOURCES
 # https://github.com/mathiasbynens/dotfiles/blob/master/.functions
 #
@@ -59,11 +52,3 @@ function t() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@"
 }
-
-function push {
-    curl -s -F "token=ahhx2yd48aomnybcx7oh2ftdtgqvra" \
-    -F "user=u4y22rmhanqrcgetmiufkei4xegcdt" \
-    -F "title=TEST" \
-    -F "message=$1" https://api.pushover.net/1/messages.json
-}
-

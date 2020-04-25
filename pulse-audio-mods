@@ -1,0 +1,4 @@
+# add to /etc/pulse/default.pa
+load-module module-jack-source channels=2
+load-module module-jack-sink channels=2
+load-module module-loopback source=jack_in sink=alsa_output.usb-Schiit_Audio_Modi_Multibit-00.analog-stereo channels=2
