@@ -21,6 +21,9 @@ export GOROOT="/usr/local/go"
 export GOPATH="$HOME/.go"
 export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 
+# steam runtime
+#export PATH="/opt/steam-runtime/bin:$PATH"
+
 # java 12
 #export PATH=/usr/lib/jdk/12/bin:$PATH
 #export JAVA_HOME=/usr/lib/jdk/12/bin

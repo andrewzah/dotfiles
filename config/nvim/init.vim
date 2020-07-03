@@ -26,6 +26,7 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
 Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
+Plug 'summivox/vim-pawn', { 'for': 'spice' }
 
 """ Vim Behavior/Functionality
 Plug 'alok/notational-fzf-vim'
@@ -228,6 +229,8 @@ let g:grepper.tools = ['rg', 'git', 'grep']
 
 let test#strategy = "dispatch"
 
+let g:go_version_warning = 0
+
 """
 """ Key remapping
 """
@@ -315,6 +318,8 @@ au BufRead,BufNewFile *.slang set filetype=slang
 " Autoset ecr -> erb syntax highlighting
 au BufRead,BufNewFile *.ecr set filetype=erb
 
+" sourcepawn
+au FileType sourcepawn setlocal makeprg=/home/andrew/programming/sourcemod/sourcemod/addons/sourcemod/scripting/spcomp
 
 " Automatically make the dir if it doesn't exist on the machine.
 silent !mkdir -p ~/.nvim/tmp >/dev/null 2>&1

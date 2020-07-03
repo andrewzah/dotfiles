@@ -1,8 +1,21 @@
+# copy/paste
 alias copy='xclip -selection c'
 alias paste='xclip -selection p'
 
+# rbenv
+alias rbenve='eval "$(rbenv init -)"'
+
+# ls
 alias ll='exa -al'
 alias ls="exa"
+
+# git
+alias gp="git push"
+alias gpo="git push origin"
+alias gpom='git push origin master'
+alias gpomr='git pull origin master --rebase'
+alias gcm="git checkout master"
+
 
 # pubkey
 alias pubkey="cat ~/.ssh/id_rsa.pub|copy"
@@ -26,3 +39,4 @@ alias cda='cd ~/work/afml'
 alias cdp='cd ~/programming'
 alias cds='cd ~/Website'
 alias cdw='cd ~/work'
+alias cdwp='cd ~/work/platform'
