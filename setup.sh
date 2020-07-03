@@ -3,6 +3,9 @@
 set -e
 set -x
 
+DOTFILES_DIR=$HOME/.dotfiles
+CONFIG_DIR=$HOME/.config
+
 # for nvidia:
 # curl latest unix driver from here: https://www.nvidia.com/en-us/drivers/unix/
 # i.e. curl http://us.download.nvidia.com/XFree86/Linux-x86_64/440.100/NVIDIA-Linux-x86_64-440.100.run
@@ -39,15 +42,20 @@ sudo apt install -y \
   libxcb-xfixes0-dev \
   neofetch \
   neovim \
+  pavucontrol \
   peek \
   pkg-config \
   psmisc \
+  pulseaudio \
+  pulseaudio-module-jack \
+  qjackctl \
   ripgrep \
   rsync \
   scrot \
   software-properties-common \
   sxiv \
   thunar \
+  thunderbird \
   unzip \
   xautolock \
   xorg
@@ -58,8 +66,11 @@ grep -qF "buster-backports" /etc/apt/sources.list \
 
 sudo apt -t buster-backports install -y polybar
 
-DOTFILES_DIR=$HOME/.dotfiles
-CONFIG_DIR=$HOME/.config
+grep -qF \
+    "load-module module-loopback source=jack_in sink=alsa_output.usb-Schiit_Audio_Modi_Multibit-00.analog-stereo channels=2" \
+    "/etc/pulse/default.pa" \
+  || cat "$DOTFILES_DIR/pulse-audio-mods" | sudo tee -a "/etc/pulse/default.pa"
+
 
 mkdir -p "$HOME/programming"
 mkdir -p "$HOME/work"
