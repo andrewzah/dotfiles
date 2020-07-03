@@ -40,3 +40,5 @@ alias cdp='cd ~/programming'
 alias cds='cd ~/Website'
 alias cdw='cd ~/work'
 alias cdwp='cd ~/work/platform'
+
+alias screenshot-clipboard="maim -s | xclip -selection clipboard -t image/png"

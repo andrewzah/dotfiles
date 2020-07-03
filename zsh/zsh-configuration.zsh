@@ -5,7 +5,7 @@ export UPDATE_ZSH_DAYS=1
 # HISTORY
 export HISTSIZE=10000000
 export SAVEHIST=10000000
-export HISTFILE=~/sync/general/personal/.shell_history.debian-holmes
+export HISTFILE=~/sync/general/personal/.shell_history.debian-desktop
 
 # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
 setopt AUTO_CD

@@ -87,7 +87,7 @@ font-0 = "DejaVu Sans:style=Regular:pixelsize=10;0"
 font-1 = "FontAwesome:pixelsize=10;0"
 font-2 = siji:pixelsize=10;1
 font-3 = unifont:fontformat=truetype:size=8:antialias=false;0
-monitor = ${env:MONITOR:DP-2}
+monitor = ${env:MONITOR:DP-4}
 bottom = true
 width = 100%
 height = 27
@@ -149,12 +149,7 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
-mount-1 = /var
-mount-2 = /home
-mount-3 = /mnt/yoshi
-mount-4 = /mnt/donkey-kong
-mount-5 = /mnt/falcon
-mount-6 = /mnt/samus
+mount-1 = /mnt/yoshi
 
 label-mounted =  %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
