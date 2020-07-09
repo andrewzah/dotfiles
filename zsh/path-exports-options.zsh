@@ -1,3 +1,6 @@
+# fix issue with steam and 32bit nvidia libs for manually installed drivers
+#export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib32:$HOME/.steam/bin32"
+
 export PATH="/opt:$PATH"
 
 ##### PROGRAMMING

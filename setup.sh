@@ -12,7 +12,9 @@ CONFIG_DIR=$HOME/.config
 # then run it NOT while Xorg is running, and uninstall any nvidia-drivers packages from apt
 
 sudo apt install -y \
+  acpi \
   apt-transport-https \
+  bc \
   ca-certificates \
   cmake \
   curl \
@@ -27,6 +29,7 @@ sudo apt install -y \
   fonts-nanum-coding \
   fzf \
   git \
+  git-lfs \
   gnupg \
   gnupg-agent \
   htop \
@@ -36,10 +39,13 @@ sudo apt install -y \
   libexpat1-dev \
   libfontconfig1-dev \
   libfreetype6-dev \
+  libreadline-dev \
+  libssl-dev \
   libx11-xcb-dev \
   libxcb-render0-dev \
   libxcb-shape0-dev \
   libxcb-xfixes0-dev \
+  lm-sensors \
   neofetch \
   neovim \
   pavucontrol \
@@ -185,6 +191,10 @@ if [ ! -f "/usr/bin/docker" ]; then
    sudo docker run hello-world
 fi
 
+if [ ! -f "/usr/local/bin/docker-compose" ]; then
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+fi
+
 if [ ! -d "$HOME/.nvm" ]; then
   git clone 'https://github.com/nvm-sh/nvm.git' "$HOME/.nvm"
   source "$HOME/.nvm/nvm.sh" && nvm install --latest-npm
@@ -197,12 +207,6 @@ if [ ! -d "$HOME/.rbenv" ]; then
   git clone 'https://github.com/rbenv/ruby-build.git' "$HOME/.rbenv/plugins/ruby-build"
 fi
 
-if [ ! -f "/usr/games/steam" ]; then
-  sudo dpkg --add-architecture i386
-  sudo apt update
-  sudo apt install -y steam
-fi
-
 if [ ! -f "/usr/bin/riot-desktop" ]; then
   sudo wget -O /usr/share/keyrings/riot-im-archive-keyring.gpg https://packages.riot.im/debian/riot-im-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ default main" |
@@ -210,3 +214,12 @@ if [ ! -f "/usr/bin/riot-desktop" ]; then
   sudo apt update
   sudo apt install -y riot-desktop
 fi
+
+if [ ! -f "/usr/bin/mongo" ]; then
+  wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+  echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+  sudo apt update
+  sudo apt install -y mongodb-org
+fi
+
+echo "complete!"
