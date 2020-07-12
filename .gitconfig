@@ -1,7 +1,6 @@
 [user]
   email = zah@andrewzah.com
   name = Andrew Zah
-  signingkey = FC9B666D052B432E0242BA91894E2098341FEC19
 
 [core]
   editor = nvim
@@ -85,6 +84,3 @@
     added = yellow
     changed = green
     untracked = red
-
-[commit]
-    gpgsign = true

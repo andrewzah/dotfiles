@@ -18,7 +18,7 @@ alias gcm="git checkout master"
 
 
 # pubkey
-alias pubkey="cat ~/.ssh/id_rsa.pub|copy"
+alias pubkey="cat ~/.ssh/id_ed25519.pub|copy"
 
 # common
 alias g="go build"

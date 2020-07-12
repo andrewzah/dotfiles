@@ -6,55 +6,11 @@ end
 
 call plug#begin('~/.vim/plugged')
 
-""" Language/Syntax
-"Plug 'l04m33/vlime', {'rtp': 'vim/'}
-Plug 'ElmCast/elm-vim', { 'for': 'elm' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
-Plug 'elorest/vim-slang', { 'for': 'slang' }
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'ledger/vim-ledger'
-Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'slim-template/vim-slim', { 'for': 'slim' }
-Plug 'LnL7/vim-nix', { 'for': 'nix' }
-Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
-Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
-Plug 'summivox/vim-pawn', { 'for': 'spice' }
-
-""" Vim Behavior/Functionality
-Plug 'alok/notational-fzf-vim'
-Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
-Plug 'bkad/CamelCaseMotion'
-Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
-Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'luochen1990/rainbow'
-Plug 'machakann/vim-sandwich'
-Plug 'mattn/emmet-vim'
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-scripts/VisIncr'
-"Plug 'w0rp/ale'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-"" og theme
+"Plug 'dahu/vim-asciidoc', { 'for': 'asciidoc' }
 Plug 'morhetz/gruvbox'
-"" new themes to try
-Plug 'KKPMW/moonshine-vim'
-
-" used for testing/debug
-"Plug 'gerw/vim-HiLinkTrace'
 
 call plug#end()
 filetype plugin indent on
@@ -152,47 +108,6 @@ set hidden  " When you 'abandon' a buffer (i.e., when you no longer have a
 """ Variables for plugins
 """
 
-" Conceal
-let g:clojure_conceal_extras = 1
-
-" Rainbow brackets/parens
-let g:rainbow_active = 1
-
-let g:fzf_tags_command = 'ctags --extra=+f -R .git/tags'
-
-" gruvbox coloring for fzf
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-" notational fzf vim
-let g:nv_search_paths =
-  \ ['~/sync/general/thoughts',
-    \ '~/sync/general/thoughts/backup',
-    \ '~/sync/general/thoughts/data',
-    \ '~/sync/general/thoughts/dnd',
-    \ '~/sync/general/thoughts/korean',
-    \ '~/sync/general/thoughts/programming',
-    \ '~/sync/general/thoughts/tools',
-    \ '~/sync/general/thoughts/work',
-  \]
-
-let g:nv_keymap = {
-                    \ 'alt-s': 'split ',
-                    \ 'alt-v': 'vertical split ',
-                    \ 'alt-t': 'tabedit ',
-                    \ }
-
 " Disable arrow movement, resize splits instead.
 let g:elite_mode = 1
 if get(g:, 'elite_mode')
@@ -202,34 +117,8 @@ if get(g:, 'elite_mode')
 	nnoremap <Right> :vertical resize -2<CR>
 endif
 
-" auto-ctags options
-let g:auto_ctags = 1
-let g:auto_ctags_directory_list = ['.git']
-
-let g:wildfire_objects = {
-  \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
-  \ "html,xml" : ["at", "it"],
-\ }
-"for appending types to * rather than excluding: https://github.com/gcmt/wildfire.vim
-
 let g:indentLine_char = '|'
 
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_save = 1
-let g:ale_linters = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'javascript': ['eslint'],
-  \ 'go': ['go fmt'],
-\ }
-
-let g:grepper = {}
-let g:grepper.tools = ['rg', 'git', 'grep']
-
-let test#strategy = "dispatch"
-
-let g:go_version_warning = 0
 
 """
 """ Key remapping
@@ -310,19 +199,22 @@ nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 nnoremap gs <Plug>(GrepperOperator)
 xnoremap gs <Plug>(GrepperOperator)
 
+set nobackup
+set noswapfile
+set noundofile
+
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+set undodir=~/.vim/backups
+set undofile
+
 """ Syntaxes """
+"au! BufRead,BufNewFile *.adoc set syntax=asciidoctor
+au! BufNewFile,BufRead *.adoc setfiletype asciidoc
 
-" Autoset slang syntax highlighting
-au BufRead,BufNewFile *.slang set filetype=slang
-
-" Autoset ecr -> erb syntax highlighting
-au BufRead,BufNewFile *.ecr set filetype=erb
-
-" sourcepawn
-au FileType sourcepawn setlocal makeprg=/home/andrew/programming/sourcemod/sourcemod/addons/sourcemod/scripting/spcomp
 
 " Automatically make the dir if it doesn't exist on the machine.
 silent !mkdir -p ~/.nvim/tmp >/dev/null 2>&1
+silent !mkdir -p ~/.nvim/backup >/dev/null 2>&1
 
 " Autoread on common events
 autocmd! FocusGained,BufEnter * checktime
@@ -330,56 +222,10 @@ autocmd! FocusGained,BufEnter * checktime
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo') && isdirectory(expand('~').'/.vim/backups')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
-  set undofile
-endif
-
-set ssop-=options       " do not store options (vimrc) in a session
-"" Make and load method to save session per dir
-function! MakeSession()
-    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-    if (filewritable(b:sessiondir) != 2)
-        exe 'silent !mkdir -p ' b:sessiondir
-        redraw!
-    endif
-    let b:filename = b:sessiondir . '/session.vim'
-    exe "mksession! " . b:filename
-endfunction
-function! LoadSession()
-    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
-    let b:sessionfile = b:sessiondir . "/session.vim"
-    if (filereadable(b:sessionfile))
-        exe 'source ' b:sessionfile
-    else
-        echo "No session loaded."
-    endif
-
-endfunction
-
-" Auto-commands 
-augroup autosourcing
-    if(argc() == 0)
-        "au VimEnter * nested :call LoadSession() " Uncomment to automatically load session
-        au VimLeave * :call MakeSession()
-    endif
-augroup END
-
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") && &ft != 'gitcommit' |
-     \   exe "normal! g`\"" |
-     \ endif
-
+"if has('persistent_undo') && isdirectory(expand('~').'/.vim/backups')
+"endif
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 " FZF :Find
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!node_modules/" --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-  \ | wincmd p | diffthis
-endif

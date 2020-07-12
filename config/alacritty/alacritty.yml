@@ -29,11 +29,11 @@ draw_bold_text_with_bright_colors: true
 # Font configuration (changes require restart)
 font:
   normal:
-    family: "Inconsolata"
+    family: "Iosevka Fixed SS03"
     style: "Regular"
 
   # Point size of the font
-  size: 10.0
+  size: 9.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -279,6 +279,6 @@ live_config_reload: true
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
 shell:
-  program: /bin/zsh
+  program: /usr/local/bin/zsh
 
 # vim: nospell
