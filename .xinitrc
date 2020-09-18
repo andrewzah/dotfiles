@@ -8,5 +8,6 @@ sh "$HOME/.dotfiles/scripts/screen-layout.sh"
 xautolock -time 15 -locker "lock" &
 
 fcitx
+# dunst > /dev/null
 dbus-launch --sh-syntax --exit-with-session > /dev/null
 exec i3

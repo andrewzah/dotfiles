@@ -1,7 +1,15 @@
 # fix issue with steam and 32bit nvidia libs for manually installed drivers
 #export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib32:$HOME/.steam/bin32"
 
+# less coloring
+export LESS="--RAW-CONTROL-CHARS"
+export LESSOPEN="| /usr/bin/highlight %s --out-format --line-numbers xterm256 --force"
+[[ -f ~/.config/less/termcap ]] && . ~/.config/less/termcap
+
 export PATH="/opt:$PATH"
+
+export RISCV="$HOME/opt/riscv-tools"
+export PATH="$RISCV/bin:$PATH"
 
 ##### PROGRAMMING
 
@@ -23,6 +31,11 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/.go"
 export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+
+
+# deno
+export DENO_INSTALL="/home/andrew/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 # steam runtime
 #export PATH="/opt/steam-runtime/bin:$PATH"

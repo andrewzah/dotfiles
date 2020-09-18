@@ -13,16 +13,19 @@ CONFIG_DIR=$HOME/.config
 
 sudo apt install -y \
   acpi \
+  anki \
   apt-transport-https \
   bc \
   ca-certificates \
   cmake \
   curl \
+  default-libmysqlclient-dev \
   dnsutils \
   exa \
   fcitx \
   fcitx-hangul \
   feh \
+  ffmpeg \
   firefox-esr \
   fontconfig \
   fonts-nanum \
@@ -30,6 +33,7 @@ sudo apt install -y \
   fzf \
   git \
   git-lfs \
+  gmtp \
   gnupg \
   gnupg-agent \
   htop \
@@ -39,13 +43,16 @@ sudo apt install -y \
   libexpat1-dev \
   libfontconfig1-dev \
   libfreetype6-dev \
+  libpq-dev \
   libreadline-dev \
+  libsqlite3-dev \
   libssl-dev \
   libx11-xcb-dev \
   libxcb-render0-dev \
   libxcb-shape0-dev \
   libxcb-xfixes0-dev \
   lm-sensors \
+  mediainfo \
   neofetch \
   neovim \
   pavucontrol \
@@ -59,9 +66,11 @@ sudo apt install -y \
   rsync \
   scrot \
   software-properties-common \
+  sqlite3 \
   sxiv \
   thunar \
   thunderbird \
+  unrar \
   unzip \
   xautolock \
   xorg

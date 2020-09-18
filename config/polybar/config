@@ -112,7 +112,7 @@ module-margin-right = 2
 
 modules-left = i3
 modules-center =
-modules-right = memory cpu temperature date
+modules-right = wired-network fans memory cpu temperature date
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -127,6 +127,15 @@ modules-right = memory cpu temperature date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/fans]
+type = custom/script
+exec = ~/.dotfiles/scripts/fan-rpm.sh
+interval = 1
+label-layout-underline = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+format-prefix-underline = ${colors.secondary}
+format-underline = #0a6cf5
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -257,19 +266,13 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = "CPU "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
-label = %{A:kitty -o allow_remote_control=yes htop -s PERCENT_CPU:}%percentage:2%%%{A}
-
+label = %{A:alacritty -e htop -s PERCENT_CPU:}%percentage:2%%%{A}
 
 [module/memory]
 type = internal/memory
@@ -277,19 +280,20 @@ interval = 2
 format-prefix = "RAM "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
-label =  %{A:kitty -o allow_remote_control=yes htop -s PERCENT_MEM:}%percentage_used%% - %gb_free%%{A}
+label =  %{A:alacritty -e htop -s PERCENT_MEM:}%percentage_used%% - %gb_free%%{A}
 
-[module/eth]
+[module/wired-network]
 type = internal/network
-interface = enp0s25
+interface = enp5s0
 interval = 3.0
+accumulate-stats = true
 
 format-connected-underline = #55aa55
-format-connected-prefix = " "
+format-connected-prefix =
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
-format-disconnected =
+format-disconnected = <label-disconnected>
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
@@ -369,7 +373,8 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
-warn-temperature = 77
+warn-temperature = 65
+hwmon-path = /sys/devices/platform/it87.2656/hwmon/hwmon1/temp1_input
 
 format = <ramp> <label>
 format-underline = #f50a4d
@@ -380,7 +385,7 @@ label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
+ramp-0 =
 ramp-1 =
 ramp-2 =
 ramp-foreground = ${colors.foreground-alt}

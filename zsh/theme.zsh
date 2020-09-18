@@ -48,7 +48,7 @@ function parse_git_branch() {
 }
 
 function set_prompt() {
-  PROMPT=' $(exit_code_status)λ ($(convertsecs $(get_time))) $(dir_status) $(exit_code_status)\$ %{$reset_color%}'
+  PROMPT='$(exit_code_status)λ ($(convertsecs $(get_time))) $(dir_status) $(exit_code_status)\$ %{$reset_color%}'
 
   RPROMPT='%{$fg[green]%}$(parse_git_branch)%{$reset_color%}'
 }

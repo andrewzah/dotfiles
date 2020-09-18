@@ -5,9 +5,18 @@ alias paste='xclip -selection p'
 # rbenv
 alias rbenve='eval "$(rbenv init -)"'
 
-# ls
-alias ll='exa -al'
-alias ls="exa"
+# color
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+
+# assign ls or exa
+if [[ $(type exa) ]]; then
+  alias ll='exa -la'
+  alias ls="exa"
+else
+  alias ls='ls --color=auto'
+  alias ll='ls -la'
+fi
 
 # git
 alias gp="git push"
@@ -16,9 +25,8 @@ alias gpom='git push origin master'
 alias gpomr='git pull origin master --rebase'
 alias gcm="git checkout master"
 
-
 # pubkey
-alias pubkey="cat ~/.ssh/id_rsa.pub|copy"
+alias pubkey="cat ~/.ssh/id_ed25519.pub|copy"
 
 # common
 alias g="go build"

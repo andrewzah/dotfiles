@@ -115,7 +115,7 @@ colors:
 #
 # To completely disable the visual bell, set its duration to 0.
 #
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
 
@@ -269,7 +269,7 @@ cursor_style: Block
 
 hide_cursor_when_typing: true
 
-dynamic_title: false
+window.dynamic_title: false
 
 # Live config reload (changes require restart)
 live_config_reload: true
