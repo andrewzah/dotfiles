@@ -2,8 +2,8 @@
 font pango:Inconsolata 10
 
 ## i3 ModKeys
-set $mod Mod4
-set $cmod Mod1
+set $mod Mod1
+set $cmod Mod4
 
 ## terminal
 bindsym $cmod+Enter /usr/local/bin/alacritty

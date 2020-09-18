@@ -27,73 +27,20 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/zah-left]
-font-0 = "DejaVu Sans:style=Regular:pixelsize=10;0"
-monitor = ${env:MONITOR:HDMI-0}
-width = 100%
-bottom = true
-height = 27
-radius = 6.0
-
-tray-position = left
-tray-padding = 2
-wm-stack = i3
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 4
-border-color = #00000000
-
-padding-left = 0
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 2
-
-modules-left = i3
-modules-center = filesystem
-modules-right = date
-
-; focused = Active workspace on focused monitor
-label-focused = %name%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %name%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-; Separator in between workspaces
-; label-separator = |
-
 [bar/zah]
 font-0 = "DejaVu Sans:style=Regular:pixelsize=10;0"
 font-1 = "FontAwesome:pixelsize=10;0"
 font-2 = siji:pixelsize=10;1
 font-3 = unifont:fontformat=truetype:size=8:antialias=false;0
-monitor = ${env:MONITOR:DP-4}
+monitor = ${env:MONITOR:eDP-1}
 bottom = true
 width = 100%
 height = 27
 radius = 6.0
 fixed-center = false
 wm-stack = i3
+
+tray-position = right
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -112,7 +59,7 @@ module-margin-right = 2
 
 modules-left = i3
 modules-center =
-modules-right = wired-network fans memory cpu temperature date
+modules-right = wireless-network memory cpu temperature battery date
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -128,14 +75,34 @@ modules-right = wired-network fans memory cpu temperature date
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[module/fans]
-type = custom/script
-exec = ~/.dotfiles/scripts/fan-rpm.sh
-interval = 1
-label-layout-underline = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-format-prefix-underline = ${colors.secondary}
-format-underline = #0a6cf5
+[module/battery]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = ADP1
+
+label-charging = CHR %percentage%% - %time% - %consumption%w
+label-discharging = DIS %percentage%% - %time% - %consumption%w
+format-charging = <label-charging>
+format-discharging = <label-discharging>
+
+poll-interval = 5
+
+format-full-prefix = "BAT "
+format-charging-prefix = "BAT "
+format-discharging-prefix = "BAT "
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-discharging-prefix-foreground = ${colors.foreground-alt}
+format-charging-prefix-foreground = ${colors.foreground-alt}
+
+format-charging-underline = #98971a
+format-discharging-underline = #98971a
+format-full-underline = #98971a
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -158,20 +125,17 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
-mount-1 = /mnt/yoshi
 
 label-mounted =  %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
-
-format-label-underline = ${colors.secondary}
 
 [module/bspwm]
 type = internal/bspwm
 
 label-focused = %name%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-underline= #689d6a
 label-focused-padding = 2
 
 label-occupied = %index%
@@ -248,11 +212,10 @@ label-song = %artist% - %album% - %title%
 label-song-maxlen = 100
 label-song-ellipsis = true
 
-[module/xbacklight]
+[module/backlight]
 type = internal/xbacklight
-output = LVDS1
+card = "intel_backlight"
 
-format = %{A1:xbacklight -dec 10:A3:xbacklight -inc 10:} <label> <bar> %{A}
 label = "BL "
 
 bar-width = 10
@@ -271,7 +234,7 @@ type = internal/cpu
 interval = 2
 format-prefix = "CPU "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-underline = #d79921
 label = %{A:alacritty -e htop -s PERCENT_CPU:}%percentage:2%%%{A}
 
 [module/memory]
@@ -279,19 +242,22 @@ type = internal/memory
 interval = 2
 format-prefix = "RAM "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-underline = #d65d0e
 label =  %{A:alacritty -e htop -s PERCENT_MEM:}%percentage_used%% - %gb_free%%{A}
 
-[module/wired-network]
+[module/wireless-network]
 type = internal/network
-interface = enp5s0
-interval = 3.0
+
+interface = wlp0s20f3
+interval = 5.0
 accumulate-stats = true
 
-format-connected-underline = #55aa55
-format-connected-prefix =
+format-connected = <label-connected>
+
+format-connected-underline = #cc241d
+format-connected-prefix = "NET "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+label-connected = %local_ip% - %essid% - %downspeed%
 
 format-disconnected = <label-disconnected>
 ;format-disconnected = <label-disconnected>
@@ -310,7 +276,7 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-underline = #458588
 
 label = %date% | %time%
 

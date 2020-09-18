@@ -29,7 +29,7 @@ Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 Plug 'summivox/vim-pawn', { 'for': 'spice' }
 
 """ Vim Behavior/Functionality
-Plug 'alok/notational-fzf-vim'
+"Plug 'alok/notational-fzf-vim'
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
 Plug 'bkad/CamelCaseMotion'
 Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }

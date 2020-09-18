@@ -13,10 +13,10 @@ CONFIG_DIR=$HOME/.config
 
 sudo apt install -y \
   acpi \
-  anki \
   apt-transport-https \
   bc \
   ca-certificates \
+  chromium \
   cmake \
   curl \
   default-libmysqlclient-dev \
@@ -63,6 +63,7 @@ sudo apt install -y \
   pulseaudio-module-jack \
   qjackctl \
   ripgrep \
+  rofi \
   rsync \
   scrot \
   software-properties-common \
@@ -70,10 +71,12 @@ sudo apt install -y \
   sxiv \
   thunar \
   thunderbird \
+  tmux \
   unrar \
   unzip \
   xautolock \
-  xorg
+  xorg \
+  zsh
 
 grep -qF "buster-backports" /etc/apt/sources.list \
   || echo 'deb http://deb.debian.org/debian buster-backports main contrib non-free' | sudo tee -a "/etc/apt/sources.list" \
@@ -90,12 +93,16 @@ grep -qF \
 mkdir -p "$HOME/programming"
 mkdir -p "$HOME/work"
 mkdir -p "$HOME/sync/general/personal"
+mkdir -p "$HOME/ssh/1"
+mkdir -p "$HOME/ssh/2"
+mkdir -p "$HOME/opt"
+
+touch "$HOME/.shell-history.$(hostname)"
 
 if [ ! -d $DOTFILES_DIR ]; then
   git clone 'https://git.sr.ht/~andrewzah/dotfiles' "$DOTFILES_DIR"
   touch $DOTFILES_DIR/zsh/secret-exports.zsh
 
-  touch "$HOME/sync/general/personal/.shell-history.debian-desktop"
 
   cd $DOTFILES_DIR \
     && git remote remove origin \
@@ -152,7 +159,8 @@ if [ ! -f "$CONFIG_DIR/nvim/init.vim" ]; then
   ln -s "$DOTFILES_DIR/config/nvim/init.vim" "$CONFIG_DIR/nvim/init.vim"
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  nvim -c ":Silent ':PlugInstall'"
+  # TODO: fix
+  # nvim -c ":Silent ':PlugInstall'"
 fi
 
 ###### install programs
@@ -216,7 +224,7 @@ if [ ! -d "$HOME/.rbenv" ]; then
   git clone 'https://github.com/rbenv/ruby-build.git' "$HOME/.rbenv/plugins/ruby-build"
 fi
 
-if [ ! -f "/usr/bin/riot-desktop" ]; then
+if [ ! -f "/usr/bin/element-desktop" ]; then
   sudo wget -O /usr/share/keyrings/riot-im-archive-keyring.gpg https://packages.riot.im/debian/riot-im-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ default main" |
     sudo tee /etc/apt/sources.list.d/riot-im.list
