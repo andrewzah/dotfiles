@@ -69,6 +69,7 @@ sudo apt install -y \
   software-properties-common \
   sqlite3 \
   sxiv \
+  syncthing-gtk \
   thunar \
   thunderbird \
   tmux \

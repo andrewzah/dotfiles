@@ -1,0 +1,3 @@
+mpd_host=<pw>@<host>
+mpd_port=
+mpd_music_dir=/var/lib/mpd/music

@@ -59,7 +59,7 @@ module-margin-right = 2
 
 modules-left = i3
 modules-center =
-modules-right = wireless-network memory cpu temperature battery date
+modules-right = mpd wireless-network memory cpu temperature battery date
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -75,17 +75,67 @@ modules-right = wireless-network memory cpu temperature battery date
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>
+format-online-underline = #cc241d
+
+host = 192.168.2.3
+port = 7700
+password = 2d0e6673d35c90dc5818dd2ad5de9fabcb0525a8646dd658b9428fd7a66e4177
+
+label-song = %artist% - %title%
+label-song-maxlen = 100
+label-song-ellipsis = true
+
+[module/wireless-network]
+type = internal/network
+
+interface = wlp0s20f3
+interval = 5.0
+accumulate-stats = true
+
+format-connected = <label-connected>
+
+format-connected-underline = #d65d0e
+format-connected-prefix = "NET "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %essid% - %downspeed% | %upspeed%
+
+format-disconnected = <label-disconnected>
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "RAM "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #d79921
+label =  %{A:alacritty -e htop -s PERCENT_MEM:}%percentage_used%% - %gb_free%%{A}
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "CPU "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #98971a
+label = %{A:alacritty -e htop -s PERCENT_CPU:}%percentage:2%%%{A}
+
 [module/battery]
 type = internal/battery
 
-; This is useful in case the battery never reports 100% charge
+time-format = %H:%M
 full-at = 99
 
-; Use the following command to list batteries and adapters:
-; $ ls -1 /sys/class/power_supply/
 battery = BAT0
 adapter = ADP1
 
+label-full = "YES"
+format-full = "<label-full>"
 label-charging = CHR %percentage%% - %time% - %consumption%w
 label-discharging = DIS %percentage%% - %time% - %consumption%w
 format-charging = <label-charging>
@@ -100,9 +150,23 @@ format-full-prefix-foreground = ${colors.foreground-alt}
 format-discharging-prefix-foreground = ${colors.foreground-alt}
 format-charging-prefix-foreground = ${colors.foreground-alt}
 
-format-charging-underline = #98971a
-format-discharging-underline = #98971a
-format-full-underline = #98971a
+format-charging-underline = #458588
+format-discharging-underline = #458588
+format-full-underline = #458588
+
+[module/date]
+type = internal/date
+interval = 5
+
+label = %date% | %time%
+date = "%A, %B %e"
+date-alt = "%A %B %e"
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #b16286
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -195,23 +259,6 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 ; label-separator = |
 
 
-[module/mpd]
-type = internal/mpd
-format-online = <label-song> <icon-prev> <icon-stop> <toggle> <icon-next> <icon-random>
-
-host = /home/andrei/.config/mpd/socket
-
-icon-prev = 
-icon-stop =  
-icon-play = 
-icon-pause = 
-icon-next = 
-icon-random = 
-
-label-song = %artist% - %album% - %title%
-label-song-maxlen = 100
-label-song-ellipsis = true
-
 [module/backlight]
 type = internal/xbacklight
 card = "intel_backlight"
@@ -228,57 +275,6 @@ bar-fill-foreground = #9f78e1
 bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = "CPU "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #d79921
-label = %{A:alacritty -e htop -s PERCENT_CPU:}%percentage:2%%%{A}
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = "RAM "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #d65d0e
-label =  %{A:alacritty -e htop -s PERCENT_MEM:}%percentage_used%% - %gb_free%%{A}
-
-[module/wireless-network]
-type = internal/network
-
-interface = wlp0s20f3
-interval = 5.0
-accumulate-stats = true
-
-format-connected = <label-connected>
-
-format-connected-underline = #cc241d
-format-connected-prefix = "NET "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip% - %essid% - %downspeed%
-
-format-disconnected = <label-disconnected>
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-[module/date]
-type = internal/date
-interval = 5
-
-date = "%A, %B %e"
-date-alt = "%A %B %e"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #458588
-
-label = %date% | %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
