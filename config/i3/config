@@ -30,6 +30,7 @@ exec_always feh --bg-scale ~/sync/general/wallpapers/doom1.jpg ~/sync/general/wa
 default_border pixel 2
 default_floating_border pixel 2
 new_window pixel 2
+hide_edge_borders horizontal
 
 # Floating mode
 #floating_modifer $mod
@@ -110,4 +111,4 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #B16286
 
 client.background       #FFFFFF
 
-for_window [class="Alacritty"] border normal 0
+for_window [class="Alacritty"] border normal 1

@@ -100,7 +100,8 @@ format-connected = <label-connected>
 format-connected-underline = #d65d0e
 format-connected-prefix = "NET "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %essid% - %downspeed% | %upspeed%
+label-connected = %local_ip% - %downspeed% | %upspeed%
+;label-connected = %essid% - %downspeed% | %upspeed%
 
 format-disconnected = <label-disconnected>
 ;format-disconnected = <label-disconnected>
