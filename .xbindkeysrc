@@ -1,0 +1,20 @@
+"pactl set-sink-volume @DEFAULT_SINK@ -5000"
+  XF86AudioLowerVolume
+
+"pactl set-sink-volume @DEFAULT_SINK@ +5000"
+  XF86AudioRaiseVolume
+
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  XF86AudioMute
+
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  XF86AudioMute
+
+"mpc toggle"
+  XF86AudioPlay
+
+"scrot -e 'mkdir -p /tmp/screenshots; mv $f /tmp/screenshots/;'"
+  Print
+
+"scrot -u -e 'mkdir -p /tmp/screenshots; mv $f /tmp/screenshots/;'"
+  Super_L

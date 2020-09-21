@@ -5,6 +5,8 @@ alias paste='xclip -selection p'
 # rbenv
 alias rbenve='eval "$(rbenv init -)"'
 
+alias n='ncmpcpp'
+
 # color
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'

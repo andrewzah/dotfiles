@@ -10,6 +10,6 @@ xautolock -time 15 -locker "lock" &
 setxkbmap -option caps:ctrl_modifier
 
 fcitx
-# dunst > /dev/null
+dunst > /dev/null &
 dbus-launch --sh-syntax --exit-with-session > /dev/null
 exec i3
