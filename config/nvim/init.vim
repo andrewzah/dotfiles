@@ -27,6 +27,7 @@ Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
 Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 Plug 'summivox/vim-pawn', { 'for': 'spice' }
+Plug 'dahu/vim-asciidoc', { 'for': 'asciidoc' }
 
 """ Vim Behavior/Functionality
 Plug 'alok/notational-fzf-vim'

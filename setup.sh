@@ -15,6 +15,7 @@ sudo apt install -y \
   acpi \
   anki \
   apt-transport-https \
+  batcat \
   bc \
   ca-certificates \
   cmake \
@@ -24,6 +25,7 @@ sudo apt install -y \
   exa \
   fcitx \
   fcitx-hangul \
+  fdfind \
   feh \
   ffmpeg \
   firefox-esr \
@@ -86,10 +88,10 @@ grep -qF \
     "/etc/pulse/default.pa" \
   || cat "$DOTFILES_DIR/pulse-audio-mods" | sudo tee -a "/etc/pulse/default.pa"
 
-
 mkdir -p "$HOME/programming"
 mkdir -p "$HOME/work"
 mkdir -p "$HOME/sync/general/personal"
+mkdir -p "$HOME/opt/debs"
 
 if [ ! -d $DOTFILES_DIR ]; then
   git clone 'https://git.sr.ht/~andrewzah/dotfiles' "$DOTFILES_DIR"
@@ -229,6 +231,10 @@ if [ ! -f "/usr/bin/mongo" ]; then
   echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
   sudo apt update
   sudo apt install -y mongodb-org
+fi
+
+if [ ! -f "$HOME/.cargo/bin/as-tree" ]; then
+  cargo install -f --git https://github.com/jez/as-tree
 fi
 
 echo "complete!"

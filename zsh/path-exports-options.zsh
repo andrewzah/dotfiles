@@ -6,7 +6,7 @@ export LESS="--RAW-CONTROL-CHARS"
 export LESSOPEN="| /usr/bin/highlight %s --out-format --line-numbers xterm256 --force"
 [[ -f ~/.config/less/termcap ]] && . ~/.config/less/termcap
 
-export PATH="/opt:$PATH"
+export PATH="$HOME/opt/bin:$PATH"
 
 export RISCV="$HOME/opt/riscv-tools"
 export PATH="$RISCV/bin:$PATH"
@@ -32,10 +32,15 @@ export GOROOT="/usr/local/go"
 export GOPATH="$HOME/.go"
 export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 
-
 # deno
 export DENO_INSTALL="/home/andrew/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# please
+export PATH="$HOME/.please/:$PATH"
+
+# maven
+export PATH="$HOME/opt/maven/apache-maven-3.6.3/bin:$PATH"
 
 # steam runtime
 #export PATH="/opt/steam-runtime/bin:$PATH"
@@ -51,7 +56,8 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 #export PATH=/home/andrew/anaconda3/bin:$PATH
 
 # Vim FZF
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND="fd --type file --color=always"
+export FZF_DEFAULT_OPTS="--ansi"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -68,3 +74,9 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 #unset __conda_setup
 # <<< conda initialize <<<
 
+
+## steam & ldd
+#local ldd_path1="/home/andrew/.steam/debian-installation/ubuntu12_32/steam-runtime/lib/x86_64-linux-gnu"
+#local ldd_path2="/home/andrew/.local/share/Steam/ubuntu12_32/steam-runtime/lib/i386-linux-gnu"
+
+#export LD_LIBRARY_PATH="${ldd_path1}:${ldd_path2}:${LD_LIBRARY_PATH}"

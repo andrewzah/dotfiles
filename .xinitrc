@@ -5,9 +5,9 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
 sh "$HOME/.dotfiles/scripts/screen-layout.sh"
-xautolock -time 15 -locker "lock" &
+xautolock -time 15 -locker "lock" 2>&1 &
 
 fcitx
-# dunst > /dev/null
+dunst > /dev/null &
 dbus-launch --sh-syntax --exit-with-session > /dev/null
 exec i3

@@ -52,3 +52,17 @@ function t() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@"
 }
+
+rf() {
+  if [ -z "$2" ]
+  then
+      rg --files | rg "$1"
+  else
+      rg --files "$2" | rg "$1"
+  fi
+}
+
+alert() {
+  $@;
+  notify-send "job finished with $?";
+}

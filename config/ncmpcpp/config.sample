@@ -1,0 +1,5 @@
+mpd_host=<pw>@<host>
+mpd_port=
+mpd_music_dir=/var/lib/mpd/music
+
+execute_on_song_change = notify-send "Now Playing " "$(mpc --format '%title% \n%artist% - %album%' current)"
