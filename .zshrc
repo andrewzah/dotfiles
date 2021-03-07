@@ -26,17 +26,10 @@ bindkey '\C-x\C-e' edit-command-line
 
 [ -f "/etc/grc.zsh" ] && source "/etc/grc.zsh"
 
-# function cleanup {
-#   TTY=$(basename $(tty))
-#   if [ -f ~/.ssh-agent-stdout.${TTY} ]; then
-#     ssh_agent_pid=$(awk '{ print $3 }' ~/.ssh-agent-stdout.${TTY})
-#     kill -HUP "$ssh_agent_pid"
-#     rm -f ~/.ssh-agent-stdout.${TTY}
-#   fi
-# }
-# 
-# trap cleanup EXIT
-# 
-# 
-# TTY=$(basename $(tty))
-# eval $(ssh-agent) > ~/.ssh-agent-stdout.${TTY}
+precmd() {
+  case $TERM in
+    xterm*)
+      precmd () {print -Pn "\e]0;%n@%m: %~\a"}
+    ;;
+  esac
+}

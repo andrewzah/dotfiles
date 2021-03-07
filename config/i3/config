@@ -1,5 +1,5 @@
 ## font
-font pango:Inconsolata 10
+font pango:Iosevka Fixed SS03 9
 
 ## i3 ModKeys
 set $mod Mod4
@@ -28,8 +28,8 @@ exec_always feh --bg-scale ~/sync/general/wallpapers/chicago.jpg ~/sync/general/
 
 ## i3 Opts
 default_border pixel 2
-default_floating_border pixel 2
-new_window pixel 2
+for_window [class="XTerm"] border normal
+#new_window pixel 2
 
 # Floating mode
 #floating_modifer $mod
@@ -76,7 +76,6 @@ bindsym $mod+Shift+9 move container to workspace $work9
 
 # assign programs to workspaces
 assign [class="Thunderbird"] $work3
-assign [class="Discord"] $work4
 
 # splits
 bindsym $mod+o split h

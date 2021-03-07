@@ -30,7 +30,7 @@ Plug 'summivox/vim-pawn', { 'for': 'spice' }
 Plug 'dahu/vim-asciidoc', { 'for': 'asciidoc' }
 
 """ Vim Behavior/Functionality
-Plug 'alok/notational-fzf-vim'
+"Plug 'alok/notational-fzf-vim'
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
 Plug 'bkad/CamelCaseMotion'
 Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
@@ -159,7 +159,7 @@ let g:clojure_conceal_extras = 1
 " Rainbow brackets/parens
 let g:rainbow_active = 1
 
-let g:fzf_tags_command = 'ctags --extra=+f -R .git/tags'
+"let g:fzf_tags_command = 'ctags --extra=+f -R .git/tags'
 
 " gruvbox coloring for fzf
 let g:fzf_colors =
@@ -177,22 +177,22 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " notational fzf vim
-let g:nv_search_paths =
-  \ ['~/sync/general/thoughts',
-    \ '~/sync/general/thoughts/backup',
-    \ '~/sync/general/thoughts/data',
-    \ '~/sync/general/thoughts/dnd',
-    \ '~/sync/general/thoughts/korean',
-    \ '~/sync/general/thoughts/programming',
-    \ '~/sync/general/thoughts/tools',
-    \ '~/sync/general/thoughts/work',
-  \]
+" let g:nv_search_paths =
+"   \ ['~/sync/general/thoughts',
+"     \ '~/sync/general/thoughts/backup',
+"     \ '~/sync/general/thoughts/data',
+"     \ '~/sync/general/thoughts/dnd',
+"     \ '~/sync/general/thoughts/korean',
+"     \ '~/sync/general/thoughts/programming',
+"     \ '~/sync/general/thoughts/tools',
+"     \ '~/sync/general/thoughts/work',
+"   \]
 
-let g:nv_keymap = {
-                    \ 'alt-s': 'split ',
-                    \ 'alt-v': 'vertical split ',
-                    \ 'alt-t': 'tabedit ',
-                    \ }
+" let g:nv_keymap = {
+"                     \ 'alt-s': 'split ',
+"                     \ 'alt-v': 'vertical split ',
+"                     \ 'alt-t': 'tabedit ',
+"                     \ }
 
 " Disable arrow movement, resize splits instead.
 let g:elite_mode = 1
@@ -375,7 +375,7 @@ autocmd BufReadPost *
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 " FZF :Find
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!node_modules/" --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!node_modules/" --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.

@@ -11,28 +11,37 @@ CONFIG_DIR=$HOME/.config
 # i.e. curl http://us.download.nvidia.com/XFree86/Linux-x86_64/440.100/NVIDIA-Linux-x86_64-440.100.run
 # then run it NOT while Xorg is running, and uninstall any nvidia-drivers packages from apt
 
-sudo apt install -y \
+# not included programs:
+# * youtube-dl (can't update itself if installed via apt)
+# * pipewire (needs to be built from latest source currently)
+doas apt install -y \
+  a2jmidid \
   acpi \
   anki \
   apt-transport-https \
-  batcat \
   bc \
+  bison \
+  build-essential \
   ca-certificates \
+  chromium \
+  chromium-sandbox \
+  clang \
   cmake \
   curl \
+  dbus-x11 \
+  default-jdk \
   default-libmysqlclient-dev \
   dnsutils \
   exa \
   fcitx \
   fcitx-hangul \
-  fdfind \
   feh \
   ffmpeg \
   firefox-esr \
+  flex \
   fontconfig \
   fonts-nanum \
   fonts-nanum-coding \
-  fzf \
   git \
   git-lfs \
   gmtp \
@@ -42,9 +51,11 @@ sudo apt install -y \
   i3 \
   i3lock \
   imagemagick \
+  jq \
   libexpat1-dev \
   libfontconfig1-dev \
   libfreetype6-dev \
+  libpam0g-dev \
   libpq-dev \
   libreadline-dev \
   libsqlite3-dev \
@@ -53,13 +64,17 @@ sudo apt install -y \
   libxcb-render0-dev \
   libxcb-shape0-dev \
   libxcb-xfixes0-dev \
+  lld \
+  llvm \
   lm-sensors \
+  make \
   mediainfo \
   neofetch \
   neovim \
   pavucontrol \
   peek \
   pkg-config \
+  polybar \
   psmisc \
   pulseaudio \
   pulseaudio-module-jack \
@@ -70,28 +85,21 @@ sudo apt install -y \
   software-properties-common \
   sqlite3 \
   sxiv \
+  telegram-desktop \
   thunar \
   thunderbird \
-  unrar \
+  tmux \
   unzip \
   xautolock \
-  xorg
-
-grep -qF "buster-backports" /etc/apt/sources.list \
-  || echo 'deb http://deb.debian.org/debian buster-backports main contrib non-free' | sudo tee -a "/etc/apt/sources.list" \
-    && sudo apt update
-
-sudo apt -t buster-backports install -y polybar
-
-grep -qF \
-    "load-module module-loopback source=jack_in sink=alsa_output.usb-Schiit_Audio_Modi_Multibit-00.analog-stereo channels=2" \
-    "/etc/pulse/default.pa" \
-  || cat "$DOTFILES_DIR/pulse-audio-mods" | sudo tee -a "/etc/pulse/default.pa"
+  xorg \
+  yamllint \
+  zsh
 
 mkdir -p "$HOME/programming"
 mkdir -p "$HOME/work"
 mkdir -p "$HOME/sync/general/personal"
 mkdir -p "$HOME/opt/debs"
+mkdir -p "$HOME/opt/bin"
 
 if [ ! -d $DOTFILES_DIR ]; then
   git clone 'https://git.sr.ht/~andrewzah/dotfiles' "$DOTFILES_DIR"
@@ -116,18 +124,18 @@ if [ ! -f "$HOME/.xinitrc" ]; then
   ln -s "$DOTFILES_DIR/.xinitrc" "$HOME/.xinitrc"
 fi
 
+if [ ! -f "$HOME/.Xresources" ]; then
+  ln -s "$DOTFILES_DIR/.Xresources" "$HOME/.Xresources"
+  xrdb "$HOME/.Xresources"
+fi
+
 if [ ! -f "$HOME/.gemrc" ]; then
   ln -s "$DOTFILES_DIR/.gemrc" "$HOME/.gemrc"
 fi
 
-mkdir -p "$CONFIG_DIR/alacritty"
 mkdir -p "$CONFIG_DIR/i3"
 mkdir -p "$CONFIG_DIR/nvim"
 mkdir -p "$CONFIG_DIR/polybar"
-
-if [ ! -f "$CONFIG_DIR/alacritty/alacritty.yml" ]; then
-  ln -s "$DOTFILES_DIR/config/alacritty/alacritty.yml" "$CONFIG_DIR/alacritty/alacritty.yml"
-fi
 
 if [ -f "$CONFIG_DIR/i3/config" ]; then
   rm "$CONFIG_DIR/i3/config"
@@ -142,13 +150,6 @@ if [ ! -f "$CONFIG_DIR/polybar/config" ]; then
   ln -s "$DOTFILES_DIR/config/polybar/config" "$CONFIG_DIR/polybar/config"
 fi
 
-THOUGHTS_DIR="$HOME/sync/general/thoughts"
-mkdir -p "$THOUGHTS_DIR/data"
-mkdir -p "$THOUGHTS_DIR/dnd"
-mkdir -p "$THOUGHTS_DIR/korean"
-mkdir -p "$THOUGHTS_DIR/programming"
-mkdir -p "$THOUGHTS_DIR/tools"
-mkdir -p "$THOUGHTS_DIR/work"
 
 if [ ! -f "$CONFIG_DIR/nvim/init.vim" ]; then
   ln -s "$DOTFILES_DIR/config/nvim/init.vim" "$CONFIG_DIR/nvim/init.vim"
@@ -160,7 +161,7 @@ fi
 ###### install programs
 
 if [ ! -f "/usr/local/bin/lock" ]; then
-  sudo ln -s "$DOTFILES_DIR/scripts/lock" "/usr/local/bin/lock"
+  doas ln -s "$DOTFILES_DIR/scripts/lock" "/usr/local/bin/lock"
 fi
 
 if [ ! -f "$HOME/.cargo/bin/rustc" ]; then
@@ -176,7 +177,7 @@ if [ ! -f "/usr/local/bin/alacritty" ]; then
 
   cd "$alacritty_dir"
   cargo build --release
-  sudo mv ./target/release/alacritty /usr/local/bin/alacritty
+  doas mv ./target/release/alacritty /usr/local/bin/alacritty
 fi
 
 if [ ! -d "/usr/local/go" ]; then
@@ -186,24 +187,24 @@ if [ ! -d "/usr/local/go" ]; then
 
   go_ver="1.14"
   curl -L "https://dl.google.com/go/go${go_ver}.linux-amd64.tar.gz" -o /tmp/go.tar.gz
-  sudo tar xvfz /tmp/go.tar.gz -C /usr/local
+  doas tar xvfz /tmp/go.tar.gz -C /usr/local
 fi
 
 if [ ! -f "/usr/bin/docker" ]; then
-  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-   sudo add-apt-repository \
+  curl -fsSL https://download.docker.com/linux/debian/gpg | doas apt-key add -
+   doas add-apt-repository \
     "deb [arch=amd64] https://download.docker.com/linux/debian \
     $(lsb_release -cs) \
     stable"
 
-   sudo apt update
-   sudo apt install -y docker-ce docker-ce-cli containerd.io
-   sudo usermod -aG docker andrew
-   sudo docker run hello-world
+   doas apt update
+   doas apt install -y docker-ce docker-ce-cli containerd.io
+   doas usermod -aG docker andrew
+   doas docker run hello-world
 fi
 
 if [ ! -f "/usr/local/bin/docker-compose" ]; then
-  sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  doas curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 fi
 
 if [ ! -d "$HOME/.nvm" ]; then
@@ -218,23 +219,22 @@ if [ ! -d "$HOME/.rbenv" ]; then
   git clone 'https://github.com/rbenv/ruby-build.git' "$HOME/.rbenv/plugins/ruby-build"
 fi
 
-if [ ! -f "/usr/bin/riot-desktop" ]; then
-  sudo wget -O /usr/share/keyrings/riot-im-archive-keyring.gpg https://packages.riot.im/debian/riot-im-archive-keyring.gpg
-  echo "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ default main" |
-    sudo tee /etc/apt/sources.list.d/riot-im.list
-  sudo apt update
-  sudo apt install -y riot-desktop
-fi
-
 if [ ! -f "/usr/bin/mongo" ]; then
-  wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-  echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
-  sudo apt update
-  sudo apt install -y mongodb-org
+  wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | doas apt-key add -
+  echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | doas tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+  doas apt update
+  doas apt install -y mongodb-org
 fi
 
 if [ ! -f "$HOME/.cargo/bin/as-tree" ]; then
   cargo install -f --git https://github.com/jez/as-tree
+fi
+
+if [ ! -f "/usr/local/bin/steam" ]; then
+  grep -q "non-free" /etc/apt/sources.list
+  doas dpkg --add-architecture i386
+  doas apt update
+  doas apt install steam
 fi
 
 echo "complete!"

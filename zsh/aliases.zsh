@@ -72,3 +72,5 @@ alias cdw='cd ~/work'
 alias cdwp='cd ~/work/platform'
 
 alias screenshot-clipboard="maim -s | xclip -selection clipboard -t image/png"
+
+alias curlj='curl -H "Content-Type: application/json"'
