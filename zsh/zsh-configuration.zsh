@@ -3,12 +3,14 @@
 export UPDATE_ZSH_DAYS=1
 
 # HISTORY
-export HISTSIZE=10000000
+export HISTFILESIZE=10000000000
+export HISTSIZE=10000000000
 export SAVEHIST=10000000
 export HISTFILE=~/sync/general/personal/.shell_history.debian-desktop
 
 # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
-setopt AUTO_CD
+# (this has been annoying several times)
+#setopt AUTO_CD
 
 # Allow multiple terminal sessions to all append to one zsh command history
 setopt APPEND_HISTORY

@@ -24,7 +24,7 @@ workspace $work2 output HDMI-0
 
 # startup applications
 exec_always --no-startup-id $HOME/.config/i3/polybar.sh
-exec_always feh --bg-scale ~/sync/general/wallpapers/chicago.jpg ~/sync/general/wallpapers/chicago.jpg
+exec_always feh --bg-scale "/home/andrew/sync/general/wallpapers/08.jpg" "/home/andrew/sync/general/wallpapers/08.jpg"
 
 ## i3 Opts
 default_border pixel 2

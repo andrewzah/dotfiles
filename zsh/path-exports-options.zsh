@@ -1,6 +1,8 @@
 # fix issue with steam and 32bit nvidia libs for manually installed drivers
 #export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib32:$HOME/.steam/bin32"
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # less coloring
 export LESS="--RAW-CONTROL-CHARS"
 export LESSOPEN="| /usr/bin/highlight %s --out-format --line-numbers xterm256 --force"

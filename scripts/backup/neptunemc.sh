@@ -2,8 +2,8 @@
 
 set -euxo pipefail
 
-MAX_BACKUPS=100
-BACKUP_DIR="$HOME/backups/neptunemc"
+MAX_BACKUPS=50
+BACKUP_DIR="/mnt/marth/backups/neptunemc"
 
 rsync \
   --recursive \
@@ -11,7 +11,7 @@ rsync \
   --verbose \
   --human-readable \
   /mnt/nfs/subvol-107-disk-0/home/guest/backups/ \
-  ~/backups/neptunemc
+  "$BACKUP_DIR"
 
 # get nicely formatted timestamps
 timestamp () {

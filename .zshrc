@@ -7,7 +7,7 @@ source ~/.dotfiles/zsh/zsh-configuration.zsh
 source ~/.dotfiles/zsh/theme.zsh
 
 autoload -U colors && colors
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -p $HISTFILE"
 
 bindkey -v
 bindkey -e
@@ -27,6 +27,7 @@ bindkey '\C-x\C-e' edit-command-line
 [ -f "/etc/grc.zsh" ] && source "/etc/grc.zsh"
 
 precmd() {
+  eval "$PROMPT_COMMAND";
   case $TERM in
     xterm*)
       precmd () {print -Pn "\e]0;%n@%m: %~\a"}

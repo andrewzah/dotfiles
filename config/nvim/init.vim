@@ -7,7 +7,6 @@ end
 call plug#begin('~/.vim/plugged')
 
 """ Language/Syntax
-"Plug 'l04m33/vlime', {'rtp': 'vim/'}
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
@@ -17,7 +16,6 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'ledger/vim-ledger'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
@@ -27,32 +25,18 @@ Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
 Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 Plug 'summivox/vim-pawn', { 'for': 'spice' }
-Plug 'dahu/vim-asciidoc', { 'for': 'asciidoc' }
 
 """ Vim Behavior/Functionality
-"Plug 'alok/notational-fzf-vim'
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
-Plug 'bkad/CamelCaseMotion'
-Plug 'chrisbra/NrrwRgn', { 'on': ['<plug>(nrrwrgn#NrrwRgn)'] }
+Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'luochen1990/rainbow'
-Plug 'machakann/vim-sandwich'
-Plug 'mattn/emmet-vim'
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
-Plug 'radenling/vim-dispatch-neovim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/VisIncr'
-"Plug 'w0rp/ale'
 
-"" og theme
+""" theme
 Plug 'morhetz/gruvbox'
-"" new themes to try
-Plug 'KKPMW/moonshine-vim'
 
 " used for testing/debug
 "Plug 'gerw/vim-HiLinkTrace'
@@ -77,6 +61,7 @@ set scrolloff=3
 " Cursor position
 set ruler
 set rulerformat=%27(%{strftime('%a\ %e,\ %H:%M')}\ %5l,%-1(%c%V%)\ %P%)
+set colorcolumn=95
 
 " Remember things between sessions
 "
@@ -88,9 +73,9 @@ set rulerformat=%27(%{strftime('%a\ %e,\ %H:%M')}\ %5l,%-1(%c%V%)\ %P%)
 " n    - set name of viminfo file
 set viminfo='20,\"50,:20,/20,%
 
-if exists('+clipboard')
-  set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
-endif
+" if exists('+clipboard')
+"   set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
+" endif
 
 " Line Numbers
 set number

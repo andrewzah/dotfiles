@@ -1,7 +1,7 @@
 [user]
   email = zah@andrewzah.com
   name = Andrew Zah
-  signingkey = FC9B666D052B432E0242BA91894E2098341FEC19
+  signingkey = 56E753CB2EDAC18F9CFE2FD523A65DACB7CAA68B
 
 [core]
   editor = nvim
@@ -62,31 +62,53 @@
   it = !git init && git commit -m \"root\" --allow-empty }
 
 [diff]
-    indentHeuristic = on
+  indentHeuristic = on
 
 [log]
   date = relative
 
 [color]
-    ui = true
+  ui = true
 
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 
 [color "diff"]
-    meta = yellow
-    frag = magenta
-    old = red
-    new = green
+  meta = yellow
+  frag = magenta
+  old = red
+  new = green
 
 [color "status"]
-    added = yellow
-    changed = green
-    untracked = red
+  added = yellow
+  changed = green
+  untracked = red
+
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = side-by-side line-numbers-decorations
+  #minus-style = "syntax #4d0000"
+  #plus-style = "syntax #19833D"
+  syntax-theme = zenburn
+  whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
 
 [commit]
-    gpgsign = true
+  gpgsign = true
+
 [init]
-	defaultBranch = main
+  defaultBranch = master

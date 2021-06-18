@@ -64,5 +64,5 @@ rf() {
 
 alert() {
   $@;
-  notify-send "job finished with $?";
+  notify-send "job finished with $? -> \"$(echo $@)\"";
 }

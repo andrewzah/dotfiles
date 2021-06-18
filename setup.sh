@@ -12,8 +12,10 @@ CONFIG_DIR=$HOME/.config
 # then run it NOT while Xorg is running, and uninstall any nvidia-drivers packages from apt
 
 # not included programs:
-# * youtube-dl (can't update itself if installed via apt)
-# * pipewire (needs to be built from latest source currently)
+# * youtube-dl - can't update itself if installed via apt
+# * pipewire - needs to be built from latest source currently
+# * libdvdcss - see ffmpeg website for download
+# * teams - see microsoft website (ugh)
 doas apt install -y \
   a2jmidid \
   acpi \
@@ -21,6 +23,7 @@ doas apt install -y \
   apt-transport-https \
   bc \
   bison \
+  brasero \
   build-essential \
   ca-certificates \
   chromium \
@@ -47,6 +50,7 @@ doas apt install -y \
   gmtp \
   gnupg \
   gnupg-agent \
+  handbrake \
   htop \
   i3 \
   i3lock \
@@ -55,6 +59,7 @@ doas apt install -y \
   libexpat1-dev \
   libfontconfig1-dev \
   libfreetype6-dev \
+  libnotify-bin \
   libpam0g-dev \
   libpq-dev \
   libreadline-dev \
@@ -69,6 +74,8 @@ doas apt install -y \
   lm-sensors \
   make \
   mediainfo \
+  mkvtoolnix \
+  mupdf \
   neofetch \
   neovim \
   pavucontrol \
@@ -185,7 +192,7 @@ if [ ! -d "/usr/local/go" ]; then
     mkdir -p "$HOME/.go/src/github.com/azah" 
   fi
 
-  go_ver="1.14"
+  go_ver="1.16"
   curl -L "https://dl.google.com/go/go${go_ver}.linux-amd64.tar.gz" -o /tmp/go.tar.gz
   doas tar xvfz /tmp/go.tar.gz -C /usr/local
 fi
