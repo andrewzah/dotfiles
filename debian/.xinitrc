@@ -4,7 +4,7 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
-sh "$HOME/.dotfiles/scripts/screen-layout.sh"
+sh "$HOME/.screenlayout/layout.sh"
 xautolock -time 15 -locker "lock" 2>&1 &
 
 xrdb "$HOME/.Xresources"
