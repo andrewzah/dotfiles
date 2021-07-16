@@ -1,10 +1,11 @@
-source ~/.dotfiles/debian/zsh/aliases.zsh
-source ~/.dotfiles/debian/zsh/config.zsh
-source ~/.dotfiles/debian/zsh/functions.zsh
-source ~/.dotfiles/debian/zsh/path-exports-options.zsh
-source ~/.dotfiles/debian/zsh/secret-exports.zsh
-source ~/.dotfiles/debian/zsh/zsh-configuration.zsh
-source ~/.dotfiles/debian/zsh/theme.zsh
+ZSH_SCRIPTS_DIR="$HOME/.dotfiles/debian/zsh"
+
+source "$ZSH_SCRIPTS_DIR/aliases.zsh"
+source "$ZSH_SCRIPTS_DIR/functions.zsh"
+source "$ZSH_SCRIPTS_DIR/path-exports-options.zsh"
+source "$ZSH_SCRIPTS_DIR/zsh-configuration.zsh"
+source "$ZSH_SCRIPTS_DIR/theme.zsh"
+source "$ZSH_SCRIPTS_DIR/secret-exports.zsh"
 
 autoload -U colors && colors
 export PROMPT_COMMAND="history -p $HISTFILE"
