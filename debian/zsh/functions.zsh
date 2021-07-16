@@ -66,3 +66,13 @@ alert() {
   $@;
   notify-send "job finished with $? -> \"$(echo $@)\"";
 }
+
+findByDate() {
+    local humansize=''
+    [ "$1" = "-h" ] && humansize='h' && shift
+    find . ${2:-! -type d} -printf "%T@ %p\0" |
+        sort -zrn |
+        head -zn ${1:--0} |
+        sed -z 's/^[0-9.]\+ //' |
+        xargs -0 ls -dlt${humansize}
+}

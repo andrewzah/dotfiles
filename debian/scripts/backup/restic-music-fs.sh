@@ -13,7 +13,9 @@ set -euo pipefail
 TMPFILE="/tmp/zah-backup.$(openssl rand -hex 32)"
 REPO_DIR="/mnt/marth/restic/music"
 
-source "$HOME/.dotfiles/zsh/secret-exports.zsh"
+# RESTIC_MUSIC_PASSWORD
+# RESTIC_MUSIC_FS_HEALTHCHECK_URL
+source "$HOME/.dotfiles/debian/zsh/secret-exports.zsh"
 
 export RESTIC_PASSWORD="$RESTIC_MUSIC_PASSWORD"
 

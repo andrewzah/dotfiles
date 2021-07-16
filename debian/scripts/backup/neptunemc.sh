@@ -1,9 +1,12 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -eux
 
 MAX_BACKUPS=50
 BACKUP_DIR="/mnt/marth/backups/neptunemc"
+
+# NEPTUNEMC_SHEA_HEALTHCHECK_URL
+source "$HOME/.dotfiles/debian/zsh/secret-exports.zsh"
 
 rsync \
   --recursive \
@@ -25,18 +28,20 @@ printf 'timestamp=%s nbackups=%i\n' "$(timestamp)" $nbackups
 # prune only if necessary
 if [ $nbackups -gt $MAX_BACKUPS ] ; then
   printf 'timestamp=%s msg="begin backup rotation"\n' "$(timestamp)"
+
   while true ; do
     # loop to check if there are still too many, select the oldest if so, and then delete
     nbackups="$(ls -1 "$BACKUP_DIR" | grep "tar.gz" | wc -l)"
     if [ $nbackups -le $MAX_BACKUPS ] ; then
       printf 'timestamp=%s msg="rotation finished"\n' "$(timestamp)"
+      break
     fi
 
     oldest="$(ls -1 "$BACKUP_DIR" | grep "tar.gz" | sort | head -n1)"
     printf 'timestamp=%s prune="%s"\n' "$(timestamp)" "$oldest"
-    rm -f "$oldest"
+    rm -f "$BACKUP_DIR/$oldest"
   done
 fi
 
-curl -L -X POST 'https://healthchecks.zah.rocks/ping/a35f5c27-40e0-42be-b3c1-4ddf1b9c5d79'
+curl -L -X POST "$NEPTUNEMC_SHEA_HEALTHCHECK_URL"
 exit 0
