@@ -24,6 +24,9 @@ export LESSOPEN="| /usr/bin/highlight %s --out-format --line-numbers xterm256 --
 export FZF_DEFAULT_COMMAND="fd --type file --color=always"
 export FZF_DEFAULT_OPTS="--ansi"
 
+# system coloring
+[ -f "/etc/grc.zsh" ] && source "/etc/grc.zsh"
+
 ##########################
 ### PATH MODIFICATIONS ###
 ##########################
