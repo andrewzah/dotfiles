@@ -11,6 +11,9 @@ export TERM='xterm-256color'
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
 export ARCHFLAGS='-arch x86_64'
 
+# fix gpg hanging on git commit
+export GPG_TTY=$(tty)
+
 #######################
 ### PROGRAM CONFIGS ###
 #######################
