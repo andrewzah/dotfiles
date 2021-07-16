@@ -4,6 +4,7 @@ alias g="go build"
 alias j="just"
 alias k="kubectl"
 alias l="ls"
+alias v="$EDITOR"
 
 ## remaps (gnu tools -> new/rust ones)
 alias fd='fdfind'
