@@ -21,6 +21,7 @@ xautolock -time 15 -locker "lock" 2>&1 &
 #############
 
 xrdb "$HOME/.Xresources"
+xmodmap ~/.Xmodmap
 
 ###########################
 ### background services ###
