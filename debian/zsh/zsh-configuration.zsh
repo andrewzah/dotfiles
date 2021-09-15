@@ -6,7 +6,7 @@ export UPDATE_ZSH_DAYS=1
 export HISTFILESIZE=10000000000
 export HISTSIZE=10000000000
 export SAVEHIST=10000000
-export HISTFILE=~/sync/general/personal/.shell_history.debian-desktop
+export HISTFILE=~/.histfile
 
 # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
 # (this has been annoying several times)

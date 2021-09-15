@@ -58,13 +58,16 @@ sudo apt install -y \
   pavucontrol \
   pcmanfm \
   ripgrep \
+  xterm \
   rsync \
+  rofi \
   scrot \
   syncthing \
   tmux \
   unzip \
   xautolock \
   xorg \
+  xterm \
   zsh
 
 if [ ! -z "$FULL_INSTALL" ]; then
@@ -134,7 +137,6 @@ if [ ! -z "$FULL_INSTALL" ]; then
     pcmanfm \
     peek \
     pkg-config \
-    polybar \
     psmisc \
     pulseaudio \
     pulseaudio-module-jack \
@@ -163,14 +165,20 @@ mkdir -p "$HOME/opt/debs"
 mkdir -p "$HOME/opt/bin"
 
 if [ ! -d "$BASE_DOTFILES_DIR" ]; then
-  git clone 'https://git.sr.ht/~andrewzah/dotfiles' "$BASE_DOTFILES_DIR"
+  git clone 'https://git.andrewzah.com/andrewzah/dotfiles.git' "$BASE_DOTFILES_DIR" \
+    || git clone 'https://github.com/andrewzah/dotfiles.git' "$BASE_DOTFILES_DIR"
+
   touch "$DOTFILES_DIR/zsh/secret-exports.zsh"
 
-  touch "$HOME/sync/general/personal/.shell-history.debian-desktop"
+  # shell history
+  histfile="$HOME/sync/general/personal/.shell-history.$(hostname)"
+  touch "$histfile"
+  ln -s "$histfile" "~/.histfile"
 
-  cd $BASE_DOTFILES_DIR \
-    && git remote remove origin \
-    && git remote add origin 'git@github.com:azah/dotfiles.git'
+  cd $BASE_DOTFILES_DIR
+  git remote remove origin
+  git remote add gh 'git@github.com:andrewzah/dotfiles.git'
+  git remote add zah 'git@git.andrewzah.com:andrewzah/dotfiles.git'
 fi
 
 if [ ! -f "$HOME/.zshrc" ]; then
@@ -187,7 +195,8 @@ fi
 
 if [ ! -f "$HOME/.Xresources" ]; then
   ln -s "$DOTFILES_DIR/.Xresources" "$HOME/.Xresources"
-  xrdb "$HOME/.Xresources"
+  # can only run this in an x session
+  # xrdb "$HOME/.Xresources"
 fi
 
 if [ ! -f "$HOME/.gemrc" ]; then
@@ -205,6 +214,7 @@ ln -s "$DOTFILES_DIR/config/i3/config" "$CONFIG_DIR/i3/config"
 
 if [ ! -f "$CONFIG_DIR/i3/polybar.sh" ]; then
   ln -s "$DOTFILES_DIR/config/i3/polybar.sh" "$CONFIG_DIR/i3/polybar.sh"
+  echo "Don't forget to symlink which polybar-config you want to use..."
 fi
 
 if [ ! -f "$CONFIG_DIR/polybar/config" ]; then
@@ -302,6 +312,10 @@ fi
 
 if [ ! -f "$HOME/.cargo/bin/dust" ]; then
   cargo install -f hyperfine
+fi
+
+if [ ! -f "$HOME/.cargo/bin/fd" ]; then
+  cargo install -f fd-find
 fi
 
 echo "complete!"

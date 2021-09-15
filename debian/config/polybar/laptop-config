@@ -27,67 +27,12 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/zah-left]
-font-0 = "DejaVu Sans:style=Regular:pixelsize=10;0"
-monitor = ${env:MONITOR:HDMI-0}
-width = 100%
-bottom = true
-height = 27
-radius = 6.0
-
-tray-position = left
-tray-padding = 2
-wm-stack = i3
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 4
-border-color = #00000000
-
-padding-left = 0
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 2
-
-modules-left = i3
-modules-center = filesystem
-modules-right = date
-
-; focused = Active workspace on focused monitor
-label-focused = %name%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %name%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-; Separator in between workspaces
-; label-separator = |
-
 [bar/zah]
 font-0 = "DejaVu Sans:style=Regular:pixelsize=10;0"
 font-1 = "FontAwesome:pixelsize=10;0"
 font-2 = siji:pixelsize=10;1
 font-3 = unifont:fontformat=truetype:size=8:antialias=false;0
-monitor = ${env:MONITOR:DP-4}
+monitor = ${env:MONITOR:eDP-1}
 bottom = true
 width = 100%
 height = 27
@@ -112,7 +57,7 @@ module-margin-right = 2
 
 modules-left = i3
 modules-center =
-modules-right = mpd wired-network memory cpu temperature date
+modules-right = wired-network wireless-network memory cpu temperature date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -137,20 +82,33 @@ label-song-ellipsis = true
 
 [module/wired-network]
 type = internal/network
-interface = enp5s0
+interface = enx4865ee1a162e
 interval = 3.0
 accumulate-stats = true
 
 format-connected-underline = #d65d0e
 format-connected-prefix =
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip% - %downspeed% | %upspeed%
+label-connected = [E] %local_ip%
 
 format-disconnected = <label-disconnected>
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
+;
+[module/wireless-network]
+type = internal/network
+interface = wlp0s20f3
+interval = 3.0
+accumulate-stats = true
+
+format-connected-underline = #d65d0e
+format-connected-prefix =
+format-connected-prefix-foreground = ${colors.foreground-alt}
+
+label-connected = [W] %local_ip%
+format-disconnected = <label-disconnected>
 
 [module/memory]
 type = internal/memory
