@@ -86,11 +86,11 @@
   changed = green
   untracked = red
 
-[pager]
-  diff = delta
-  log = delta
-  reflog = delta
-  show = delta
+#[pager]
+#  diff = delta
+#  log = delta
+#  reflog = delta
+#  show = delta
 
 [interactive]
   diffFilter = delta --color-only
