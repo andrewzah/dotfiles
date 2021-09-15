@@ -199,6 +199,10 @@ if [ ! -f "$HOME/.Xresources" ]; then
   ln -s "$DOTFILES_DIR/.Xresources" "$HOME/.Xresources"
 fi
 
+if [ ! -f "$HOME/.Xmodmap" ]; then
+  ln -s "$DOTFILES_DIR/.Xmodmap" "$HOME/.Xmodmap"
+fi
+
 if [ ! -f "$HOME/.gemrc" ]; then
   ln -s "$DOTFILES_DIR/.gemrc" "$HOME/.gemrc"
 fi
