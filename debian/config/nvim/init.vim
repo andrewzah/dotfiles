@@ -8,12 +8,16 @@ call plug#begin('~/.vim/plugged')
 
 """ Language/Syntax
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
+Plug 'LnL7/vim-nix', { 'for': 'nix' }
+Plug 'NoahTheDuke/vim-just', { 'for': 'just' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 Plug 'elorest/vim-slang', { 'for': 'slang' }
+Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'isobit/vim-caddyfile', { 'for': 'caddyfile' }
+Plug 'itspriddle/vim-shellcheck', { 'for': 'sh' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
@@ -21,14 +25,13 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
-Plug 'LnL7/vim-nix', { 'for': 'nix' }
-Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
-Plug 'evanleck/vim-svelte', { 'for': 'svelte' }
 Plug 'summivox/vim-pawn', { 'for': 'spice' }
+Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
 
 """ Vim Behavior/Functionality
 Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
 Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
+Plug 'Alok/notational-fzf-vim', {'on': 'NV'}
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -162,22 +165,12 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 " notational fzf vim
-" let g:nv_search_paths =
-"   \ ['~/sync/general/thoughts',
-"     \ '~/sync/general/thoughts/backup',
-"     \ '~/sync/general/thoughts/data',
-"     \ '~/sync/general/thoughts/dnd',
-"     \ '~/sync/general/thoughts/korean',
-"     \ '~/sync/general/thoughts/programming',
-"     \ '~/sync/general/thoughts/tools',
-"     \ '~/sync/general/thoughts/work',
-"   \]
-
-" let g:nv_keymap = {
-"                     \ 'alt-s': 'split ',
-"                     \ 'alt-v': 'vertical split ',
-"                     \ 'alt-t': 'tabedit ',
-"                     \ }
+let g:nv_search_paths = [ '~/sync/general/thoughts' ]
+let g:nv_keymap = {
+  \ 'alt-s': 'split ',
+  \ 'alt-v': 'vertical split ',
+  \ 'alt-t': 'tabedit ',
+  \ }
 
 " Disable arrow movement, resize splits instead.
 let g:elite_mode = 1

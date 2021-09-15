@@ -1,9 +1,10 @@
 #!/bin/bash
 
-set -eux
+set -eu
 
 MAX_BACKUPS=50
-BACKUP_DIR="/mnt/marth/backups/neptunemc"
+LOCAL_BACKUP_DIR="/mnt/marth/backups/neptunemc"
+EXTERNAL_BACKUP_DIR="/mnt/nfs/data/backups/neptunemc"
 
 # NEPTUNEMC_SHEA_HEALTHCHECK_URL
 source "$HOME/.dotfiles/debian/zsh/secret-exports.zsh"
@@ -13,8 +14,8 @@ rsync \
   --archive \
   --verbose \
   --human-readable \
-  /mnt/nfs/subvol-107-disk-0/home/guest/backups/ \
-  "$BACKUP_DIR"
+  "${EXTERNAL_BACKUP_DIR}/" \
+  "$LOCAL_BACKUP_DIR"
 
 # get nicely formatted timestamps
 timestamp () {

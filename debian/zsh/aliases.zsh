@@ -34,6 +34,7 @@ alias fehs='feh --scale-down --auto-zoom'
 alias deit='docker exec -it'
 alias dps='docker ps'
 alias drri='docker run --rm -it'
+alias drrie='docker run --rm -it --entrypoint=/bin/bash'
 alias dil='docker image ls'
 
 # docker-compose
