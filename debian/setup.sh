@@ -60,10 +60,10 @@ sudo apt install -y \
   network-manager \
   pavucontrol \
   pcmanfm \
+  polybar \
   ripgrep \
   rofi \
   rsync \
-  rofi \
   scrot \
   syncthing \
   tmux \
@@ -217,10 +217,6 @@ if [ ! -f "$CONFIG_DIR/i3/polybar.sh" ]; then
   echo "Don't forget to symlink which polybar-config you want to use..."
 fi
 
-if [ ! -f "$CONFIG_DIR/polybar/config" ]; then
-  ln -s "$DOTFILES_DIR/config/polybar/config" "$CONFIG_DIR/polybar/config"
-fi
-
 if [ ! -f "$CONFIG_DIR/nvim/init.vim" ]; then
   ln -s "$DOTFILES_DIR/config/nvim/init.vim" "$CONFIG_DIR/nvim/init.vim"
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -316,6 +312,11 @@ fi
 
 if [ ! -f "$HOME/.cargo/bin/fd" ]; then
   cargo install -f fd-find
+fi
+
+
+if [ ! -f "$CONFIG_DIR/polybar/config" ]; then
+  echo "Don't forget to copy/paste a polybar config."
 fi
 
 echo "complete!"
