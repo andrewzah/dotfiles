@@ -49,6 +49,7 @@ sudo apt install -y \
   curl \
   fcitx \
   fcitx-hangul \
+  firefox-esr \
   fonts-nanum \
   git \
   git-lfs \
@@ -97,7 +98,6 @@ if [ ! -z "$FULL_INSTALL" ]; then
     fcitx-hangul \
     feh \
     ffmpeg \
-    firefox-esr \
     flex \
     fontconfig \
     fonts-nanum \
