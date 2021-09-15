@@ -6,13 +6,10 @@ alias k="kubectl"
 alias l="ls"
 alias v="$EDITOR"
 
-## remaps (gnu tools -> new/rust ones)
-alias fd='fdfind'
-
 # assign ls or exa
-if [[ $(type exa) ]]; then
-  alias ll='exa -la'
+if [[ -f "$HOME/.cargo/bin/exa" ]]; then
   alias ls="exa"
+  alias ll='exa -la'
 else
   alias ls='ls --color=auto'
   alias ll='ls -la'

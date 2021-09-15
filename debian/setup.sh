@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -exo pipefail
 
 DIST=''
 case "$1" in
@@ -42,6 +42,8 @@ sudo apt update -y
 
 sudo apt install -y \
   anki \
+  arandr \
+  ca-certificates \
   chromium \
   chromium-sandbox \
   curl \
@@ -55,9 +57,11 @@ sudo apt install -y \
   mupdf \
   neofetch \
   neovim \
+  network-manager \
   pavucontrol \
   pcmanfm \
   ripgrep \
+  rofi \
   rsync \
   scrot \
   syncthing \
@@ -65,6 +69,7 @@ sudo apt install -y \
   unzip \
   xautolock \
   xorg \
+  xterm \
   zsh
 
 if [ ! -z "$FULL_INSTALL" ]; then
@@ -77,7 +82,6 @@ if [ ! -z "$FULL_INSTALL" ]; then
     bison \
     brasero \
     build-essential \
-    ca-certificates \
     chromium \
     chromium-sandbox \
     clang \
@@ -164,7 +168,7 @@ mkdir -p "$HOME/opt/bin"
 
 if [ ! -d "$BASE_DOTFILES_DIR" ]; then
   git clone 'https://git.sr.ht/~andrewzah/dotfiles' "$BASE_DOTFILES_DIR"
-  touch "$DOTFILES_DIR/zsh/secret-exports.zsh"
+  touch "$DOTFILES_DIR/debian/zsh/secret-exports.zsh"
 
   touch "$HOME/sync/general/personal/.shell-history.debian-desktop"
 
@@ -187,7 +191,6 @@ fi
 
 if [ ! -f "$HOME/.Xresources" ]; then
   ln -s "$DOTFILES_DIR/.Xresources" "$HOME/.Xresources"
-  xrdb "$HOME/.Xresources"
 fi
 
 if [ ! -f "$HOME/.gemrc" ]; then
