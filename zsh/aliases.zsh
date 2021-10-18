@@ -50,6 +50,7 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 
 # git
+alias gitpp='git push gh master; git push zah master'
 alias gbc='git branch -v |& cat'
 
 # git
