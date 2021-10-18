@@ -2,7 +2,7 @@
 
 set -exo pipefail
 
-FQDN="${1:-test.local}"
+FQDN="${1:?Please specify a FQDN.}"
 
 openssl req \
   -x509 \

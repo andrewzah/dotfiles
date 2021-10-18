@@ -1,0 +1,1 @@
+SUBSYSTEM=="input", ACTION=="remove|add", ENV{ID_VENDOR_ID}=="2188" RUN+="/usr/bin/pkill -USR1 displayman"

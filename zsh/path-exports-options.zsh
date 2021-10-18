@@ -2,8 +2,8 @@
 ### GENERAL SYSTEM CONFIG ###
 #############################
 
-export LANG='en_US.UTF-8';
-export LC_ALL='en_US.UTF-8';
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
 
 export EDITOR='nvim'
 export VISUAL="$EDITOR"
@@ -41,6 +41,7 @@ export FZF_DEFAULT_OPTS="--ansi"
 # currently: joplin, bitwarden, carla, cubiomes-viewer,
 #   jetbrains, sauerbraten, slippi, winbox
 export PATH="$HOME/opt/bin:$PATH"
+export PATH="$HOME/.dotfiles/bin:$PATH"
 
 # python binaries ?
 export PATH="$HOME/.local/bin:$PATH"

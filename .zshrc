@@ -2,7 +2,7 @@
 ### sourcing ###
 ################
 
-ZSH_SCRIPTS_DIR="$HOME/.dotfiles/debian/zsh"
+ZSH_SCRIPTS_DIR="$HOME/.dotfiles/zsh"
 
 source "$ZSH_SCRIPTS_DIR/aliases.zsh"
 source "$ZSH_SCRIPTS_DIR/functions.zsh"

@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# original: taken from https://git.sr.ht/~charles/dotfiles/tree/master/item/overlay.full/bin/displayman
+# license:  https://git.sr.ht/~charles/dotfiles/tree/master/item/LICENSE
+# see also: http://cdaniels.net/posts/sigusr.html
+
+trigger_reconfigure () {
+ echo "($(date)) re-configuring displays... "
+ ls -1 "$HOME/.screenlayout"/*.sh | sort | while read -r f ; do
+
+  echo "considering screenlayout $f"
+  if [ ! -x "$f" ] ; then
+   echo "ignoring $f, it is not executable"
+   continue
+  fi
+
+  if "$f" ; then
+   echo "configuration successful"
+   break
+  else
+   echo "configuration failed"
+  fi
+ done
+
+ # do some sanity checking
+ $HOME/.dotfiles/debian/bin/x-fix-keymaps
+
+ xrdb "$HOME/.Xresources"
+ #numlockx on
+ #xkbset nullify lock
+
+ #if [ -e /dev/wsmouse ] ; then
+ # xinput set-prop /dev/wsmouse "WS Pointer Wheel Emulation" 1
+ # xinput set-prop /dev/wsmouse "WS Pointer Wheel Emulation Button" 2
+ #fi
+}
+
+
+if pgrep displayman | grep -qv $$ ; then
+ echo "displayman is already running" 1>&2
+ pkill -USR1 displayman
+ exit 1
+fi
+
+trap trigger_reconfigure USR1
+
+trigger_reconfigure
+
+while true ; do
+ sleep 1
+done
+
+# vim: set syntax=sh:

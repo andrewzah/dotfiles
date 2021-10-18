@@ -2,6 +2,20 @@
 
 set -exo pipefail
 
+#####################
+### FUNCTION DEFS ###
+#####################
+
+get_latest_release() {
+curl --silent "https://api.github.com/repos/$1/releases/latest" \
+  | grep '"tag_name":' \
+  | sed -E 's/.*"([^"]+)".*/\1/'
+}
+
+############
+### OPTS ###
+############
+
 DIST=''
 case "$1" in
   "debian")
@@ -23,6 +37,10 @@ while getopts "F" opt; do
   esac
 done
 
+############
+### VARS ###
+############
+
 BASE_DOTFILES_DIR="$HOME/.dotfiles"
 DOTFILES_DIR="$BASE_DOTFILES_DIR/$DIST"
 CONFIG_DIR="$HOME/.config"
@@ -37,6 +55,10 @@ CONFIG_DIR="$HOME/.config"
 # * pipewire - needs to be built from latest source currently
 # * libdvdcss - see ffmpeg website for download
 # * teams - see microsoft website (ugh)
+
+####################
+### APPLICATIONS ###
+####################
 
 sudo apt update -y
 
@@ -159,6 +181,10 @@ if [ ! -z "$FULL_INSTALL" ]; then
     zsh
 fi
 
+###################################
+### Symlink files + create dirs ###
+###################################
+
 
 mkdir -p "$HOME/programming"
 mkdir -p "$HOME/work"
@@ -218,8 +244,8 @@ ln -s "$DOTFILES_DIR/config/i3/config" "$CONFIG_DIR/i3/config"
 
 if [ ! -f "$CONFIG_DIR/i3/polybar.sh" ]; then
   ln -s "$DOTFILES_DIR/config/i3/polybar.sh" "$CONFIG_DIR/i3/polybar.sh"
-  echo "Don't forget to symlink which polybar-config you want to use..."
 fi
+
 
 if [ ! -f "$CONFIG_DIR/nvim/init.vim" ]; then
   ln -s "$DOTFILES_DIR/config/nvim/init.vim" "$CONFIG_DIR/nvim/init.vim"
@@ -228,7 +254,9 @@ if [ ! -f "$CONFIG_DIR/nvim/init.vim" ]; then
   nvim -c ":Silent ':PlugInstall'"
 fi
 
-###### install programs
+#########################
+### Install utilities ###
+#########################
 
 if [ ! -f "/usr/local/bin/lock" ]; then
   sudo ln -s "$DOTFILES_DIR/scripts/lock" "/usr/local/bin/lock"
@@ -318,9 +346,16 @@ if [ ! -f "$HOME/.cargo/bin/fd" ]; then
   cargo install -f fd-find
 fi
 
-
-if [ ! -f "$CONFIG_DIR/polybar/config" ]; then
-  echo "Don't forget to copy/paste a polybar config."
+if [ ! -f "/usr/local/bin/hadolint" ]; then
+  ver=$(get_latest_release hadolint/hadolint)
+  url="https://github.com/hadolint/hadolint/releases/download/$ver/hadolint-Linux-x86_64"
+  sudo curl -L "$url" -o /usr/local/bin/hadolint
+  sudo chmod +x /usr/local/bin/hadolint
 fi
 
+##############
+### FINISH ###
+##############
+
 echo "complete!"
+echo "Don't forget to symlink which polybar-config you want to use..."

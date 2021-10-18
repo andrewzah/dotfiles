@@ -1,0 +1,10 @@
+#!/bin/sh
+
+layout=$(xmodmap -pm)
+
+# don't run xmodmap if the keys are already remapped...
+if ! echo "$layout" | grep -q "Caps_Lock (0x25)"; then
+  xmodmap ~/.Xmodmap
+fi
+
+# vim: set syntax=sh:
