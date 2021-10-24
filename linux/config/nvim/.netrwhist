@@ -1,4 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =3
 let g:netrw_dirhist_1='/home/andrew/work/platform/rust/chunk-rebuilder/src/handlers'
 let g:netrw_dirhist_2='/home/andrew/work/platform/rust/api/src/handlers'
+let g:netrw_dirhist_3='/home/andrew/website/andrewzah.com-src/content/posts/2020/10-05_kakaotalk_linux_2020'
