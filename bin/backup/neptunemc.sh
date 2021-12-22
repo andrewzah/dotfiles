@@ -11,7 +11,6 @@ source "$HOME/.dotfiles/debian/zsh/secret-exports.zsh"
 
 rsync \
   --recursive \
-  --archive \
   --verbose \
   --human-readable \
   "${EXTERNAL_BACKUP_DIR}/" \
@@ -19,7 +18,7 @@ rsync \
 
 # get nicely formatted timestamps
 timestamp () {
-	date -u +"%Y-%m-%dT%H:%M:%SZ"
+  date -u +"%Y-%m-%dT%H:%M:%SZ"
 }
 
 # count backups

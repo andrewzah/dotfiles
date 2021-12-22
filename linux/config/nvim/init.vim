@@ -7,6 +7,7 @@ end
 call plug#begin('~/.vim/plugged')
 
 """ Language/Syntax
+Plug 'sersorrel/vim-lilypond', { 'for': 'lilypond' }
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'NoahTheDuke/vim-just', { 'for': 'just' }

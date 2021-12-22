@@ -2,6 +2,9 @@
 # ZSH
 export UPDATE_ZSH_DAYS=1
 
+# remove nag for rm -f
+export RM_STAR_SILENT=1
+
 # HISTORY
 export HISTFILESIZE=10000000000
 export HISTSIZE=10000000000
@@ -39,7 +42,7 @@ setopt hist_ignore_space
 setopt COMPLETE_IN_WORD 
 
 # When completing from the middle of a word, move the cursor to the end of the word
-setopt ALWAYS_TO_END            
+setopt ALWAYS_TO_END
 
 unsetopt CORRECT
 

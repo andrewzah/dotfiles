@@ -1,0 +1,8 @@
+---
+#api_key: ""
+limit: 10
+lucky: false
+sites:
+  - serverfault
+  - unix
+search_engine: stackexchange

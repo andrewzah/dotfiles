@@ -73,6 +73,7 @@ sudo apt install -y \
   fcitx-hangul \
   firefox-esr \
   fonts-nanum \
+  font-manager \
   git \
   git-lfs \
   i3 \

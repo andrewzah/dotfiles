@@ -19,12 +19,12 @@ source "$HOME/.dotfiles/debian/zsh/secret-exports.zsh"
 
 export RESTIC_PASSWORD="$RESTIC_MUSIC_PASSWORD"
 
-echo "backing up from NFS->/mnt/marth"
+echo "backing up from NFS->/mnt/marth" >> "$TMPFILE"
 restic -r /mnt/marth/restic/music --verbose backup /mnt/nfs/media/music \
   >> "$TMPFILE" 2>&1 \
   || cat "$TMPFILE"
 
-echo "pinging healthchecks service"
+echo "pinging healthchecks service" >> "$TMPFILE"
 curl -L -X POST "$RESTIC_MUSIC_FS_HEALTHCHECK_URL" \
   >> "$TMPFILE" 2>&1 \
   || cat "$TMPFILE"

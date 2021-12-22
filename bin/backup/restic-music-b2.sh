@@ -15,14 +15,15 @@ REPO_DIR="/mnt/marth/restic/music"
 
 source "${REPO_DIR}/creds"
 
+echo "backing up to b2 from /mnt/nfs/media/music" >> "$TMPFILE"
 restic -r "b2:${B2_BUCKET_NAME}:/" --verbose backup /mnt/nfs/media/music  \
   >> "$TMPFILE" 2>&1 \
   || cat "$TMPFILE"
 echo "[ok] backed up from NFS->b2"
 
+echo "pinging healthchecks service" >> "$TMPFILE"
 curl -L -X POST "$HEALTHCHECKS_URL" \
   >> "$TMPFILE" 2>&1 \
   || cat "$TMPFILE"
-echo "[ok] pinged healthchecks service"
 
 exit 0

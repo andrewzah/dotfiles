@@ -31,8 +31,16 @@ convertsecs() {
 
 # -- info commands
 
+function user_status() {
+  echo "%{$fg_bold[red]%}%n%{$fg_no_bold[white]%}@%{$reset_color%}"
+}
+
+function host_status() {
+  echo "%{$fg_bold[blue]%}%m:%{$reset_color%}"
+}
+
 function dir_status() {
-  echo "%{$fg_bold[cyan]%}%2~%{$reset_color%}"
+  echo "%{$fg_bold[yellow]%}%2~%{$reset_color%}"
 }
 
 function exit_code_status() {
@@ -48,9 +56,10 @@ function parse_git_branch() {
 }
 
 function set_prompt() {
-  PROMPT='$(exit_code_status)λ ($(convertsecs $(get_time))) $(dir_status) $(exit_code_status)\$ %{$reset_color%}'
+  #PROMPT='$(exit_code_status)λ ($(convertsecs $(get_time))) $(dir_status) $(exit_code_status)\$ %{$reset_color%}'
+  PROMPT='$(user_status)$(host_status)$(dir_status) $(exit_code_status)\$ %{$reset_color%}'
 
-  RPROMPT='%{$fg[green]%}$(parse_git_branch)%{$reset_color%}'
+  #RPROMPT='%{$fg[green]%}$(parse_git_branch)%{$reset_color%}'
 }
 
 

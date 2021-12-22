@@ -46,6 +46,8 @@ export PATH="$HOME/.dotfiles/bin:$PATH"
 # python binaries ?
 export PATH="$HOME/.local/bin:$PATH"
 
+export PATH="$HOME/bin:$PATH"
+
 # riscv sdk / compilation
 export RISCV="$HOME/opt/riscv-tools"
 export PATH="$RISCV/bin:$PATH"
@@ -76,6 +78,9 @@ export PATH="$HOME/.please/:$PATH"
 
 # maven
 export PATH="$HOME/opt/maven/apache-maven-3.6.3/bin:$PATH"
+
+# crossover
+export PATH="/opt/cxoffice/bin:$PATH"
 
 #############################
 ### BUG/COMPILATION FIXES ###
