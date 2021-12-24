@@ -8,6 +8,8 @@ call plug#begin('~/.vim/plugged')
 
 """ Language/Syntax
 Plug 'sersorrel/vim-lilypond', { 'for': 'lilypond' }
+Plug 'gleam-lang/gleam.vim', {'for':'gleam'}
+Plug 'djpohly/vim-execline', {'for':'execline'}
 Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'NoahTheDuke/vim-just', { 'for': 'just' }
@@ -30,7 +32,6 @@ Plug 'summivox/vim-pawn', { 'for': 'spice' }
 Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
 
 """ Vim Behavior/Functionality
-Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
 Plug 'nathanaelkane/vim-indent-guides', { 'for': ['yaml', 'python', 'haml', 'slim', 'slang'] }
 Plug 'Alok/notational-fzf-vim', {'on': 'NV'}
 Plug 'godlygeek/tabular'
@@ -38,6 +39,11 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'luochen1990/rainbow'
 Plug 'vim-scripts/VisIncr'
+" clojure
+Plug 'Olical/conjure', {'for':'clojure'}
+Plug 'clojure-vim/vim-jack-in'
+Plug 'radenling/vim-dispatch-neovim'
+Plug 'bhurlow/vim-parinfer', {'for': 'clojure' }
 
 """ theme
 Plug 'morhetz/gruvbox'
@@ -56,7 +62,6 @@ set history=1000
 
 " theme / colors
 set background=dark
-"colorscheme hybrid
 colorscheme gruvbox
 set termguicolors
 
@@ -77,14 +82,14 @@ set colorcolumn=95
 " n    - set name of viminfo file
 set viminfo='20,\"50,:20,/20,%
 
-" if exists('+clipboard')
-"   set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
-" endif
+if exists('+clipboard')
+  set clipboard=unnamedplus  " Yanks go to the ctrl-c '+' clipboard register
+endif
 
 " Line Numbers
 set number
-
-" make backspace behave
+"
+"" make backspace behave
 set backspace=eol,start,indent
 set whichwrap+=<,>
 
@@ -117,14 +122,14 @@ set list       " Enable 'list mode', which visually displays certain characters
 " Quick timeouts on key combinations.
 set timeoutlen=300
 
-set shortmess=atIwmfl
+set shortmess=atTIO
 
 " Backup, Swap, and Undo
 set directory^=~/.nvim/tmp,/tmp
 set backupdir=~/.nvim/backup,/tmp
 set undodir=~/.nvim/undo,/tmp
 
-" Remove swapfiles, autoread changes instead
+"" Remove swapfiles, autoread changes instead
 set noswapfile
 set autoread
 
@@ -176,10 +181,10 @@ let g:nv_keymap = {
 " Disable arrow movement, resize splits instead.
 let g:elite_mode = 1
 if get(g:, 'elite_mode')
-	nnoremap <Up>    :resize +2<CR>
-	nnoremap <Down>  :resize -2<CR>
-	nnoremap <Left>  :vertical resize +2<CR>
-	nnoremap <Right> :vertical resize -2<CR>
+  nnoremap <Up>    :resize +2<CR>
+  nnoremap <Down>  :resize -2<CR>
+  nnoremap <Left>  :vertical resize +2<CR>
+  nnoremap <Right> :vertical resize -2<CR>
 endif
 
 " auto-ctags options
@@ -217,6 +222,7 @@ let g:go_version_warning = 0
 
 " Leader key
 let mapleader = ","
+let maplocalleader = ","
 
 " ease of access
 nnoremap ' `
@@ -290,6 +296,7 @@ nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 nnoremap gs <Plug>(GrepperOperator)
 xnoremap gs <Plug>(GrepperOperator)
 
+
 """ Syntaxes """
 
 " Autoset slang syntax highlighting
@@ -299,7 +306,7 @@ au BufRead,BufNewFile *.slang set filetype=slang
 au BufRead,BufNewFile *.ecr set filetype=erb
 
 " sourcepawn
-au FileType sourcepawn setlocal makeprg=/home/andrew/programming/sourcemod/sourcemod/addons/sourcemod/scripting/spcomp
+"au FileType sourcepawn setlocal makeprg=/home/andrew/programming/sourcemod/sourcemod/addons/sourcemod/scripting/spcomp
 
 " Automatically make the dir if it doesn't exist on the machine.
 silent !mkdir -p ~/.nvim/tmp >/dev/null 2>&1
@@ -327,6 +334,7 @@ function! MakeSession()
     let b:filename = b:sessiondir . '/session.vim'
     exe "mksession! " . b:filename
 endfunction
+
 function! LoadSession()
     let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
     let b:sessionfile = b:sessiondir . "/session.vim"
@@ -354,7 +362,10 @@ autocmd BufReadPost *
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 " FZF :Find
-" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!node_modules/" --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --color=always --glob "!node_modules/" --glob "!.git/*" -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -363,3 +374,8 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
   \ | wincmd p | diffthis
 endif
+
+" for s6 scripting
+augroup filetypedetect
+autocmd BufNewFile,BufRead *        if getline(1) =~# '^#!/usr/bin/with-contenv bash\>' | setf sh | endif
+augroup END

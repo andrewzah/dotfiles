@@ -7,6 +7,7 @@ export LC_ALL='en_US.UTF-8'
 
 export EDITOR='nvim'
 export VISUAL="$EDITOR"
+export SUDO_EDITOR="$EDITOR"
 export TERM='xterm-256color'
 
 # This resolves issues install the mysql, postgres, and other gems with native non universal binary extensions
@@ -81,6 +82,9 @@ export PATH="$HOME/opt/maven/apache-maven-3.6.3/bin:$PATH"
 
 # crossover
 export PATH="/opt/cxoffice/bin:$PATH"
+
+# execline
+export PATH="/usr/lib/execline/bin:$PATH"
 
 #############################
 ### BUG/COMPILATION FIXES ###

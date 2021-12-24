@@ -40,6 +40,8 @@ radius = 6.0
 fixed-center = false
 wm-stack = i3
 
+tray-position = left
+
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -152,7 +154,7 @@ time-alt = %H:%M:%S
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #b16286
 
-label = %date% | %time%
+label =  %date% | %time%
 
 [module/fans]
 type = custom/script
@@ -227,6 +229,8 @@ ws-icon-default =
 
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
+
+strip-wsnumbers = true
 
 label-mode-padding = 2
 label-mode-foreground = #000

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+scrot \
+  --select \
+  --silent \
+  --exec 'mv $f /tmp/'

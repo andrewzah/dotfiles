@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+sudoedit /sys/class/backlight/intel_backlight/brightness

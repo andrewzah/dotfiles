@@ -8,15 +8,15 @@ set $cmod Mod4
 ## terminal
 bindsym $cmod+Enter /usr/bin/xterm
 
-set $work1 "Mercury"
-set $work2 "Venus"
-set $work3 "Earth"
-set $work4 "Mars"
-set $work5 "Jupiter"
-set $work6 "Saturn"
-set $work7 "Uranus"
-set $work8 "Neptune"
-set $work9 "Pluto"
+set $work1 "1:Mercury"
+set $work2 "2:Venus"
+set $work3 "3:Earth"
+set $work4 "4:Mars"
+set $work5 "5:Jupiter"
+set $work6 "6:Saturn"
+set $work7 "7:Uranus"
+set $work8 "8:Neptune"
+set $work9 "9:Pluto"
 
 # default workspaces to each monitor
 workspace $work1 output HDMI-0

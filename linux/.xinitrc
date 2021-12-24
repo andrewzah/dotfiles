@@ -22,6 +22,7 @@ xautolock -time 15 -locker "lock" 2>&1 &
 
 xrdb "$HOME/.Xresources"
 xmodmap ~/.Xmodmap
+xbindkeys --poll-rc
 
 ###########################
 ### background services ###
@@ -32,6 +33,9 @@ blueman-applet > /dev/null &
 dbus-launch --sh-syntax --exit-with-session > /dev/null
 
 # for caldigit dock
-$HOME/.dotfiles/debian/bin/displayman > /tmp/displayman.txt &
+$HOME/.dotfiles/bin/displayman > /tmp/displayman.log &
+
+# for bluetooth keyboards
+$HOME/.dotfiles/bin/btkbman > /tmp/btkbman.log &
 
 exec i3

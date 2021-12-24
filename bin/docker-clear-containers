@@ -1,0 +1,12 @@
+#!/bin/bash
+
+num_containers=$(docker ps -a | grep Exited | wc -l)
+
+if [ $num_containers -ne 0 ]; then
+  docker ps -a \
+    | grep Exited \
+    | awk '{print $1}' \
+    | xargs docker rm
+fi
+
+exit 0

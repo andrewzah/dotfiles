@@ -1,7 +1,7 @@
 [user]
   email = zah@andrewzah.com
   name = Andrew Zah
-  signingkey = 56E753CB2EDAC18F9CFE2FD523A65DACB7CAA68B
+  #signingkey = 56E753CB2EDAC18F9CFE2FD523A65DACB7CAA68B
 
 [core]
   editor = nvim
@@ -108,7 +108,7 @@
   file-decoration-style = none
 
 [commit]
-  gpgsign = true
+  #gpgsign = true
 
 [init]
   defaultBranch = master

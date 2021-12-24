@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# adapted from ./displayman
+
+trigger_reconfigure () {
+  echo "($(date)) refreshing keyboard mappings... "
+
+  # do some sanity checking
+  /home/andrew/.dotfiles/bin/fix-x-keymaps >> /tmp/fix-x-keymaps.log
+}
+
+
+if pgrep btkbman | grep -qv $$ ; then
+ echo "btkbman is already running" 1>&2
+ pkill -USR1 btkbman
+ exit 1
+fi
+
+trap trigger_reconfigure USR1
+
+trigger_reconfigure
+
+while true ; do
+ sleep 1
+done
+
+# vim: set syntax=sh:

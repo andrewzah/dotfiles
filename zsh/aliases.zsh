@@ -7,7 +7,7 @@ alias l="ls"
 alias v="$EDITOR"
 
 # assign ls or exa
-if [[ -f "$HOME/.cargo/bin/exa" ]]; then
+if command -v exa 2>&1 >/dev/null; then
   alias ls="exa"
   alias ll='exa -la'
 else
@@ -22,6 +22,7 @@ alias paste='xclip -selection p'
 
 ## tmux
 alias ta='tmux attach'
+alias tat='tmux attach -t'
 
 # programming shortcuts
 ## images
