@@ -38,4 +38,6 @@ $HOME/.dotfiles/bin/displayman > /tmp/displayman.log &
 # for bluetooth keyboards
 $HOME/.dotfiles/bin/btkbman > /tmp/btkbman.log &
 
+$HOME/.dotfiles/bin/fix-x-keymaps > /tmp/fix-x-keymaps.log &
+
 exec i3
